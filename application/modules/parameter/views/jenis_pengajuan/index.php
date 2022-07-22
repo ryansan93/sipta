@@ -18,8 +18,9 @@
 			<table class="table table-bordered table-hover tbl_jp" id="dataTable" width="100%" cellspacing="0">
 				<thead>
 					<tr>
-						<th class="col-sm-4 text-center">Kode</th>
+						<th class="col-sm-2 text-center">Kode</th>
 						<th class="col-sm-6 text-center">Nama</th>
+						<th class="col-sm-2 text-center">Form</th>
 						<th class="col-sm-2 text-center">Action</th>
 					</tr>
 				</thead>
@@ -29,6 +30,7 @@
 							<tr>
 								<td class="kode"><?php echo $v_data['kode']; ?></td>
 								<td><?php echo $v_data['nama']; ?></td>
+								<td><?php echo $v_data['form_pengajuan']; ?></td>
 								<td>
 									<div class="col-sm-6 no-padding" style="display: flex; justify-content: center; align-items: center;">
 										<?php if ( $akses['a_edit'] == 1 ) { ?>

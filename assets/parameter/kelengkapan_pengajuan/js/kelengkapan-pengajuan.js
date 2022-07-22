@@ -60,13 +60,17 @@ var kp = {
 			var kode = $(div).find('.kode').val().toUpperCase();
 			var kode_jenis_pengajuan = $(div).find('.jenis_pengajuan').val();
 			var nama = $(div).find('.nama').val().toUpperCase();
+			var wajib = $(div).find('.wajib').val();
+			var jml_file = numeral.unformat($(div).find('.jml_file').val());
 
 			bootbox.confirm('Apakah anda yakin ingin menyimpan data ?', function(result) {
 				if ( result ) {
 					var data = {
 						'kode': kode,
 						'kode_jenis_pengajuan': kode_jenis_pengajuan,
-						'nama': nama
+						'nama': nama,
+						'wajib': wajib,
+						'jml_file': jml_file
 					};
 
 			        $.ajax({
@@ -112,13 +116,17 @@ var kp = {
 			var kode = $(div).find('.kode').val().toUpperCase();
 			var kode_jenis_pengajuan = $(div).find('.jenis_pengajuan').val();
 			var nama = $(div).find('.nama').val().toUpperCase();
+			var wajib = $(div).find('.wajib').val();
+			var jml_file = numeral.unformat($(div).find('.jml_file').val());
 
 			bootbox.confirm('Apakah anda yakin ingin meng-ubah data ?', function(result) {
 				if ( result ) {
 					var data = {
 						'kode': kode,
 						'kode_jenis_pengajuan': kode_jenis_pengajuan,
-						'nama': nama
+						'nama': nama,
+						'wajib': wajib,
+						'jml_file': jml_file
 					};
 
 			        $.ajax({

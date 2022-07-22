@@ -59,12 +59,14 @@ var jp = {
 		} else {
 			var kode = $(div).find('.kode').val().toUpperCase();
 			var nama = $(div).find('.nama').val().toUpperCase();
+			var form = $(div).find('.form').val();
 
 			bootbox.confirm('Apakah anda yakin ingin menyimpan data ?', function(result) {
 				if ( result ) {
 					var data = {
 						'kode': kode,
-						'nama': nama
+						'nama': nama,
+						'form': form
 					};
 
 			        $.ajax({
@@ -109,12 +111,14 @@ var jp = {
 		} else {
 			var kode = $(div).find('.kode').val().toUpperCase();
 			var nama = $(div).find('.nama').val().toUpperCase();
+			var form = $(div).find('.form').val();
 
 			bootbox.confirm('Apakah anda yakin ingin meng-ubah data ?', function(result) {
 				if ( result ) {
 					var data = {
 						'kode': kode,
 						'nama': nama
+						'form': form
 					};
 
 			        $.ajax({

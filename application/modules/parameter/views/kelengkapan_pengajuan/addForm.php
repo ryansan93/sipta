@@ -21,7 +21,7 @@
 						</td>
 						<td class="col-sm-10">
 							<select class="form-control jenis_pengajuan col-sm-6" data-required="1">
-								<option value="">-- Pilih Jenis Pengajuan</option>
+								<option value="">-- Pilih Jenis Pengajuan --</option>
 								<?php if ( !empty($jenis_pengajuan) ): ?>
 									<?php foreach ($jenis_pengajuan as $k_jp => $v_jp): ?>
 										<option value="<?php echo $v_jp['kode']; ?>"><?php echo $v_jp['nama']; ?></option>
@@ -35,7 +35,27 @@
 							<label class="control-label">Nama</label>
 						</td>
 						<td class="col-sm-10">
-							<input type="text" class="col-sm-8 form-control nama uppercase" placeholder="Nama" data-required="1" maxlength="50">
+							<textarea class="form-control nama uppercase" placeholder="Nama" data-required="1"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td class="col-sm-2">				
+							<label class="control-label">WAJIB</label>
+						</td>
+						<td class="col-sm-10">
+							<select class="form-control wajib col-sm-6" data-required="1">
+								<option value="">-- Pilih --</option>
+								<option value="1">WAJIB</option>
+								<option value="0">TIDAK WAJIB</option>
+							</select>
+						</td>
+					</tr>
+					<tr class="hide">
+						<td class="col-sm-2">				
+							<label class="control-label">Jumlah File</label>
+						</td>
+						<td class="col-sm-10">
+							<input type="text" class="form-control text-right jml_file" placeholder="Jumlah" data-tipe="integer" maxlength="2"></input>
 						</td>
 					</tr>
 				</tbody>

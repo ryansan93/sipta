@@ -18,9 +18,11 @@
 			<table class="table table-bordered table-hover tbl_jp" id="dataTable" width="100%" cellspacing="0">
 				<thead>
 					<tr>
-						<th class="col-sm-2 text-center">Kode</th>
-						<th class="col-sm-4 text-center">Jenis Pengajuan</th>
+						<th class="col-sm-1 text-center">Kode</th>
+						<th class="col-sm-3 text-center">Jenis Pengajuan</th>
 						<th class="col-sm-4 text-center">Nama</th>
+						<th class="col-sm-1 text-center">Wajib</th>
+						<th class="col-sm-1 text-center hide">Jumlah File</th>
 						<th class="col-sm-2 text-center">Action</th>
 					</tr>
 				</thead>
@@ -31,6 +33,8 @@
 								<td class="kode"><?php echo $v_data['kode']; ?></td>
 								<td><?php echo $v_data['jenis_pengajuan']['nama']; ?></td>
 								<td><?php echo $v_data['nama']; ?></td>
+								<td class="text-center"><?php echo ($v_data['wajib'] == 1) ? 'WAJIB' : 'TIDAK WAJIB'; ?></td>
+								<td class="text-right hide"><?php echo angkaRibuan($v_data['jml_file']); ?></td>
 								<td>
 									<div class="col-sm-6 no-padding" style="display: flex; justify-content: center; align-items: center;">
 										<?php if ( $akses['a_edit'] == 1 ) { ?>
@@ -47,7 +51,7 @@
 						<?php endforeach ?>
 					<?php else: ?>
 						<tr>
-							<td colspan="4">Data tidak ditemukan.</td>
+							<td colspan="5">Data tidak ditemukan.</td>
 						</tr>
 					<?php endif ?>
 				</tbody>

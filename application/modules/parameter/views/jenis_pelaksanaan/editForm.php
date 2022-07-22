@@ -9,18 +9,18 @@
 				<tbody>
 					<tr>
 						<td class="col-sm-2">				
-							<label class="control-label">Kode Prodi</label>
+							<label class="control-label">Kode</label>
 						</td>
 						<td class="col-sm-10">
-							<input type="text" class="col-sm-2 form-control kode uppercase" placeholder="Kode Prodi" maxlength="10" value="<?php echo $data['kode']; ?>" readonly>
+							<input type="text" class="col-sm-2 form-control kode uppercase" placeholder="Kode" maxlength="10" value="<?php echo $data['kode']; ?>" readonly>
 						</td>
 					</tr>
 					<tr>
 						<td class="col-sm-2">				
-							<label class="control-label">Nama Prodi</label>
+							<label class="control-label">Nama</label>
 						</td>
 						<td class="col-sm-10">
-							<input type="text" class="col-sm-8 form-control nama uppercase" placeholder="Nama Prodi" data-required="1" maxlength="50" value="<?php echo $data['nama']; ?>">
+							<input type="text" class="col-sm-8 form-control nama uppercase" placeholder="Nama" data-required="1" maxlength="50" value="<?php echo $data['nama']; ?>">
 						</td>
 					</tr>
 				</tbody>

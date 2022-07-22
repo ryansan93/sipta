@@ -33,7 +33,7 @@ class KelengkapanPengajuan extends Public_Controller {
             $data = $this->includes;
 
             $m_kp = new \Model\Storage\KelengkapanPengajuan_model();
-            $d_kp = $m_kp->orderBy('nama', 'asc')->with(['jenis_pengajuan'])->get()->toArray();
+            $d_kp = $m_kp->orderBy('kode', 'asc')->with(['jenis_pengajuan'])->get()->toArray();
 
             $content['akses'] = $this->hakAkses;
             $content['data'] = $d_kp;
@@ -76,6 +76,8 @@ class KelengkapanPengajuan extends Public_Controller {
             $m_kp->kode = $kode;
             $m_kp->jenis_pengajuan_kode = $params['kode_jenis_pengajuan'];
             $m_kp->nama = $params['nama'];
+            $m_kp->wajib = $params['wajib'];
+            $m_kp->jml_file = $params['jml_file'];
             $m_kp->save();
 
             $deskripsi_log = 'di-submit oleh ' . $this->userdata['detail_user']['nama_detuser'];
@@ -121,7 +123,9 @@ class KelengkapanPengajuan extends Public_Controller {
             $m_kp->where('kode', $params['kode'])->update(
                 array(
                     'jenis_pengajuan_kode' => $params['kode_jenis_pengajuan'],
-                    'nama' => $params['nama']
+                    'nama' => $params['nama'],
+                    'wajib' => $params['wajib'],
+                    'jml_file' => $params['jml_file']
                 )
             );
 
