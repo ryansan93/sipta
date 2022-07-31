@@ -313,7 +313,7 @@ class NoSurat extends Public_Controller {
         $no_dosen = 1;
         foreach ($data['pengajuan_dosen'] as $key => $value) {
             $html .= '<tr>
-                    <td colspan="3"><span style="padding-left: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$no_dosen.'. '.$value['nama'].'</span></td>
+                    <td colspan="3"><span style="padding-left: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$no_dosen.'. '.ucwords($value['nama']).'</span></td>
                 </tr>';
 
             $no_dosen++;
@@ -348,7 +348,7 @@ class NoSurat extends Public_Controller {
                 <tr>
                     <td style="width: 200px;">Program Studi</td>
                     <td style="width: 10px;">:</td>
-                    <td style="width: 500px;">'.$data['prodi']['nama'].'</td>
+                    <td style="width: 500px;">'.ucwords($data['prodi']['nama']).'</td>
                 </tr>
                 <tr>
                     <td style="width: 200px;">Hari, Tanggal</td>
@@ -417,7 +417,7 @@ class NoSurat extends Public_Controller {
                         Tembusan YTH :<br>
                         1. Direktur Polbangtan Malang sebagai laporan<br>
                         2. Wakil Direktur I Bidang Akademik dan Kerja Sama<br>
-                        3. Ketua Jurusan '.$data['prodi']['jurusan'].' Polbangtan Malang
+                        3. Ketua Jurusan '.ucwords($data['prodi']['jurusan']).' Ka. Prodi '.ucwords($data['prodi']['nama']).' Polbangtan Malang
                     </td>
                 </tr>
             </tbody>
@@ -528,7 +528,7 @@ class NoSurat extends Public_Controller {
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3" style="text-align: justify;">Berdasarkan Kalender Akademik (Tentatif) Politeknik Pembangunan Pertanian Malang Tahun Akademik '.$data['tahun_akademik'].', akan dilaksanakan Seminar Hasil Tugas Akhir (TA). Selanjutnya untuk kelancaran kegiatan tersebut maka kami mohon kehadiran Bapak/Ibu.</td>
+                    <td colspan="3" style="text-align: justify;">Berdasarkan Kalender Akademik (Tentatif) Politeknik Pembangunan Pertanian Malang Tahun Akademik '.$data['tahun_akademik'].', akan dilaksanakan Seminar Hasil Tugas Akhir (TA). Selanjutnya untuk kelancaran kegiatan tersebut maka kami mohon kehadiran saudara.</td>
                 </tr>
                 <tr><td colspan="3">Adapun Mahasiswa dan waktu pelaksanaan kegiatan tersebut :</td></tr>
                 <tr>
@@ -544,7 +544,7 @@ class NoSurat extends Public_Controller {
                 <tr>
                     <td style="width: 200px;">Program Studi</td>
                     <td style="width: 10px;">:</td>
-                    <td style="width: 500px;">'.$data['prodi']['nama'].'</td>
+                    <td style="width: 500px;">'.ucwords($data['prodi']['nama']).'</td>
                 </tr>
                 <tr>
                     <td style="width: 200px;">Hari, Tanggal</td>
@@ -577,7 +577,7 @@ class NoSurat extends Public_Controller {
                     </tr>';
         }
         $html .= '<tr>
-                    <td colspan="3" style="text-align: justify;">Demikian atas perhatian dan kerjasama Bapak/ Ibu diucapkan terima kasih.</td>
+                    <td colspan="3" style="text-align: justify;">Demikian atas perhatian dan kerjasama saudara diucapkan terima kasih.</td>
                 </tr>
                 <tr>
                     <td colspan="3">
