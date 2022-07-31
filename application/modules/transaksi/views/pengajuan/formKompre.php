@@ -73,6 +73,15 @@
 	</div>
 </div>
 
+<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+	<div class="col-xs-12 no-padding">
+		<label class="control-label">Tahun Akademik</label>
+	</div>
+	<div class="col-xs-12 no-padding">
+		<input type="text" class="form-control uppercase tahun_akademik" placeholder="Tahun Akademik" data-required="1" maxlength="10">
+	</div>
+</div>
+
 <?php for ($i=0; $i < 4; $i++) { ?>
 	<div class="col-xs-12 no-padding penguji" data-no="<?php echo $i+1; ?>" style="margin-bottom: 5px;">
 		<div class="col-xs-4 no-padding" style="padding-right: 5px;">

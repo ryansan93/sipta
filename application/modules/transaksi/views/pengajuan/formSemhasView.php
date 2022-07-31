@@ -61,6 +61,15 @@
 	</div>
 </div>
 <div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
+<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+	<div class="col-xs-12 no-padding">
+		<label class="control-label">Tahun Akademik</label>
+	</div>
+	<div class="col-xs-12 no-padding" style="padding-left: 15px;">
+		<span><?php echo strtoupper($data['tahun_akademik']); ?></span>
+	</div>
+</div>
+<div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
 <?php $idx = 1; ?>
 <?php foreach ($data['pengajuan_dosen'] as $k_pd => $v_pd): ?>
 	<div class="col-xs-12 no-padding pembimbing" style="margin-bottom: 5px;">

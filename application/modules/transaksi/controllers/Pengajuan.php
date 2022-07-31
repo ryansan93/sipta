@@ -303,6 +303,7 @@ class Pengajuan extends Public_Controller {
             $m_pengajuan->jam_pelaksanaan = $params['jam_pelaksanaan'];
             $m_pengajuan->g_status = 1;
             $m_pengajuan->batal = 0;
+            $m_pengajuan->tahun_akademik = $params['tahun_akademik'];
             $m_pengajuan->save();
 
             foreach ($params['list_kelengkapan_pengajuan'] as $k_lkp => $v_lkp) {

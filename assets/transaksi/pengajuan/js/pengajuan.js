@@ -456,6 +456,7 @@ var pengajuan = {
 						'no_telp': $(dcontent).find('.no_telp').val(),
 						'jenis_pelaksanaan_kode': $(dcontent).find('.jenis_pelaksanaan').val(),
 						'judul_penelitian': $(dcontent).find('.judul_penelitian').val(),
+						'tahun_akademik': $(dcontent).find('.tahun_akademik').val(),
 						'list_penguji': list_penguji,
 						'jadwal': dateSQL( $(dcontent).find('#Jadwal').data('DateTimePicker').date() ),
 						'jam_pelaksanaan': dateTimeSQL( $(dcontent).find('#JamPelaksanaan').data('DateTimePicker').date() ),
