@@ -117,7 +117,7 @@ var jp = {
 				if ( result ) {
 					var data = {
 						'kode': kode,
-						'nama': nama
+						'nama': nama,
 						'form': form
 					};
 
