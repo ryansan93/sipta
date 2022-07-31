@@ -1,0 +1,463 @@
+         <html xmlns:v="urn:schemas-microsoft-com:vml"
+        xmlns:o="urn:schemas-microsoft-com:office:office"
+        xmlns:w="urn:schemas-microsoft-com:office:word"
+        xmlns="http://www.w3.org/TR/REC-html40">
+        
+        <head>
+        <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+        <meta name=ProgId content=Word.Document>
+        <meta name=Generator content="Microsoft Word 9">
+        <meta name=Originator content="Microsoft Word 9">
+        <!--[if !mso]>
+        <style>
+        v\:* {behavior:url(#default#VML);}
+        o\:* {behavior:url(#default#VML);}
+        w\:* {behavior:url(#default#VML);}
+        .shape {behavior:url(#default#VML);}
+        </style>
+        <![endif]-->
+        <title></title>
+        <!--[if gte mso 9]><xml>
+         <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:DoNotHyphenateCaps/>
+            <w:PunctuationKerning/>
+            <w:DrawingGridHorizontalSpacing>9.35 pt</w:DrawingGridHorizontalSpacing>
+            <w:DrawingGridVerticalSpacing>9.35 pt</w:DrawingGridVerticalSpacing>
+         </w:WordDocument>
+        </xml><![endif]-->
+        <style>
+        <!--
+         /* Font Definitions */
+        @font-face
+            {font-family:Verdana;
+            panose-1:2 11 6 4 3 5 4 4 2 4;
+            mso-font-charset:0;
+            mso-generic-font-family:swiss;
+            mso-font-pitch:variable;
+            mso-font-signature:536871559 0 0 0 415 0;}
+         /* Style Definitions */
+        p.MsoNormal, li.MsoNormal, div.MsoNormal
+            {mso-style-parent:"";
+            margin:0in;
+            margin-bottom:.0001pt;
+            mso-pagination:widow-orphan;
+            font-size:7.5pt;
+            mso-bidi-font-size:8.0pt;
+            font-family:"Verdana";
+            mso-fareast-font-family:"Verdana";}
+        p.small
+            {mso-style-parent:"";
+            margin:0in;
+            margin-bottom:.0001pt;
+            mso-pagination:widow-orphan;
+            font-size:1.0pt;
+            mso-bidi-font-size:1.0pt;
+            font-family:"Verdana";
+            mso-fareast-font-family:"Verdana";}
+        @page Section1
+            {size:8.5in 11.0in;
+            margin:1.0in 1.25in 1.0in 1.25in;
+            mso-header-margin:.5in;
+            mso-footer-margin:.5in;
+            mso-paper-source:0;}
+        div.Section1
+            {page:Section1;}
+        -->
+        </style>
+        <!--[if gte mso 9]><xml>
+         <o:shapedefaults v:ext="edit" spidmax="1032">
+            <o:colormenu v:ext="edit" strokecolor="none"/>
+         </o:shapedefaults></xml><![endif]--><!--[if gte mso 9]><xml>
+         <o:shapelayout v:ext="edit">
+            <o:idmap v:ext="edit" data="1"/>
+         </o:shapelayout></xml><![endif]-->
+         
+	
+	<style type="text/css">
+		@page Page
+		{
+			size: 8.5in 14.0in;
+			margin: 0.15in 0.25in 0in 0.25in;
+			mso-header-margin: .5in;
+			mso-footer-margin: .5in;
+			mso-paper-source: 0;
+			border-bottom: 1px solid #245fac;
+		} 
+		div.Page {
+			page: Page;
+		}
+		div.Section2 {
+			margin: 0in 0.05in 0in 0.3in;
+		}
+	</style>
+
+        </head>
+        <body>
+<html>
+
+
+	<div class="Page">
+		<div class="header">
+			<table style="border-spacing:0; border-collapse: collapse;">
+				<tbody>
+					<tr>
+						<td style="width: 30px;">
+							<img src="assets/images/templateSurat/logo-header.png">
+							<!-- <img src="sipta/assets/images/templateSurat/logo-header.png"> -->
+						</td>
+						<td style="width: 700px; vertical-align: top;">
+							<table style="border-spacing:0; border-collapse: collapse; color: #245fac;">
+								<tr>
+									<td style="width: 700px; text-align: center; font-size: 14pt;"><b>KEMENTRIAN PERTANIAN</b></td>
+								</tr>
+								<tr>
+									<td style="width: 700px; text-align: center; font-size: 11pt;">BADAN PENYULUHAN DAN PENGEMBANGAN SUMBER DAYA MANUSIA PERTANIAN</td>
+								</tr>
+								<tr>
+									<td style="width: 700px; text-align: center; font-size: 13pt;"><b>POLITEKNIK PEMBANGUNAN PERTANIAN (POLBANGTAN) MALANG</b></td>
+								</tr>
+								<tr>
+									<td style="width: 700px; text-align: center; font-size: 7.5pt;">Jl. Dr. Cipto 144 A Bedali, Lawang - Malang 65200 Kotak Pos 144 Telp.0341- 427771, 427772, 427379, Fax. 427774</td>
+								</tr>
+								<tr>
+									<td style="width: 700px; text-align: center; font-size: 7.5pt;">website : www.polbangtanmalang.ac.id e-mail : official@polbangtanmalang.ac.id</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="Section2">
+		<div>
+			<img src="assets/images/templateSurat/garis-double.png">
+		</div>
+		<br>
+		<div>
+			<table style="border-spacing:0; border-collapse: collapse; color: #000000; line-height: 80%;">
+				<tr>
+					<td style="width: 100px; text-align: left; font-size: 12pt;">Nomor</td>
+					<td style="width: 25px; text-center: center; font-size: 12pt;">:</td>
+					<td style="width: 380px; font-size: 12pt;">B-3891/SM.220/I.9.2/06/2022</td>
+					<td style="width: 200px; text-align: right; font-size: 12pt;">30 Desember 2022</td>
+				</tr>
+				<tr>
+					<td style="width: 100px; text-align: left; font-size: 12pt;">Lampiran</td>
+					<td style="width: 25px; text-center: center; font-size: 12pt;">:</td>
+					<td style="font-size: 12pt;">-</td>
+				</tr>
+				<tr>
+					<td style="width: 100px; text-align: left; font-size: 12pt;">Hal</td>
+					<td style="width: 25px; text-center: center; font-size: 12pt;">:</td>
+					<td style="font-size: 12pt;">Undangan Seminar</td>
+				</tr>
+			</table>
+		</div>
+		<br>
+		<br>
+		<br>
+		<div>
+			<table style="border-spacing:0; border-collapse: collapse; color: #000000; line-height: 80%;">
+				<tr>
+					<td style="width: 700; text-align: left; font-size: 12pt;">Kepada Yth Bapak/Ibu.</td>
+				</tr>
+									<tr>
+						<td style="padding-left: 70px;">
+							1.   Coba						</td>
+					</tr>
+									<tr>
+						<td style="padding-left: 70px;">
+							2.   Coba						</td>
+					</tr>
+								<tr>
+					<td style="padding-left: 25px;">di -</td>
+				</tr>
+				<tr>
+					<td style="padding-left: 50px;">Tempat</td>
+				</tr>
+			</table>
+		</div>
+		<br>
+		<br>
+		<br>
+		<div style="margin-right: 20px;">
+			<div style="padding-right: 10px;">
+				<div style="text-align: justify;">
+					<span style="line-height: 80%;">Berdasarkan Kalender Akademik (Tentatif) Politeknik Pembangunan Pertanian Malang Tahun Akademik 2021/2022, akan dilaksanakan Seminar Hasil Tugas Akhir (TA). Selanjutnya untuk kelancaran kegiatan tersebut maka kami mohon kehadiran Bapak/Ibu.</span>
+				</div>
+				<span style="line-height: 80%;">Adapun Mahasiswa dan waktu pelaksanaan kegiatan tersebut : </span>
+				<br>
+				<table style="border-spacing:0; border-collapse: collapse; color: #000000;">
+					<tr>
+						<td style="width: 200px">Nama Mahasiswa</td>
+						<td style="width: 5px;">:</td>
+						<td style="width: 400px;">Ira Mahyu Ningsih</td>
+					</tr>
+					<tr>
+						<td>NIM</td>
+						<td>:</td>
+						<td>040118115</td>
+					</tr>
+					<tr>
+						<td>Program Studi</td>
+						<td>:</td>
+						<td>Penyuluhan Pertanian Berkelanjutan</td>
+					</tr>
+					<tr>
+						<td>Hari, Tanggal</td>
+						<td>:</td>
+						<td>Jumat, 01 Juli 2022</td>
+					</tr>
+					<tr>
+						<td>Pukul</td>
+						<td>:</td>
+						<td><b>08.30 – 10.00 WIB</b></td>
+					</tr>
+					<tr>
+						<td>Tempat / Ruang</td>
+						<td>:</td>
+						<td><b>Kelas B</b></td>
+					</tr>
+				</table>
+				<br>
+				<div style="text-align: justify;">
+					<span style="line-height: 80%;">Demikian atas perhatian dan kerjasama Saudara diucapkan terima kasih.</span>
+				</div>
+			</div>
+		</div>
+		<br>
+		<br>
+		<div>
+			<table>
+				<tbody>
+					<tr>
+						<td style="width: 450px;">
+							<br>
+						</td>
+						<td style="width: 450px;">
+							<img src="assets/images/templateSurat/TTD_ne.png" style="position: absolute; top: 100%; left: 35%;">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<br>
+		<div>
+			<table style="font-size: 10pt; width: 800px;">
+				<tbody>
+					<tr>
+						<td>
+							Tembusan YTH :
+						</td>
+					</tr>
+					<tr>
+						<td>
+							1. Direktur Polbangtan Malang sebagai laporan
+						</td>
+					</tr>
+					<tr>
+						<td>
+							2. Wakil Direktur I Bidang Akademik dan Kerja Sama
+						</td>
+					</tr>
+					<tr>
+						<td>
+							3. Ketua Jurusan Pertanian dan Ka.Prodi Penyuluhan Pertanian Berkelanjutan Polbangtan Malang
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div style="margin: 0in 0.1in 0in 0in; border-bottom: 1px solid #245fac;">&nbsp;</div>
+		<div>
+			<img src="assets/images/templateSurat/Footer.png" style="position: absolute; top: 100%; left: 35%;">
+		</div>
+	</div>
+
+	<div class="Page">
+		<div class="header">
+			<table style="border-spacing:0; border-collapse: collapse;">
+				<tbody>
+					<tr>
+						<td style="width: 30px;">
+							<img src="assets/images/templateSurat/logo-header.png">
+							<!-- <img src="sipta/assets/images/templateSurat/logo-header.png"> -->
+						</td>
+						<td style="width: 700px; vertical-align: top;">
+							<table style="border-spacing:0; border-collapse: collapse; color: #245fac;">
+								<tr>
+									<td style="width: 700px; text-align: center; font-size: 14pt;"><b>KEMENTRIAN PERTANIAN</b></td>
+								</tr>
+								<tr>
+									<td style="width: 700px; text-align: center; font-size: 11pt;">BADAN PENYULUHAN DAN PENGEMBANGAN SUMBER DAYA MANUSIA PERTANIAN</td>
+								</tr>
+								<tr>
+									<td style="width: 700px; text-align: center; font-size: 13pt;"><b>POLITEKNIK PEMBANGUNAN PERTANIAN (POLBANGTAN) MALANG</b></td>
+								</tr>
+								<tr>
+									<td style="width: 700px; text-align: center; font-size: 7.5pt;">Jl. Dr. Cipto 144 A Bedali, Lawang - Malang 65200 Kotak Pos 144 Telp.0341- 427771, 427772, 427379, Fax. 427774</td>
+								</tr>
+								<tr>
+									<td style="width: 700px; text-align: center; font-size: 7.5pt;">website : www.polbangtanmalang.ac.id e-mail : official@polbangtanmalang.ac.id</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="Section2">
+		<div>
+			<img src="assets/images/templateSurat/garis-double.png">
+		</div>
+		<br>
+		<div>
+			<table style="border-spacing:0; border-collapse: collapse; color: #000000; line-height: 80%;">
+				<tr>
+					<td style="width: 100px; text-align: left; font-size: 12pt;">Nomor</td>
+					<td style="width: 25px; text-center: center; font-size: 12pt;">:</td>
+					<td style="width: 380px; font-size: 12pt;">B-3891/SM.220/I.9.2/06/2022</td>
+					<td style="width: 200px; text-align: right; font-size: 12pt;">30 Desember 2022</td>
+				</tr>
+				<tr>
+					<td style="width: 100px; text-align: left; font-size: 12pt;">Lampiran</td>
+					<td style="width: 25px; text-center: center; font-size: 12pt;">:</td>
+					<td style="font-size: 12pt;">-</td>
+				</tr>
+				<tr>
+					<td style="width: 100px; text-align: left; font-size: 12pt;">Hal</td>
+					<td style="width: 25px; text-center: center; font-size: 12pt;">:</td>
+					<td style="font-size: 12pt;">Undangan Seminar</td>
+				</tr>
+			</table>
+		</div>
+		<br>
+		<br>
+		<br>
+		<div>
+			<table style="border-spacing:0; border-collapse: collapse; color: #000000; line-height: 80%;">
+				<tr>
+					<td style="width: 700; text-align: left; font-size: 12pt;">Kepada Saudara</td>
+				</tr>
+				<tr>
+					<td>Mahasiswa Polbangtan Malang</td>
+				</tr>
+				<tr>
+					<td>di -</td>
+				</tr>
+				<tr>
+					<td style="padding-left: 50px;">Tempat</td>
+				</tr>
+			</table>
+		</div>
+		<br>
+		<br>
+		<br>
+		<div style="margin-right: 20px;">
+			<div style="padding-right: 10px;">
+				<div style="text-align: justify;">
+					<span style="line-height: 80%;">Berdasarkan Kalender Akademik (Tentatif) Politeknik Pembangunan Pertanian Malang Tahun Akademik 2021/2022, akan dilaksanakan Seminar Proposal Tugas Akhir (TA). Selanjutnya untuk kelancaran kegiatan tersebut maka kami mohon kehadiran Saudara.</span>
+				</div>
+				<br>
+				<span style="line-height: 80%;">Adapun Mahasiswa dan waktu pelaksanaan kegiatan tersebut : </span>
+				<table style="border-spacing:0; border-collapse: collapse; color: #000000;">
+					<tr>
+						<td style="width: 200px">Nama Mahasiswa</td>
+						<td style="width: 5px;">:</td>
+						<td style="width: 400px;">Ira Mahyu Ningsih</td>
+					</tr>
+					<tr>
+						<td>NIM</td>
+						<td>:</td>
+						<td>040118115</td>
+					</tr>
+					<tr>
+						<td>Program Studi</td>
+						<td>:</td>
+						<td>Penyuluhan Pertanian Berkelanjutan</td>
+					</tr>
+					<tr>
+						<td>Hari, Tanggal</td>
+						<td>:</td>
+						<td>Jumat, 01 Juli 2022</td>
+					</tr>
+					<tr>
+						<td>Pukul</td>
+						<td>:</td>
+						<td><b>08.30 – 10.00 WIB</b></td>
+					</tr>
+					<tr>
+						<td>Tempat / Ruang</td>
+						<td>:</td>
+						<td><b>Kelas B</b></td>
+					</tr>
+				</table>
+				<br>
+				<div style="text-align: justify;">
+					<span style="line-height: 80%;">Demikian atas perhatian dan kerjasama Saudara diucapkan terima kasih.</span>
+				</div>
+			</div>
+		</div>
+		<br>
+		<br>
+		<div>
+			<table>
+				<tbody>
+					<tr>
+						<td style="width: 450px;">
+							<br>
+						</td>
+						<td style="width: 450px;">
+							<img src="assets/images/templateSurat/TTD_ne.png" style="position: absolute; top: 100%; left: 35%;">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<div style="margin: 0in 0.1in 0in 0in; border-bottom: 1px solid #245fac;">&nbsp;</div>
+		<div>
+			<img src="assets/images/templateSurat/Footer.png" style="position: absolute; top: 100%; left: 35%;">
+		</div>
+	</div>
+
+</html></body></html>

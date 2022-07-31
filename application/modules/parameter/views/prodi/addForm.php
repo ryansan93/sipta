@@ -23,6 +23,14 @@
 							<input type="text" class="col-sm-8 form-control nama uppercase" placeholder="Nama Prodi" data-required="1" maxlength="100">
 						</td>
 					</tr>
+					<tr>
+						<td class="col-sm-2">				
+							<label class="control-label">Nama Jurusan</label>
+						</td>
+						<td class="col-sm-10">
+							<input type="text" class="col-sm-8 form-control jurusan uppercase" placeholder="Nama Jurusan" data-required="1" maxlength="50">
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>

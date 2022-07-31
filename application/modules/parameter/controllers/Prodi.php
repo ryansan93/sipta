@@ -66,6 +66,7 @@ class Prodi extends Public_Controller {
             if ( !$d_prodi ) {
                 $m_prodi->kode = $params['kode'];
                 $m_prodi->nama = $params['nama'];
+                $m_prodi->jurusan = $params['jurusan'];
                 $m_prodi->save();
 
                 $deskripsi_log = 'di-submit oleh ' . $this->userdata['detail_user']['nama_detuser'];
@@ -105,7 +106,8 @@ class Prodi extends Public_Controller {
             $m_prodi = new \Model\Storage\Prodi_model();
             $m_prodi->where('kode', $params['kode'])->update(
                 array(
-                    'nama' => $params['nama']
+                    'nama' => $params['nama'],
+                    'jurusan' => $params['jurusan']
                 )
             );
 

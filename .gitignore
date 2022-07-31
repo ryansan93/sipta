@@ -17,4 +17,5 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 #/vendor/
-#/uploads/
+/uploads/
+/application/config/env.php

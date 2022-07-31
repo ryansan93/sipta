@@ -16,13 +16,13 @@
 				<div class="form-group">
 					<label class="col-lg-2 control-label">Nama User</label>
 					<div class="col-lg-4">
-						<!-- <input type="text" placeholder="Nama User" id="nama_user" class="form-control" data-required="1"> -->
-						<select id="nama_user" data-placeholder="Pilih Karyawan" class="form-control selectpicker" data-live-search="true" type="text" data-required="1">
+						<input type="text" placeholder="Nama User" id="nama_user" class="form-control" data-required="1">
+						<!-- <select id="nama_user" data-placeholder="Pilih Karyawan" class="form-control selectpicker" data-live-search="true" type="text" data-required="1">
 							<option value="">Pilih Karyawan</option>
 							<?php foreach ($data_karyawan as $k_dk => $v_dk): ?>
 								<option data-tokens="<?php echo strtoupper($v_dk['nama'].' ('.$v_dk['jabatan'].')'); ?>" value="<?php echo $v_dk['nama']; ?>"><?php echo strtoupper($v_dk['nama'].' ('.$v_dk['jabatan'].')'); ?></option>
 							<?php endforeach ?>
-						</select>
+						</select> -->
 					</div>
 				</div>
 				<div class="form-group">

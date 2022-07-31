@@ -42,8 +42,9 @@
 										<th>Submit</th>
 										<th>Update</th>
 										<th>Delete</th>
-										<th>Ack</th>
+										<!-- <th>Ack</th> -->
 										<th>Approve</th>
+										<th>Reject</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -71,11 +72,14 @@
 												<td class="text-center">
 													<input type="checkbox" class="check-delete">
 												</td>
-												<td class="text-center">
+												<!-- <td class="text-center">
 													<input type="checkbox" class="check-ack">
-												</td>
+												</td> -->
 												<td class="text-center">
 													<input type="checkbox" class="check-approve">
+												</td>
+												<td class="text-center">
+													<input type="checkbox" class="check-reject">
 												</td>
 												<td class="text-center">
 													<input data-idftr="<?php echo $d_val['id_detfitur']; ?>" type="checkbox" class="check-fitur" data-parent="check-fitur-all" onclick="group.mark_view(this)">

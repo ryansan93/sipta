@@ -111,8 +111,9 @@ var group = {
 								var a_submit = $(tr).find('.check-submit').is(':checked') ? 1 : 0;
 								var a_edit = $(tr).find('.check-update').is(':checked') ? 1 : 0;
 								var a_delete = $(tr).find('.check-delete').is(':checked') ? 1 : 0;
-								var a_ack = $(tr).find('.check-ack').is(':checked') ? 1 : 0;
+								// var a_ack = $(tr).find('.check-ack').is(':checked') ? 1 : 0;
 								var a_approve = $(tr).find('.check-approve').is(':checked') ? 1 : 0;
+								var a_reject = $(tr).find('.check-reject').is(':checked') ? 1 : 0;
 
 								var data_detail = {
 									'id_detfitur' : $(check).data('idftr'),
@@ -120,8 +121,9 @@ var group = {
 									'a_submit' : a_submit,
 									'a_edit' : a_edit,
 									'a_delete' : a_delete,
-									'a_ack' : a_ack,
+									// 'a_ack' : a_ack,
 									'a_approve' : a_approve,
+									'a_reject' : a_reject,
 								};
 							};
 
@@ -203,8 +205,9 @@ var group = {
 								var a_submit = $(_tr).find('.check-submit').is(':checked') ? 1 : 0;
 								var a_edit = $(_tr).find('.check-update').is(':checked') ? 1 : 0;
 								var a_delete = $(_tr).find('.check-delete').is(':checked') ? 1 : 0;
-								var a_ack = $(_tr).find('.check-ack').is(':checked') ? 1 : 0;
+								// var a_ack = $(_tr).find('.check-ack').is(':checked') ? 1 : 0;
 								var a_approve = $(_tr).find('.check-approve').is(':checked') ? 1 : 0;
+								var a_reject = $(_tr).find('.check-reject').is(':checked') ? 1 : 0;
 
 								// console.log('view : ' + a_view + ',submit : ' + a_submit + ',edit : ' + a_edit + ',delete : ' + a_delete + ',ack : ' + a_ack + ',approve : ' + a_approve);
 
@@ -214,8 +217,9 @@ var group = {
 									'a_submit' : a_submit,
 									'a_edit' : a_edit,
 									'a_delete' : a_delete,
-									'a_ack' : a_ack,
+									// 'a_ack' : a_ack,
 									'a_approve' : a_approve,
+									'a_reject' : a_reject,
 								};
 							};
 

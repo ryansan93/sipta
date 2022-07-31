@@ -489,6 +489,7 @@ if(!function_exists('ubahNama')){
       $location = FCPATH . "//uploads/";
     }
     
+    
     $ext_pos = strrpos($filename, '.');
     $ext = substr($filename, $ext_pos);
     $filename = substr($filename, 0, $ext_pos);
@@ -496,6 +497,7 @@ if(!function_exists('ubahNama')){
     $filename = str_replace('.', '_', $filename);
     $filename = preg_replace('/\s+/', '_', $filename);
     $filename = str_replace(',', '_', $filename);
+
 
     $loc = $location.$filename.$ext;
     if(file_exists($loc)){

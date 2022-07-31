@@ -36,4 +36,14 @@ class Pengajuan_model extends Conf{
 	{
 		return $this->hasMany('\Model\Storage\PengajuanKelengkapan_model', 'pengajuan_kode', 'kode')->with(['kelengkapan_pengajuan']);
 	}
+
+	public function ruang_kelas()
+	{
+		return $this->hasOne('\Model\Storage\RuangKelas_model', 'kode', 'ruang_kelas');
+	}
+
+	public function no_surat()
+	{
+		return $this->hasOne('\Model\Storage\NoSurat_model', 'pengajuan_kode', 'kode');
+	}
 }

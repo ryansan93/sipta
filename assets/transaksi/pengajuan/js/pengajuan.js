@@ -1,6 +1,13 @@
 var pengajuan = {
 	start_up: function () {
 		pengajuan.setting_up();
+
+		var start_date = $('#StartDate').find('input').val();
+		var end_date = $('#EndDate').find('input').val();
+
+		if ( !empty(start_date) && !empty(end_date) ) {
+			pengajuan.getLists();
+		}
 	}, // end - start_up
 
 	setting_up: function() {
@@ -20,6 +27,10 @@ var pengajuan = {
             var minDate = dateSQL($("#StartDate").data("DateTimePicker").date())+' 00:00:00';
             $("#EndDate").data("DateTimePicker").minDate(moment(new Date(minDate)));
         });
+        var start_date = $("#StartDate").find('input').data('tgl');
+        if ( !empty(start_date) && empty($("#StartDate").find('input').val()) ) {
+        	$("#StartDate").data('DateTimePicker').date(moment(new Date(start_date)));
+        }
 
         $("#EndDate").on("dp.change", function (e) {
             var maxDate = dateSQL($("#EndDate").data("DateTimePicker").date())+' 23:59:59';
@@ -27,6 +38,10 @@ var pengajuan = {
                 $("#StartDate").data("DateTimePicker").maxDate(moment(new Date(maxDate)));
             }
         });
+        var end_date = $("#EndDate").find('input').data('tgl');
+        if ( !empty(end_date) ) {
+        	$("#EndDate").data('DateTimePicker').date(moment(new Date(end_date)));
+        }
 
 		$("#TglPengajuan").datetimepicker({
             locale: 'id',
@@ -44,6 +59,15 @@ var pengajuan = {
             locale: 'id',
             format: 'LT'
         });
+
+        $("#JamSelesai").datetimepicker({
+            locale: 'id',
+            format: 'LT'
+        });
+
+        // if ( !empty(start_date) && !empty(end_date) ) {
+        // 	pengajuan.getLists();
+        // }
 	}, // end - setting_up
 
 	showNameFile : function(elm, isLable = 1) {
@@ -212,6 +236,8 @@ var pengajuan = {
 
 	getLists: function() {
 		var dcontent = $('div#riwayat');
+
+		console.log('coba');
 
 		var err = 0;
 		$.map( $(dcontent).find('[data-required=1]'), function(ipt) {
@@ -504,6 +530,73 @@ var pengajuan = {
 			}
 		});
 	}, // end - delete
+
+	approve_reject: function(elm) {
+		var dcontent = $('div#action');
+		var err = 0;
+
+		$.map( $(dcontent).find('[data-required=1]'), function(ipt) {
+			if ( empty($(ipt).val()) ) {
+				$(ipt).parent().addClass('has-error');
+				err++;
+			} else {
+				$(ipt).parent().removeClass('has-error');
+			}
+		});
+
+		if ( err > 0 ) {
+			bootbox.alert('Harap lengkapi data terlebih dahulu.');
+		} else {
+			var kode = $(elm).data('kode');
+			var jenis = $(elm).data('jenis');
+			var jam_selesai = dateTimeSQL($(dcontent).find('#JamSelesai').data('DateTimePicker').date());
+			var ruang_kelas = $(dcontent).find('select.ruang_kelas').val();
+			var akun_zoom = $(dcontent).find('.akun_zoom').val();
+			var id_meeting = $(dcontent).find('.id_meeting').val();
+			var password_meeting = $(dcontent).find('.password_meeting').val();
+
+			bootbox.confirm('Apakah anda yakin ingin '+jenis.toUpperCase()+' data ?', function(result) {
+				if ( result ) {
+					var params = {
+						'kode': kode,
+						'jenis': jenis,
+						'jam_selesai': jam_selesai,
+						'ruang_kelas': ruang_kelas,
+						'akun_zoom': akun_zoom,
+						'id_meeting': id_meeting,
+						'password_meeting': password_meeting
+					};
+
+					$.ajax({
+			            url : 'transaksi/Pengajuan/approve_reject',
+			            type : 'POST',
+			            dataType : 'JSON',
+			            data: {
+			            	'params': params
+			            },
+			            beforeSend : function(){ showLoading(); },
+			            success : function(data){
+			                hideLoading();
+			                if ( data.status == 1 ) {
+			                	bootbox.alert(data.message, function() {
+			                		pengajuan.loadForm(data.content.kode);
+
+			                		var start_date = $('#StartDate').find('input').val();
+									var end_date = $('#EndDate').find('input').val();
+
+			                		if ( !empty(start_date) && !empty(end_date) ) {
+			                			pengajuan.getLists();
+			                		}
+			                	});
+			                } else {
+			                	bootbox.alert(data.message);
+			                }
+			            },
+			        });
+				}
+			});
+		}
+	} // end - approve_reject
 };
 
 pengajuan.start_up();

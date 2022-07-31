@@ -105,7 +105,7 @@ class User extends Public_Controller
 		$d_grp = $m_grp->get()->toArray();
 
 		$data['data_user'] = $d_usr;
-		$data['data_karyawan'] = $this->get_karyawan();
+		// $data['data_karyawan'] = $this->get_karyawan();
 		$data['data_group'] = $d_grp;
 
 		$this->load->view('master/user/edit_form', $data);

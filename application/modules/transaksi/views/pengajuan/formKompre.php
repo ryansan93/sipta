@@ -73,7 +73,7 @@
 	</div>
 </div>
 
-<?php for ($i=0; $i < 3; $i++) { ?>
+<?php for ($i=0; $i < 4; $i++) { ?>
 	<div class="col-xs-12 no-padding penguji" data-no="<?php echo $i+1; ?>" style="margin-bottom: 5px;">
 		<div class="col-xs-4 no-padding" style="padding-right: 5px;">
 			<div class="col-xs-12 no-padding">

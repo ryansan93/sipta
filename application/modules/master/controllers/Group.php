@@ -100,8 +100,9 @@ class Group extends Public_Controller
 					$m_dgrp->a_submit = $val['a_submit'];
 					$m_dgrp->a_edit = $val['a_edit'];
 					$m_dgrp->a_delete = $val['a_delete'];
-					$m_dgrp->a_ack = $val['a_ack'];
+					$m_dgrp->a_ack = 0;
 					$m_dgrp->a_approve = $val['a_approve'];
+					$m_dgrp->a_reject = $val['a_reject'];
 					$m_dgrp->save();
 				}
 
@@ -170,8 +171,9 @@ class Group extends Public_Controller
 			$m_dgrp->a_submit = $val['a_submit'];
 			$m_dgrp->a_edit = $val['a_edit'];
 			$m_dgrp->a_delete = $val['a_delete'];
-			$m_dgrp->a_ack = $val['a_ack'];
+			$m_dgrp->a_ack = 0;
 			$m_dgrp->a_approve = $val['a_approve'];
+			$m_dgrp->a_reject = $val['a_reject'];
 			$m_dgrp->save();
 		}
 	}

@@ -756,3 +756,16 @@ tr.kena-batas-timeline{
     from { transform: scale(1) rotate(0deg);}
     to { transform: scale(1) rotate(360deg);}
 }
+
+.dot {
+    height: 20px;
+    width: 20px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+}
+
+.dot:hover {
+    background-color: #8cde94;
+}

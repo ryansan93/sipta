@@ -59,12 +59,14 @@ var prodi = {
 		} else {
 			var kode = $(div).find('.kode').val().toUpperCase();
 			var nama = $(div).find('.nama').val().toUpperCase();
+			var jurusan = $(div).find('.jurusan').val().toUpperCase();
 
 			bootbox.confirm('Apakah anda yakin ingin menyimpan data ?', function(result) {
 				if ( result ) {
 					var data = {
 						'kode': kode,
-						'nama': nama
+						'nama': nama,
+						'jurusan': jurusan
 					};
 
 			        $.ajax({
@@ -109,12 +111,14 @@ var prodi = {
 		} else {
 			var kode = $(div).find('.kode').val().toUpperCase();
 			var nama = $(div).find('.nama').val().toUpperCase();
+			var jurusan = $(div).find('.jurusan').val().toUpperCase();
 
 			bootbox.confirm('Apakah anda yakin ingin meng-ubah data ?', function(result) {
 				if ( result ) {
 					var data = {
 						'kode': kode,
-						'nama': nama
+						'nama': nama,
+						'jurusan': jurusan
 					};
 
 			        $.ajax({

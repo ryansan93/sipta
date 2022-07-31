@@ -23,6 +23,22 @@
 							<input type="text" class="col-sm-8 form-control nama uppercase" placeholder="Nama" data-required="1" maxlength="50" value="<?php echo $data['nama']; ?>">
 						</td>
 					</tr>
+					<tr>
+						<td class="col-sm-2">				
+							<label class="control-label">Ruang / Kelas</label>
+						</td>
+						<td class="col-sm-10">
+							<input type="checkbox" class="ruang_kelas cursor-p" <?php echo ($data['ruang_kelas'] == 1) ? 'checked' : ''; ?>>
+						</td>
+					</tr>
+					<tr>
+						<td class="col-sm-2">				
+							<label class="control-label">Zoom</label>
+						</td>
+						<td class="col-sm-10">
+							<input type="checkbox" class="zoom cursor-p" <?php echo ($data['zoom'] == 1) ? 'checked' : ''; ?>>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>

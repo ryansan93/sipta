@@ -120,6 +120,154 @@
 	<?php endforeach ?>
 </div>
 
+<?php if ( $data['g_status'] == getStatus('submit') ): ?>
+	<?php if ( $akses['a_approve'] == 1 ): ?>
+		<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+			<div class="col-xs-12 no-padding">
+				<label class="control-label">Jam Selesai</label>
+			</div>
+			<div class="col-xs-12 no-padding">
+				<div class="input-group date datetimepicker" name="jamSelesai" id="JamSelesai">
+			        <input type="text" class="form-control text-center" placeholder="Jam" data-required="1" />
+			        <span class="input-group-addon">
+			            <span class="glyphicon glyphicon-calendar"></span>
+			        </span>
+			    </div>
+			</div>
+		</div>
+		<div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
+		<?php 
+			$data_required_ruang_kelas = 0;
+			$hide_ruang_kelas = 'hide';
+			if ( $data['jenis_pelaksanaan']['ruang_kelas'] == 1 ) {
+				$hide_ruang_kelas = '';
+				$data_required_ruang_kelas = 0;
+			}
+		?>
+		<div class="col-xs-12 no-padding ruang_kelas <?php echo $hide_ruang_kelas; ?>">
+			<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+				<div class="col-xs-12 no-padding">
+					<label class="control-label">Ruangan / Kelas</label>
+				</div>
+				<div class="col-xs-12 no-padding">
+					<select class="form-control ruang_kelas" data-required="<?php echo $data_required_ruang_kelas; ?>">
+						<option value="">-- Pilih Kelas --</option>
+						<?php if ( !empty($ruang_kelas) ): ?>
+							<?php foreach ($ruang_kelas as $k_rk => $v_rk): ?>
+								<option value="<?php echo $v_rk['kode']; ?>"><?php echo $v_rk['nama']; ?></option>
+							<?php endforeach ?>
+						<?php endif ?>
+					</select>
+				</div>
+			</div>
+			<div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
+		</div>
+
+		<?php
+			$data_required_zoom = 0;
+			$hide_zoom = 'hide';
+			if ( $data['jenis_pelaksanaan']['zoom'] == 1 ) {
+				$hide_zoom = '';
+				$data_required_zoom = 1;
+			}
+		?>
+		<div class="xol-xs-12 no-padding zoom <?php echo $hide_zoom; ?>">
+			<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+				<div class="col-xs-12 no-padding">
+					<label class="control-label">Akun Zoom</label>
+				</div>
+				<div class="col-xs-12 no-padding">
+					<input type="text" class="form-control text-center akun_zoom" placeholder="Akun Zoom" data-required="<?php echo $data_required_zoom; ?>" />
+				</div>
+			</div>
+			<div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
+
+			<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+				<div class="col-xs-12 no-padding">
+					<label class="control-label">ID Meeting</label>
+				</div>
+				<div class="col-xs-12 no-padding">
+					<input type="text" class="form-control text-center id_meeting" placeholder="ID Meeting" data-required="<?php echo $data_required_zoom; ?>" />
+				</div>
+			</div>
+			<div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
+
+			<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+				<div class="col-xs-12 no-padding">
+					<label class="control-label">Password Meeting</label>
+				</div>
+				<div class="col-xs-12 no-padding">
+					<input type="text" class="form-control text-center password_meeting" placeholder="Password Meeting" data-required="<?php echo $data_required_zoom; ?>" />
+				</div>
+			</div>
+		</div>
+	<?php endif ?>
+<?php else: ?>
+	<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+		<div class="col-xs-12 no-padding">
+			<label class="control-label">Jam Selesai</label>
+		</div>
+		<div class="col-xs-12 no-padding" style="padding-left: 15px;">
+		<span><?php echo strtoupper(substr($data['jam_selesai'], 0, 5)); ?></span>
+	</div>
+	</div>
+	<div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
+	<?php 
+		$hide_ruang_kelas = 'hide';
+		if ( $data['jenis_pelaksanaan']['ruang_kelas'] == 1 ) {
+			$hide_ruang_kelas = '';
+		}
+	?>
+	<div class="col-xs-12 no-padding ruang_kelas <?php echo $hide_ruang_kelas; ?>">
+		<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+			<div class="col-xs-12 no-padding">
+				<label class="control-label">Ruangan / Kelas</label>
+			</div>
+			<div class="col-xs-12 no-padding" style="padding-left: 15px;">
+				<span><?php echo strtoupper($data['ruang_kelas']['nama']); ?></span>
+			</div>
+		</div>
+		<div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
+	</div>
+
+	<?php
+		$hide_zoom = 'hide';
+		if ( $data['jenis_pelaksanaan']['zoom'] == 1 ) {
+			$hide_zoom = '';
+		}
+	?>
+	<div class="xol-xs-12 no-padding zoom <?php echo $hide_zoom; ?>">
+		<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+			<div class="col-xs-12 no-padding">
+				<label class="control-label">Akun Zoom</label>
+			</div>
+			<div class="col-xs-12 no-padding" style="padding-left: 15px;">
+				<span><?php echo strtoupper($data['akun_zoom']); ?></span>
+			</div>
+		</div>
+		<div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
+
+		<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+			<div class="col-xs-12 no-padding">
+				<label class="control-label">ID Meeting</label>
+			</div>
+			<div class="col-xs-12 no-padding" style="padding-left: 15px;">
+				<span><?php echo strtoupper($data['id_meeting']); ?></span>
+			</div>
+		</div>
+		<div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
+
+		<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+			<div class="col-xs-12 no-padding">
+				<label class="control-label">Password Meeting</label>
+			</div>
+			<div class="col-xs-12 no-padding" style="padding-left: 15px;">
+				<span><?php echo strtoupper($data['password_meeting']); ?></span>
+			</div>
+		</div>
+	</div>
+<?php endif ?>
+
 <div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
 	<hr style="margin-top: 10px; margin-bottom: 10px;">
 </div>
@@ -132,10 +280,10 @@
 			<?php } ?>
 		<?php } else { ?>
 			<?php if ( $akses['a_approve'] == 1 ) { ?>
-				<button type="button" class="btn btn-primary pull-right" onclick="pengajuan.approve(this)" data-kode="<?php echo $data['kode']; ?>" style="margin-left: 5px;"><i class="fa fa-check"></i> Approve</button>
+				<button type="button" class="btn btn-primary pull-right" onclick="pengajuan.approve_reject(this)" data-kode="<?php echo $data['kode']; ?>" data-jenis="approve" style="margin-left: 5px;"><i class="fa fa-check"></i> Approve</button>
 			<?php } ?>
 			<?php if ( $akses['a_reject'] == 1 ) { ?>
-				<button type="button" class="btn btn-danger pull-right" onclick="pengajuan.reject(this)" data-kode="<?php echo $data['kode']; ?>" style="margin-right: 5px;"><i class="fa fa-times"></i> Reject</button>
+				<button type="button" class="btn btn-danger pull-right" onclick="pengajuan.approve_reject(this)" data-kode="<?php echo $data['kode']; ?>" data-jenis="reject" style="margin-right: 5px;"><i class="fa fa-times"></i> Reject</button>
 			<?php } ?>
 		<?php } ?>
 	<?php endif ?>

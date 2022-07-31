@@ -23,6 +23,22 @@
 							<input type="text" class="col-sm-8 form-control nama uppercase" placeholder="Nama" data-required="1" maxlength="50">
 						</td>
 					</tr>
+					<tr>
+						<td class="col-sm-2">				
+							<label class="control-label">Ruang / Kelas</label>
+						</td>
+						<td class="col-sm-10">
+							<input type="checkbox" class="ruang_kelas cursor-p">
+						</td>
+					</tr>
+					<tr>
+						<td class="col-sm-2">				
+							<label class="control-label">Zoom</label>
+						</td>
+						<td class="col-sm-10">
+							<input type="checkbox" class="zoom cursor-p">
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>

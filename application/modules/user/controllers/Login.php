@@ -78,6 +78,7 @@ class Login extends MY_Controller
 								$fitur[$k_fitur]['detail'][$k_dfitur]['akses']['a_delete'] = $v_group['a_delete'];
 								$fitur[$k_fitur]['detail'][$k_dfitur]['akses']['a_ack'] = $v_group['a_ack'];
 								$fitur[$k_fitur]['detail'][$k_dfitur]['akses']['a_approve'] = $v_group['a_approve'];
+								$fitur[$k_fitur]['detail'][$k_dfitur]['akses']['a_reject'] = $v_group['a_reject'];
 								$fitur[$k_fitur]['detail'][$k_dfitur]['akses']['a_khusus'] = $akses_khusus;
 							}
 						}

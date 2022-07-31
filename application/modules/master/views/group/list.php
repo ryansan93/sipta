@@ -27,8 +27,8 @@
 						<th class="col-sm-1">Submit</th>
 						<th class="col-sm-1">Edit</th>
 						<th class="col-sm-1">Delete</th>
-						<th class="col-sm-1">Ack</th>
 						<th class="col-sm-1">Approve</th>
+						<th class="col-sm-1">Reject</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -66,14 +66,14 @@
 								<?php } ?>
 							</td>
 							<td class="text-center">
-								<?php if ( $d_val['a_ack'] == 1 ) { ?>
+								<?php if ( $d_val['a_approve'] == 1 ) { ?>
 									<i class="fa fa-check" aria-hidden="true"></i>
 								<?php } else { ?>
 									<i class="fa fa-minus" aria-hidden="true"></i>
 								<?php } ?>
 							</td>
 							<td class="text-center">
-								<?php if ( $d_val['a_approve'] == 1 ) { ?>
+								<?php if ( $d_val['a_reject'] == 1 ) { ?>
 									<i class="fa fa-check" aria-hidden="true"></i>
 								<?php } else { ?>
 									<i class="fa fa-minus" aria-hidden="true"></i>

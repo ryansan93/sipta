@@ -19,7 +19,7 @@ class Pengajuan extends Public_Controller {
     /**
      * Default
      */
-    public function index($segment=0)
+    public function index($params=null)
     {
         if ( $this->hakAkses['a_view'] == 1 ) {
             $this->add_external_js(array(
@@ -32,9 +32,17 @@ class Pengajuan extends Public_Controller {
 
             $data = $this->includes;
 
+            $start_date = null;
+            $end_date = null;
+            if ( !empty($params) ) {
+                $_params = json_decode(base64_decode($params), true);
+
+                $start_date = $_params['start_date'];
+                $end_date = $_params['end_date'];
+            }
 
             $content['akses'] = $this->hakAkses;
-            $content['riwayatForm'] = $this->riwayatForm();
+            $content['riwayatForm'] = $this->riwayatForm($start_date, $end_date);
             $content['addForm'] = $this->addForm();
             $content['title_panel'] = 'Pengajuan TA';
 
@@ -91,11 +99,15 @@ class Pengajuan extends Public_Controller {
     public function getMahasiswa()
     {
         $m_mahasiswa = new \Model\Storage\Mahasiswa_model();
-        $d_mahasiswa = $m_mahasiswa->orderBy('nama', 'asc')->get();
-
+        $d_mahasiswa = $m_mahasiswa->where('nim', $this->userid)->orderBy('nama', 'asc')->get();
         $data = null;
         if ( $d_mahasiswa->count() > 0 ) {
             $data = $d_mahasiswa->toArray();
+        } else {
+            $d_mahasiswa = $m_mahasiswa->orderBy('nama', 'asc')->get();
+            if ( $d_mahasiswa->count() > 0 ) {
+                $data = $d_mahasiswa->toArray();
+            }
         }
 
         return $data;
@@ -156,8 +168,24 @@ class Pengajuan extends Public_Controller {
         echo $html;
     }
 
-    public function riwayatForm()
+    public function getRuangKelas()
     {
+        $m_rk = new \Model\Storage\RuangKelas_model();
+        $d_rk = $m_rk->orderBy('nama', 'asc')->get();
+
+        $data = null;
+        if ( $d_rk->count() > 0 ) {
+            $data = $d_rk->toArray();
+        }
+
+        return $data;
+    }
+
+    public function riwayatForm($start_date = null, $end_date = null)
+    {
+        $content['akses'] = $this->hakAkses;
+        $content['start_date'] = $start_date;
+        $content['end_date'] = $end_date;
         $content['jenis_pengajuan'] = $this->getJenisPengajuan();
 
         $html = $this->load->view($this->pathView . 'riwayat', $content, TRUE);
@@ -172,8 +200,15 @@ class Pengajuan extends Public_Controller {
         $start_date = $params['start_date'];
         $end_date = $params['end_date'];
 
+        $m_mahasiswa = new \Model\Storage\Mahasiswa_model();
+        $d_mahasiswa = $m_mahasiswa->where('nim', $this->userid)->orderBy('nama', 'asc')->first();
+
         $m_pengajuan = new \Model\Storage\Pengajuan_model();
-        $d_pengajuan = $m_pengajuan->whereBetween('tgl_pengajuan', [$start_date, $end_date])->with(['jenis_pengajuan', 'mahasiswa'])->orderBy('tgl_pengajuan', 'desc')->get();
+        if ( $d_mahasiswa ) {
+            $d_pengajuan = $m_pengajuan->whereBetween('tgl_pengajuan', [$start_date, $end_date])->where('nim', $this->userid)->with(['jenis_pengajuan', 'mahasiswa'])->orderBy('tgl_pengajuan', 'desc')->get();
+        } else {
+            $d_pengajuan = $m_pengajuan->whereBetween('tgl_pengajuan', [$start_date, $end_date])->with(['jenis_pengajuan', 'mahasiswa'])->orderBy('tgl_pengajuan', 'desc')->get();
+        }
 
         $data = null;
         if ( $d_pengajuan->count() > 0 ) {
@@ -189,6 +224,7 @@ class Pengajuan extends Public_Controller {
 
     public function addForm()
     {
+        $content['akses'] = $this->hakAkses;
         $content['jenis_pengajuan'] = $this->getJenisPengajuan();
 
         $html = $this->load->view($this->pathView . 'addForm', $content, TRUE);
@@ -199,11 +235,12 @@ class Pengajuan extends Public_Controller {
     public function viewForm($kode)
     {
         $m_pengajuan = new \Model\Storage\Pengajuan_model();
-        $d_pengajuan = $m_pengajuan->where('kode', $kode)->with(['jenis_pengajuan', 'mahasiswa', 'jenis_pelaksanaan', 'prodi', 'pengajuan_dosen', 'pengajuan_kelengkapan'])->first()->toArray();
+        $d_pengajuan = $m_pengajuan->where('kode', $kode)->with(['jenis_pengajuan', 'mahasiswa', 'jenis_pelaksanaan', 'prodi', 'pengajuan_dosen', 'pengajuan_kelengkapan', 'ruang_kelas'])->first()->toArray();
 
         $jenis_pengajuan_form = $d_pengajuan['jenis_pengajuan']['form_pengajuan'];
 
         $content['akses'] = $this->hakAkses;
+        $content['ruang_kelas'] = $this->getRuangKelas();
         $content['data'] = $d_pengajuan;
 
         $html = $this->load->view($this->pathView . 'form'.ucfirst($jenis_pengajuan_form).'View', $content, TRUE);
@@ -331,5 +368,69 @@ class Pengajuan extends Public_Controller {
         }
 
         display_json( $this->result );
+    }
+
+    public function approve_reject() {
+        $params = $this->input->post('params');
+
+        try {
+            $m_pengajuan = new \Model\Storage\Pengajuan_model();
+            $m_pengajuan->where('kode', $params['kode'])->update(
+                array(
+                    'g_status' => getStatus($params['jenis']),
+                    'jam_selesai' => $params['jam_selesai'],
+                    'ruang_kelas' => $params['ruang_kelas'],
+                    'akun_zoom' => $params['akun_zoom'],
+                    'id_meeting' => $params['id_meeting'],
+                    'password_meeting' => $params['password_meeting']
+                )
+            );
+
+            $d_pengajuan = $m_pengajuan->where('kode', $params['kode'])->first();
+
+            $deskripsi_log = 'di-'.$params['jenis'].' oleh ' . $this->userdata['detail_user']['nama_detuser'];
+            Modules::run( 'base/event/update', $d_pengajuan, $deskripsi_log );
+
+            $this->result['status'] = 1;
+            $this->result['content'] = array('kode' => $params['kode']);
+            $this->result['message'] = 'Data berhasil di hapus.';
+        } catch (Exception $e) {
+            $this->result['message'] = $e->getMessage();
+        }
+
+        display_json( $this->result );
+    }
+
+    public function notifikasi($g_status)
+    {
+        $m_pengajuan = new \Model\Storage\Pengajuan_model();
+        $d_pengajuan = $m_pengajuan->where('g_status', $g_status)->get();
+
+        $data = null;
+        if ( $d_pengajuan->count() > 0 ) {
+            $sql = "
+                select min(tgl_pengajuan) as start_date, max(tgl_pengajuan) as end_date from pengajuan
+                where
+                    g_status = ".$g_status."
+            ";
+            $_d_pengajuan = $m_pengajuan->hydrateRaw($sql)->toArray();
+
+            $start_date = $_d_pengajuan[0]['start_date'];
+            $end_date = $_d_pengajuan[0]['end_date'];
+
+            $params = array(
+                'start_date' => $start_date,
+                'end_date' => $end_date
+            );
+
+            $data[] = array(
+                'title' => 'Notifikasi Pengajuan',
+                'deskripsi' => 'Approve Pengajuan',
+                'jumlah' => $d_pengajuan->count(),
+                'action' => "window.open('transaksi/Pengajuan/index/".base64_encode((json_encode($params)))."')"
+            );
+        }
+
+        return $data;
     }
 }

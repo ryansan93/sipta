@@ -56,8 +56,9 @@
 									<th>Submit</th>
 									<th>Update</th>
 									<th>Delete</th>
-									<th>Ack</th>
+									<!-- <th>Ack</th> -->
 									<th>Approve</th>
+									<th>Reject</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -69,8 +70,9 @@
 											$checked_submit = null;
 											$checked_edit = null;
 											$checked_delete = null;
-											$checked_ack = null;
+											// $checked_ack = null;
 											$checked_approve = null;
+											$checked_reject = null;
 											foreach ($data_group['detail_group'] as $key => $dg_val) {
 												if ( $d_val['id_detfitur'] == $dg_val['id_detfitur'] ) {
 													$checked = 'checked';
@@ -78,8 +80,9 @@
 													$checked_submit = ($dg_val['a_submit'] == 1) ? 'checked' : null;
 													$checked_edit = ($dg_val['a_edit'] == 1) ? 'checked' : null;
 													$checked_delete = ($dg_val['a_delete'] == 1) ? 'checked' : null;
-													$checked_ack = ($dg_val['a_ack'] == 1) ? 'checked' : null;
+													// $checked_ack = ($dg_val['a_ack'] == 1) ? 'checked' : null;
 													$checked_approve = ($dg_val['a_approve'] == 1) ? 'checked' : null;
+													$checked_reject = ($dg_val['a_reject'] == 1) ? 'checked' : null;
 												}
 											}
 										?>
@@ -105,11 +108,14 @@
 											<td class="text-center">
 												<input type="checkbox" class="check-delete" <?php echo $checked_delete; ?>>
 											</td>
-											<td class="text-center">
+											<!-- <td class="text-center">
 												<input type="checkbox" class="check-ack" <?php echo $checked_ack; ?>>
-											</td>
+											</td> -->
 											<td class="text-center">
 												<input type="checkbox" class="check-approve" <?php echo $checked_approve; ?>>
+											</td>
+											<td class="text-center">
+												<input type="checkbox" class="check-reject" <?php echo $checked_reject; ?>>
 											</td>
 											<td class="text-center">
 												<input <?php echo $checked?> data-idftr="<?php echo $d_val['id_detfitur']; ?>" type="checkbox" class="check-fitur" data-parent="check-fitur-all" onclick="group.mark_view(this)">

@@ -13,9 +13,8 @@ class Home extends Public_Controller
 
 		$data['title_menu'] = 'Dashboard';
 
-		// $content['list_notif'] = $this->list_notif();
+		$content['list_notif'] = $this->list_notif();
 		// $content['jml_notif'] = count($this->list_notif());
-		$content = null;
 		$data['view'] = $this->load->view('home/dashboard', $content, true);
 
 		$this->load->view($this->template, $data);
@@ -28,23 +27,20 @@ class Home extends Public_Controller
 		foreach ($arr_fitur as $key => $v_fitur) {
 			foreach ($v_fitur['detail'] as $key => $v_mdetail) {
 				$akses = hakAkses('/'.$v_mdetail['path_detfitur']);
-				if ( $akses['a_ack'] == 1 ) {
+				if ( $akses['a_approve'] == 1 ) {
 					$status = getStatus('submit');
 
-					$data = Modules::run( $v_mdetail['path_detfitur'].'/model', $status)->first();
+					$data = Modules::run( $v_mdetail['path_detfitur'].'/notifikasi', $status);
 
-					$notif[$v_mdetail['path_detfitur']] = $data->toArray();
-					$notif[$v_mdetail['path_detfitur']]['path'] = $v_mdetail['path_detfitur'];
-					$notif[$v_mdetail['path_detfitur']]['nama_fitur'] = $v_mdetail['nama_detfitur'];
-
-				} else if ( $akses['a_approve'] == 1 ) {
-					$status = getStatus('ack');
-
-					$data = Modules::run( $v_mdetail['path_detfitur'].'/model', $status)->first();
-
-					$notif[$v_mdetail['path_detfitur']] = $data->toArray();
-					$notif[$v_mdetail['path_detfitur']]['path'] = $v_mdetail['path_detfitur'];
-					$notif[$v_mdetail['path_detfitur']]['nama_fitur'] = $v_mdetail['nama_detfitur'];
+					if ( !empty($data) ) {
+						foreach ($data as $key => $value) {
+							if ( $value['jumlah'] > 0 ) {
+								$notif[$key][$v_mdetail['path_detfitur']] = $value;
+								$notif[$key][$v_mdetail['path_detfitur']]['path'] = $v_mdetail['path_detfitur'];
+								$notif[$key][$v_mdetail['path_detfitur']]['nama_fitur'] = $v_mdetail['nama_detfitur'];
+							}
+						}
+					}
 				}
 			}
         }

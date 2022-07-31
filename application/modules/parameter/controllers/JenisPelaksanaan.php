@@ -66,6 +66,8 @@ class JenisPelaksanaan extends Public_Controller {
 
             $m_jp->kode = $kode;
             $m_jp->nama = $params['nama'];
+            $m_jp->ruang_kelas = $params['ruang_kelas'];
+            $m_jp->zoom = $params['zoom'];
             $m_jp->save();
 
             $deskripsi_log = 'di-submit oleh ' . $this->userdata['detail_user']['nama_detuser'];
@@ -102,7 +104,9 @@ class JenisPelaksanaan extends Public_Controller {
             $m_jp = new \Model\Storage\JenisPelaksanaan_model();
             $m_jp->where('kode', $params['kode'])->update(
                 array(
-                    'nama' => $params['nama']
+                    'nama' => $params['nama'],
+                    'ruang_kelas' => $params['ruang_kelas'],
+                    'zoom' => $params['zoom']
                 )
             );
 

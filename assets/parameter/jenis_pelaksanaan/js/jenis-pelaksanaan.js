@@ -59,12 +59,16 @@ var jp = {
 		} else {
 			var kode = $(div).find('.kode').val().toUpperCase();
 			var nama = $(div).find('.nama').val().toUpperCase();
+			var ruang_kelas = ($(div).find('.ruang_kelas').is(':checked') == true) ? 1 : 0;
+			var zoom = ($(div).find('.zoom').is(':checked') == true) ? 1 : 0;
 
 			bootbox.confirm('Apakah anda yakin ingin menyimpan data ?', function(result) {
 				if ( result ) {
 					var data = {
 						'kode': kode,
-						'nama': nama
+						'nama': nama,
+						'ruang_kelas': ruang_kelas,
+						'zoom': zoom
 					};
 
 			        $.ajax({
@@ -109,12 +113,16 @@ var jp = {
 		} else {
 			var kode = $(div).find('.kode').val().toUpperCase();
 			var nama = $(div).find('.nama').val().toUpperCase();
+			var ruang_kelas = ($(div).find('.ruang_kelas').is(':checked') == true) ? 1 : 0;
+			var zoom = ($(div).find('.zoom').is(':checked') == true) ? 1 : 0;
 
 			bootbox.confirm('Apakah anda yakin ingin meng-ubah data ?', function(result) {
 				if ( result ) {
 					var data = {
 						'kode': kode,
-						'nama': nama
+						'nama': nama,
+						'ruang_kelas': ruang_kelas,
+						'zoom': zoom
 					};
 
 			        $.ajax({
