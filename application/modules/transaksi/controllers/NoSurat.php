@@ -332,7 +332,7 @@ class NoSurat extends Public_Controller {
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3" style="text-align: justify;">Berdasarkan Kalender Akademik (Tentatif) Politeknik Pembangunan Pertanian Malang Tahun Akademik 2021/2022, akan dilaksanakan Seminar Hasil Tugas Akhir (TA). Selanjutnya untuk kelancaran kegiatan tersebut maka kami mohon kehadiran Bapak/Ibu.</td>
+                    <td colspan="3" style="text-align: justify;">Berdasarkan Kalender Akademik (Tentatif) Politeknik Pembangunan Pertanian Malang Tahun Akademik '.$data['tahun_akademik'].', akan dilaksanakan Seminar Hasil Tugas Akhir (TA). Selanjutnya untuk kelancaran kegiatan tersebut maka kami mohon kehadiran Bapak/Ibu.</td>
                 </tr>
                 <tr><td colspan="3">Adapun Mahasiswa dan waktu pelaksanaan kegiatan tersebut :</td></tr>
                 <tr>
@@ -528,7 +528,7 @@ class NoSurat extends Public_Controller {
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3" style="text-align: justify;">Berdasarkan Kalender Akademik (Tentatif) Politeknik Pembangunan Pertanian Malang Tahun Akademik 2021/2022, akan dilaksanakan Seminar Hasil Tugas Akhir (TA). Selanjutnya untuk kelancaran kegiatan tersebut maka kami mohon kehadiran Bapak/Ibu.</td>
+                    <td colspan="3" style="text-align: justify;">Berdasarkan Kalender Akademik (Tentatif) Politeknik Pembangunan Pertanian Malang Tahun Akademik '.$data['tahun_akademik'].', akan dilaksanakan Seminar Hasil Tugas Akhir (TA). Selanjutnya untuk kelancaran kegiatan tersebut maka kami mohon kehadiran Bapak/Ibu.</td>
                 </tr>
                 <tr><td colspan="3">Adapun Mahasiswa dan waktu pelaksanaan kegiatan tersebut :</td></tr>
                 <tr>
@@ -762,7 +762,7 @@ class NoSurat extends Public_Controller {
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3" style="text-align: justify;">Berdasarkan Kalender Akademik (Tentatif) Politeknik Pembangunan Pertanian Malang Tahun Akademik 2021/2022, akan dilaksanakan Ujian Komprehensif Tugas Akhir (TA). Selanjutnya untuk kelancaran kegiatan tersebut maka kami mohon kehadiran Bapak/Ibu.</td>
+                    <td colspan="3" style="text-align: justify;">Berdasarkan Kalender Akademik (Tentatif) Politeknik Pembangunan Pertanian Malang Tahun Akademik '.$data['tahun_akademik'].', akan dilaksanakan Ujian Komprehensif Tugas Akhir (TA). Selanjutnya untuk kelancaran kegiatan tersebut maka kami mohon kehadiran Bapak/Ibu.</td>
                 </tr>
                 <tr><td colspan="3">Adapun Mahasiswa dan waktu pelaksanaan kegiatan tersebut :</td></tr>
                 <tr>
