@@ -230,8 +230,6 @@ class NoSurat extends Public_Controller {
         $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
         $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
-        $nama_prodi = ucwords($data['prodi']['nama']);
-
         $pdf -> AddPage();
 
         // $width_page = 144;
@@ -315,7 +313,7 @@ class NoSurat extends Public_Controller {
         $no_dosen = 1;
         foreach ($data['pengajuan_dosen'] as $key => $value) {
             $html .= '<tr>
-                    <td colspan="3"><span style="padding-left: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$no_dosen.'. '.ucwords($value['nama']).'</span></td>
+                    <td colspan="3"><span style="padding-left: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$no_dosen.'. '.ucwords(strtolower($value['nama'])).'</span></td>
                 </tr>';
 
             $no_dosen++;
@@ -350,7 +348,7 @@ class NoSurat extends Public_Controller {
                 <tr>
                     <td style="width: 200px;">Program Studi</td>
                     <td style="width: 10px;">:</td>
-                    <td style="width: 500px;">'.$nama_prodi.'</td>
+                    <td style="width: 500px;">'.ucwords(strtolower($data['prodi']['nama'])).'</td>
                 </tr>
                 <tr>
                     <td style="width: 200px;">Hari, Tanggal</td>
@@ -419,7 +417,7 @@ class NoSurat extends Public_Controller {
                         Tembusan YTH :<br>
                         1. Direktur Polbangtan Malang sebagai laporan<br>
                         2. Wakil Direktur I Bidang Akademik dan Kerja Sama<br>
-                        3. Ketua Jurusan '.ucwords($data['prodi']['jurusan']).' Ka. Prodi '.$nama_prodi.' Polbangtan Malang
+                        3. Ketua Jurusan '.ucwords(strtolower($data['prodi']['jurusan'])).' Ka. Prodi '.ucwords(strtolower($data['prodi']['nama'])).' Polbangtan Malang
                     </td>
                 </tr>
             </tbody>
@@ -546,7 +544,7 @@ class NoSurat extends Public_Controller {
                 <tr>
                     <td style="width: 200px;">Program Studi</td>
                     <td style="width: 10px;">:</td>
-                    <td style="width: 500px;">'.$nama_prodi.'</td>
+                    <td style="width: 500px;">'.ucwords(strtolower($data['prodi']['nama'])).'</td>
                 </tr>
                 <tr>
                     <td style="width: 200px;">Hari, Tanggal</td>
