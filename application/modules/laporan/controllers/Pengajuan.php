@@ -183,19 +183,20 @@ class Pengajuan extends Public_Controller {
             $mapping_by_tanggal = !empty($data) ? $this->mapping_by_tanggal( $data ) : null;
             $mapping_by_dosen = !empty($data) ? $this->mapping_by_dosen( $data, $nip_dosen ) : null;
             $mapping_by_prodi = !empty($data) ? $this->mapping_by_prodi( $data ) : null;
-
+            
             $content_report_by_tanggal['data'] = $mapping_by_tanggal;
             $html_report_by_tanggal = $this->load->view($this->pathView . 'list_report_by_tanggal', $content_report_by_tanggal, TRUE);
 
             $content_report_by_dosen['data'] = $mapping_by_dosen;
             $html_report_by_dosen = $this->load->view($this->pathView . 'list_report_by_dosen', $content_report_by_dosen, TRUE);
 
-            $content_report_by_prodi['data'] = $mapping_by_dosen;
+            $content_report_by_prodi['data'] = $mapping_by_prodi;
             $html_report_by_prodi = $this->load->view($this->pathView . 'list_report_by_prodi', $content_report_by_prodi, TRUE);
 
             $list_html = array(
                 'list_report_by_tanggal' => $html_report_by_tanggal,
-                'list_report_by_dosen' => $html_report_by_dosen
+                'list_report_by_dosen' => $html_report_by_dosen,
+                'list_report_by_prodi' => $html_report_by_prodi
             );
 
             $this->result['status'] = 1;

@@ -424,7 +424,7 @@ class Pengajuan extends Public_Controller {
 
             $this->result['status'] = 1;
             $this->result['content'] = array('kode' => $params['kode']);
-            $this->result['message'] = 'Data berhasil di reject.';
+            $this->result['message'] = 'Data berhasil di '.$params['jenis'].'.';
         } catch (Exception $e) {
             $this->result['message'] = $e->getMessage();
         }
