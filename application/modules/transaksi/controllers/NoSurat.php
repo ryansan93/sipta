@@ -92,7 +92,7 @@ class NoSurat extends Public_Controller {
 
         if ( $d_ns->count() > 0 ) {
             $sql = "
-                select p.*, m.nama as nama_mahasiswa, jp.nama as nama_jenis_pengajuan from pengajuan p 
+                select p.kode as kode, p.tgl_pengajuan as tgl_pengajuan, p.jadwal as jadwal, p.jam_pelaksanaan as jam_pelaksanaan, p.nim, p.jenis_pengajuan_kode, m.nama as nama_mahasiswa, jp.nama as nama_jenis_pengajuan from pengajuan p 
                 right join
                     no_surat ns
                     on
@@ -107,10 +107,11 @@ class NoSurat extends Public_Controller {
                         p.nim = m.nim
                 where
                     p.g_status = ".getStatus('approve')."
+                group by p.kode, p.tgl_pengajuan, p.jadwal, p.jam_pelaksanaan, p.nim, p.jenis_pengajuan_kode, m.nama, jp.nama
             ";
         } else {
             $sql = "
-                select p.*, m.nama as nama_mahasiswa, jp.nama as nama_jenis_pengajuan from pengajuan p 
+                select p.kode as kode, p.tgl_pengajuan as tgl_pengajuan, p.jadwal as jadwal, p.jam_pelaksanaan as jam_pelaksanaan, p.nim, p.jenis_pengajuan_kode, m.nama as nama_mahasiswa, jp.nama as nama_jenis_pengajuan from pengajuan p 
                 left join
                     jenis_pengajuan jp 
                     on
@@ -121,6 +122,7 @@ class NoSurat extends Public_Controller {
                         p.nim = m.nim
                 where
                     p.g_status = ".getStatus('approve')."
+                group by p.kode, p.tgl_pengajuan, p.jadwal, p.jam_pelaksanaan, p.nim, p.jenis_pengajuan_kode, m.nama, jp.nama
             ";
         }
 
