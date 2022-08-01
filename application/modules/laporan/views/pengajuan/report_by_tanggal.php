@@ -1,6 +1,6 @@
 <div class="col-xs-12 no-padding">
 	<small>
-		<table class="table table-bordered by_dosen" style="margin-bottom: 0px;">
+		<table class="table table-bordered by_tanggal" style="margin-bottom: 0px;">
 			<thead>
 				<tr>
 					<th class="col-xs-1">Tgl Pengajuan</th>
