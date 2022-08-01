@@ -6,6 +6,7 @@
 		<?php foreach ($value['detail'] as $k_det => $v_det): ?>
 			<tr>
 				<td><?php echo tglIndonesia($v_det['tgl_pengajuan'], '-', ' '); ?></td>
+				<td><?php echo $v_det['jenis_pengajuan']); ?></td>
 				<td><?php echo tglIndonesia($v_det['tgl_seminar'], '-', ' '); ?></td>
 				<td><?php echo $v_det['nama'].'<br>'.$v_det['nim']; ?></td>
 				<td><?php echo $v_det['prodi']; ?></td>

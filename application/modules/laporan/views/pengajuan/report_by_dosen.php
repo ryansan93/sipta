@@ -4,9 +4,10 @@
 			<thead>
 				<tr>
 					<th class="col-xs-1">Tgl Pengajuan</th>
+					<th class="col-xs-1">Pengajuan</th>
 					<th class="col-xs-1">Tgl Seminar / Ujian</th>
 					<th class="col-xs-2">Nama<br>Nim</th>
-					<th class="col-xs-2">Prodi</th>
+					<th class="col-xs-1">Prodi</th>
 					<th class="col-xs-2">Dosbing 1<br>Dosbing 2</th>
 					<th class="col-xs-1">Pelaksanaan</th>
 					<th class="col-xs-1">ruang</th>
