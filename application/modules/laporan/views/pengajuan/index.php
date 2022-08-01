@@ -56,6 +56,9 @@
 						<li class="nav-item">
 							<a class="nav-link" data-toggle="tab" href="#by_dosen" data-tab="by_dosen">BY DOSEN</a>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link" data-toggle="tab" href="#by_prodi" data-tab="by_prodi">BY PRODI</a>
+						</li>
 					</ul>
 				</div>
 				<div class="panel-body no-padding">
@@ -66,6 +69,10 @@
 
 						<div id="by_dosen" class="tab-pane fade" role="tabpanel" style="padding-top: 10px;">
 							<?php echo $report_by_dosen; ?>
+						</div>
+
+						<div id="by_prodi" class="tab-pane fade" role="tabpanel" style="padding-top: 10px;">
+							<?php echo $report_by_prodi; ?>
 						</div>
 					</div>
 				</div>

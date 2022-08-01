@@ -4,7 +4,7 @@
 			<div class="col-xs-12 no-padding">
 				<?php if ( $akses['a_submit'] == 1 ): ?>
 					<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
-						<button type="button" class="col-xs-12 btn btn-primary pull-right" onclick="ns.modalAddForm()" data-href="action" data-edit=""><i class="fa fa-plus"></i> ISI NO SURAT</button>
+						<button type="button" class="col-xs-12 btn btn-success pull-right" onclick="ns.modalAddForm()" data-href="action" data-edit=""><i class="fa fa-plus"></i> ISI NO SURAT</button>
 					</div>
 					<div class="col-xs-12 no-padding"><hr style="margin-top: 10px; margin-bottom: 10px;"></div>
 				<?php endif ?>

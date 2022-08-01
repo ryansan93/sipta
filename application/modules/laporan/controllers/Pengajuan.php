@@ -39,6 +39,7 @@ class Pengajuan extends Public_Controller {
 
             $content['report_by_tanggal'] = $this->load->view($this->pathView . 'report_by_tanggal', null, TRUE);
             $content['report_by_dosen'] = $this->load->view($this->pathView . 'report_by_dosen', null, TRUE);
+            $content['report_by_prodi'] = $this->load->view($this->pathView . 'report_by_prodi', null, TRUE);
             $content['dosen'] = $this->getDosen();
 
             // Load Indexx
@@ -98,7 +99,10 @@ class Pengajuan extends Public_Controller {
                     m.nama as nama,
                     p.nim as nim,
                     prd.nama as prodi,
+                    p.prodi_kode as prodi_kode,
                     jplk.nama as jenis_pelaksanaan,
+                    jp.nama as jenis_pengajuan,
+                    p.jenis_pengajuan_kode as jenis_pengajuan_kode,
                     rk.nama as ruang_kelas,
                     p.akun_zoom as akun_zoom,
                     ns.no_surat as no_surat, 
@@ -178,12 +182,16 @@ class Pengajuan extends Public_Controller {
 
             $mapping_by_tanggal = !empty($data) ? $this->mapping_by_tanggal( $data ) : null;
             $mapping_by_dosen = !empty($data) ? $this->mapping_by_dosen( $data, $nip_dosen ) : null;
+            $mapping_by_prodi = !empty($data) ? $this->mapping_by_prodi( $data ) : null;
 
             $content_report_by_tanggal['data'] = $mapping_by_tanggal;
             $html_report_by_tanggal = $this->load->view($this->pathView . 'list_report_by_tanggal', $content_report_by_tanggal, TRUE);
 
             $content_report_by_dosen['data'] = $mapping_by_dosen;
             $html_report_by_dosen = $this->load->view($this->pathView . 'list_report_by_dosen', $content_report_by_dosen, TRUE);
+
+            $content_report_by_prodi['data'] = $mapping_by_dosen;
+            $html_report_by_prodi = $this->load->view($this->pathView . 'list_report_by_prodi', $content_report_by_prodi, TRUE);
 
             $list_html = array(
                 'list_report_by_tanggal' => $html_report_by_tanggal,
@@ -221,6 +229,25 @@ class Pengajuan extends Public_Controller {
                         $data[ $v_val ]['nama'] = $value[ substr($k_val, 4, strlen($k_val)) ];
                         $data[ $v_val ]['detail'][ $value['kode'] ] = $value;
                     }
+                }
+            }
+        }
+
+        return $data;
+    }
+
+    public function mapping_by_prodi($_data)
+    {
+        $data = null;
+        foreach ($_data as $key => $value) {
+            if ( !empty($value['no_surat']) ) {
+                $data[ $value['prodi_kode'] ]['kode'] = $value['prodi_kode'];
+                $data[ $value['prodi_kode'] ]['nama'] = $value['prodi'];
+                if ( !isset($data[ $value['prodi_kode'] ]['detail'][ $value['jenis_pengajuan_kode'] ]) ) {
+                    $data[ $value['prodi_kode'] ]['detail'][ $value['jenis_pengajuan_kode'] ]['nama'] = $value['jenis_pengajuan'];
+                    $data[ $value['prodi_kode'] ]['detail'][ $value['jenis_pengajuan_kode'] ]['jumlah'] = 1;
+                } else {
+                    $data[ $value['prodi_kode'] ]['detail'][ $value['jenis_pengajuan_kode'] ]['jumlah'] += 1;
                 }
             }
         }

@@ -99,13 +99,19 @@
 </div>
 
 <?php for ($i=0; $i < 4; $i++) { ?>
+	<?php 
+		$data_required = 1;
+		if ( $i == 3 ) {
+			$data_required = 0;
+		}
+	?>
 	<div class="col-xs-12 no-padding penguji" data-no="<?php echo $i+1; ?>" style="margin-bottom: 5px;">
 		<div class="col-xs-4 no-padding" style="padding-right: 5px;">
 			<div class="col-xs-12 no-padding">
 				<label class="control-label">Jenis Penguji</label>
 			</div>
 			<div class="col-xs-12 no-padding">
-			<select class="form-control jenis_penguji" data-required="1" onclick="pengajuan.pilihJenisPenguji(this)">
+			<select class="form-control jenis_penguji" data-required="<?php echo $data_required; ?>" onclick="pengajuan.pilihJenisPenguji(this)">
 					<option value="">-- Pilih --</option>
 					<option value="luar">DOSEN LUAR</option>
 					<option value="dalam">DOSEN DALAM</option>
@@ -117,7 +123,7 @@
 				<label class="control-label">Penguji <?php echo $i+1; ?></label>
 			</div>
 			<div class="col-xs-12 no-padding jenis_dosen dalam">
-				<select class="form-control dosen" data-required="1">
+				<select class="form-control dosen" data-required="<?php echo $data_required; ?>">
 					<option value="">-- Pilih Dosen --</option>
 					<?php if ( !empty($dosen) ): ?>
 						<?php foreach ($dosen as $k_dosen => $v_dosen): ?>

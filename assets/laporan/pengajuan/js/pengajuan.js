@@ -76,6 +76,7 @@ var pengajuan = {
 	                if ( data.status == 1 ) {
 		                $('table.by_tanggal tbody').html( data.content.list_report_by_tanggal );
 		                $('table.by_dosen tbody').html( data.content.list_report_by_dosen );
+		                $('div.by_prodi').html( data.content.list_report_by_prodi );
 		            } else {
 		            	bootbox.alert(data.message);
 		            }
