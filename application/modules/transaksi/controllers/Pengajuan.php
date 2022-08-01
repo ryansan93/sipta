@@ -139,6 +139,26 @@ class Pengajuan extends Public_Controller {
         return $data;
     }
 
+    public function getDataSemhas()
+    {
+        $m_pengajuan = new \Model\Storage\Pengajuan_model();
+        $d_pengajuan = $m_pengajuan->where('nim', $this->userid)->where('g_status', getStatus('approve'))->with(['jenis_pengajuan'])->get();
+
+        $data = null;
+        if ( $d_pengajuan->count() > 0 ) {
+            $d_pengajuan = $d_pengajuan->toArray();
+            foreach ($d_pengajuan as $key => $value) {
+                $data[ $value['kode'] ] = array(
+                    'kode_pengajuan' => $value['kode'],
+                    'jenis_pengajuan' => $value['jenis_pengajuan']['nama'],
+                    'judul_penelitian' => $value['judul_penelitian']
+                );
+            }
+        }
+
+        return $data;
+    }
+
     public function kelengkapanPengajuan()
     {
         $jenis_pengajuan_kode = $this->input->get('jenis_pengajuan_kode');
@@ -160,6 +180,7 @@ class Pengajuan extends Public_Controller {
         $content['dosen'] = $this->getDosen();
 
         if ( $d_jp->form_pengajuan == 'kompre' ) {
+            $content['data_semhas'] = $this->getDataSemhas();
             $html = $this->load->view($this->pathView . 'formKompre', $content, TRUE);
         } else {
             $html = $this->load->view($this->pathView . 'formSemhas', $content, TRUE);
@@ -292,8 +313,9 @@ class Pengajuan extends Public_Controller {
             $kode = $m_pengajuan->getNextIdRibuan();
 
             $m_pengajuan->kode = $kode;
+            $m_pengajuan->kode_pengajuan = isset($params['kode_pengajuan']) ? $params['kode_pengajuan'] : null;
             $m_pengajuan->jenis_pengajuan_kode = $params['jenis_pengajuan'];
-            $m_pengajuan->tgl_pengajuan = isset($params['tgl_pengajuan']) ? $params['tgl_pengajuan'] : date('Y-m-d');
+            $m_pengajuan->tgl_pengajuan = date('Y-m-d');
             $m_pengajuan->prodi_kode = $params['prodi_kode'];
             $m_pengajuan->nim = $params['nim'];
             $m_pengajuan->no_telp = $params['no_telp'];
@@ -376,16 +398,24 @@ class Pengajuan extends Public_Controller {
 
         try {
             $m_pengajuan = new \Model\Storage\Pengajuan_model();
-            $m_pengajuan->where('kode', $params['kode'])->update(
-                array(
-                    'g_status' => getStatus($params['jenis']),
-                    'jam_selesai' => $params['jam_selesai'],
-                    'ruang_kelas' => $params['ruang_kelas'],
-                    'akun_zoom' => $params['akun_zoom'],
-                    'id_meeting' => $params['id_meeting'],
-                    'password_meeting' => $params['password_meeting']
-                )
-            );
+            if ( $params['jenis'] != getStatus(4) ) {
+                $m_pengajuan->where('kode', $params['kode'])->update(
+                    array(
+                        'g_status' => getStatus($params['jenis']),
+                        'jam_selesai' => $params['jam_selesai'],
+                        'ruang_kelas' => $params['ruang_kelas'],
+                        'akun_zoom' => $params['akun_zoom'],
+                        'id_meeting' => $params['id_meeting'],
+                        'password_meeting' => $params['password_meeting']
+                    )
+                );
+            } else {
+                $m_pengajuan->where('kode', $params['kode'])->update(
+                    array(
+                        'g_status' => getStatus($params['jenis'])
+                    )
+                );
+            }
 
             $d_pengajuan = $m_pengajuan->where('kode', $params['kode'])->first();
 
@@ -394,7 +424,7 @@ class Pengajuan extends Public_Controller {
 
             $this->result['status'] = 1;
             $this->result['content'] = array('kode' => $params['kode']);
-            $this->result['message'] = 'Data berhasil di hapus.';
+            $this->result['message'] = 'Data berhasil di reject.';
         } catch (Exception $e) {
             $this->result['message'] = $e->getMessage();
         }

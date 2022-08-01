@@ -23,10 +23,12 @@ class Pengajuan extends Public_Controller {
     {
         if ( $this->hakAkses['a_view'] == 1 ) {
             $this->add_external_js(array(
+                "assets/select2/js/select2.min.js",
                 "assets/jquery/list.min.js",
                 "assets/laporan/pengajuan/js/pengajuan.js",
             ));
             $this->add_external_css(array(
+                'assets/select2/css/select2.min.css',
                 "assets/laporan/pengajuan/css/pengajuan.css",
             ));
 
@@ -35,6 +37,10 @@ class Pengajuan extends Public_Controller {
             $content['akses'] = $this->hakAkses;
             $content['title_panel'] = 'Laporan Pengajuan TA';
 
+            $content['report_by_tanggal'] = $this->load->view($this->pathView . 'report_by_tanggal', null, TRUE);
+            $content['report_by_dosen'] = $this->load->view($this->pathView . 'report_by_dosen', null, TRUE);
+            $content['dosen'] = $this->getDosen();
+
             // Load Indexx
             $data['title_menu'] = 'Laporan Pengajuan TA';
             $data['view'] = $this->load->view($this->pathView . 'index', $content, TRUE);
@@ -42,62 +48,6 @@ class Pengajuan extends Public_Controller {
         } else {
             showErrorAkses();
         }
-    }
-
-    public function getJenisPengajuan()
-    {
-        $m_jp = new \Model\Storage\JenisPengajuan_model();
-        $d_jp = $m_jp->orderBy('nama', 'asc')->get();
-
-        $data = null;
-        if ( $d_jp->count() > 0 ) {
-            $data = $d_jp->toArray();
-        }
-
-        return $data;
-    }
-
-    public function getProdi()
-    {
-        $m_prodi = new \Model\Storage\Prodi_model();
-        $d_prodi = $m_prodi->orderBy('nama', 'asc')->get();
-
-        $data = null;
-        if ( $d_prodi->count() > 0 ) {
-            $data = $d_prodi->toArray();
-        }
-
-        return $data;
-    }
-
-    public function getMahasiswa()
-    {
-        $m_mahasiswa = new \Model\Storage\Mahasiswa_model();
-        $d_mahasiswa = $m_mahasiswa->where('nim', $this->userid)->orderBy('nama', 'asc')->get();
-        $data = null;
-        if ( $d_mahasiswa->count() > 0 ) {
-            $data = $d_mahasiswa->toArray();
-        } else {
-            $d_mahasiswa = $m_mahasiswa->orderBy('nama', 'asc')->get();
-            if ( $d_mahasiswa->count() > 0 ) {
-                $data = $d_mahasiswa->toArray();
-            }
-        }
-
-        return $data;
-    }
-
-    public function getJenisPelaksanaan()
-    {
-        $m_jp = new \Model\Storage\JenisPelaksanaan_model();
-        $d_jp = $m_jp->orderBy('nama', 'asc')->get();
-
-        $data = null;
-        if ( $d_jp->count() > 0 ) {
-            $data = $d_jp->toArray();
-        }
-
-        return $data;
     }
 
     public function getDosen()
@@ -113,74 +63,168 @@ class Pengajuan extends Public_Controller {
         return $data;
     }
 
-    public function kelengkapanPengajuan()
+    public function getLists()
     {
-        $jenis_pengajuan_kode = $this->input->get('jenis_pengajuan_kode');
+        $params = $this->input->post('params');
 
-        $m_jp = new \Model\Storage\JenisPengajuan_model();
-        $d_jp = $m_jp->where('kode', $jenis_pengajuan_kode)->first();
+        try {
+            $start_date = $params['start_date'];
+            $end_date = $params['end_date'];
+            $_dosen = $params['dosen'];
 
-        $m_kp = new \Model\Storage\KelengkapanPengajuan_model();
-        $d_kp = $m_kp->where('jenis_pengajuan_kode', $jenis_pengajuan_kode)->orderBy('kode', 'asc')->get();
+            $nip_dosen = array();
+            if ( !empty( $_dosen ) ) {
+                foreach ($_dosen as $k_dosen => $v_dosen) {
+                    if ( stristr($v_dosen, 'all') !== FALSE ) {
+                        $d_dosen = $this->getDosen();
 
-        if ( $d_kp->count() > 0 ) {
-            $d_kp = $d_kp->toArray();
+                        foreach ($d_dosen as $key => $val) {
+                            $nip_dosen[] = $val['nip'];
+                        }
+
+                        break;
+                    } else {
+                        $nip_dosen[] = $v_dosen;
+                    }
+                }
+            }
+
+            $sql = "
+                select 
+                    p.kode as kode, 
+                    p.tgl_pengajuan as tgl_pengajuan, 
+                    p.jadwal as tgl_seminar, 
+                    p.jam_pelaksanaan as jam_pelaksanaan, 
+                    m.nama as nama,
+                    p.nim as nim,
+                    prd.nama as prodi,
+                    jplk.nama as jenis_pelaksanaan,
+                    rk.nama as ruang_kelas,
+                    p.akun_zoom as akun_zoom,
+                    ns.no_surat as no_surat, 
+                    ns.path as path,
+                    p.kode_pengajuan as kode_pengajuan
+                from pengajuan p
+                left join
+                    mahasiswa m
+                    on
+                        p.nim = m.nim
+                left join
+                    prodi prd
+                    on
+                        p.prodi_kode = prd.kode
+                left join
+                    no_surat ns
+                    on
+                        p.kode = ns.pengajuan_kode
+                left join
+                    jenis_pengajuan jp
+                    on
+                        p.jenis_pengajuan_kode = jp.kode
+                left join
+                    jenis_pelaksanaan jplk
+                    on
+                        p.jenis_pelaksanaan_kode = jplk.kode
+                left join
+                    ruang_kelas rk
+                    on
+                        p.ruang_kelas = rk.kode
+                where
+                    p.tgl_pengajuan between '".$start_date."' and '".$end_date."'
+            ";
+            $m_pengajuan = new \Model\Storage\Pengajuan_model();
+            $d_pengajuan = $m_pengajuan->hydrateRaw($sql);
+
+            $data = null;
+            if ( $d_pengajuan->count() > 0 ) {
+                $d_pengajuan = $d_pengajuan->toArray();
+
+                foreach ($d_pengajuan as $key => $value) {
+                    if ( !empty($value['kode_pengajuan']) ) {
+                        $m_pd = new \Model\Storage\PengajuanDosen_model();
+                        $_d_pd = $m_pd->where('pengajuan_kode', $value['kode_pengajuan'])->whereIn('nip', $nip_dosen)->get();
+                        if ( $_d_pd->count() > 0 ) {
+                            $data[ $value['kode'] ] = $value;
+
+                            $d_pd = $m_pd->where('pengajuan_kode', $value['kode_pengajuan'])->get()->toArray();
+
+                            $no = 1;
+                            foreach ($d_pd as $k_pd => $v_pd) {
+                                $data[ $value['kode'] ]['dosbing'.$no] = $v_pd['nama'];
+                                $data[ $value['kode'] ]['nip_dosbing'.$no] = $v_pd['nip'];
+
+                                $no++;
+                            }
+                        }
+                    } else {
+                        $m_pd = new \Model\Storage\PengajuanDosen_model();
+                        $_d_pd = $m_pd->where('pengajuan_kode', $value['kode'])->whereIn('nip', $nip_dosen)->get();
+                        if ( $_d_pd->count() > 0 ) {
+                            $data[ $value['kode'] ] = $value;
+
+                            $d_pd = $m_pd->where('pengajuan_kode', $value['kode'])->get()->toArray();
+
+                            $no = 1;
+                            foreach ($d_pd as $k_pd => $v_pd) {
+                                $data[ $value['kode'] ]['dosbing'.$no] = $v_pd['nama'];
+                                $data[ $value['kode'] ]['nip_dosbing'.$no] = $v_pd['nip'];
+
+                                $no++;
+                            }
+                        }
+                    }
+                }
+            }
+
+            $mapping_by_tanggal = !empty($data) ? $this->mapping_by_tanggal( $data ) : null;
+            $mapping_by_dosen = !empty($data) ? $this->mapping_by_dosen( $data, $nip_dosen ) : null;
+
+            $content_report_by_tanggal['data'] = $mapping_by_tanggal;
+            $html_report_by_tanggal = $this->load->view($this->pathView . 'list_report_by_tanggal', $content_report_by_tanggal, TRUE);
+
+            $content_report_by_dosen['data'] = $mapping_by_dosen;
+            $html_report_by_dosen = $this->load->view($this->pathView . 'list_report_by_dosen', $content_report_by_dosen, TRUE);
+
+            $list_html = array(
+                'list_report_by_tanggal' => $html_report_by_tanggal,
+                'list_report_by_dosen' => $html_report_by_dosen
+            );
+
+            $this->result['status'] = 1;
+            $this->result['content'] = $list_html;
+        } catch (Exception $e) {
+            $this->result['message'] = $e->getMessage();
         }
 
-        $content['prodi'] = $this->getProdi();
-        $content['mahasiswa'] = $this->getMahasiswa();
-        $content['jenis_pelaksanaan'] = $this->getJenisPelaksanaan();
-        $content['data_kelengkapan'] = $d_kp;
-        $content['dosen'] = $this->getDosen();
-
-        if ( $d_jp->form_pengajuan == 'kompre' ) {
-            $html = $this->load->view($this->pathView . 'formKompre', $content, TRUE);
-        } else {
-            $html = $this->load->view($this->pathView . 'formSemhas', $content, TRUE);
-        }
-
-        echo $html;
+        display_json( $this->result );
     }
 
-    public function getRuangKelas()
+    public function mapping_by_tanggal($_data)
     {
-        $m_rk = new \Model\Storage\RuangKelas_model();
-        $d_rk = $m_rk->orderBy('nama', 'asc')->get();
-
         $data = null;
-        if ( $d_rk->count() > 0 ) {
-            $data = $d_rk->toArray();
+        foreach ($_data as $key => $value) {
+            $data[ $value['tgl_pengajuan'] ]['tanggal'] = $value['tgl_pengajuan'];
+            $data[ $value['tgl_pengajuan'] ]['detail'][ $value['kode'] ] = $value;
         }
 
         return $data;
     }
 
-    public function getLists()
+    public function mapping_by_dosen($_data, $nip_dosen)
     {
-        $params = $this->input->get('params');
-
-        $start_date = $params['start_date'];
-        $end_date = $params['end_date'];
-
-        $m_mahasiswa = new \Model\Storage\Mahasiswa_model();
-        $d_mahasiswa = $m_mahasiswa->where('nim', $this->userid)->orderBy('nama', 'asc')->first();
-
-        $m_pengajuan = new \Model\Storage\Pengajuan_model();
-        if ( $d_mahasiswa ) {
-            $d_pengajuan = $m_pengajuan->whereBetween('tgl_pengajuan', [$start_date, $end_date])->where('nim', $this->userid)->with(['jenis_pengajuan', 'mahasiswa'])->orderBy('tgl_pengajuan', 'desc')->get();
-        } else {
-            $d_pengajuan = $m_pengajuan->whereBetween('tgl_pengajuan', [$start_date, $end_date])->with(['jenis_pengajuan', 'mahasiswa'])->orderBy('tgl_pengajuan', 'desc')->get();
-        }
-
         $data = null;
-        if ( $d_pengajuan->count() > 0 ) {
-            $data = $d_pengajuan->toArray();
+        foreach ($_data as $key => $value) {
+            foreach ($value as $k_val => $v_val) {
+                if ( stristr($k_val, 'nip_dosbing') !== false ) {
+                    if ( in_array($v_val, $nip_dosen) !== false ) {
+                        $data[ $v_val ]['nip'] = $v_val;
+                        $data[ $v_val ]['nama'] = $value[ substr($k_val, 4, strlen($k_val)) ];
+                        $data[ $v_val ]['detail'][ $value['kode'] ] = $value;
+                    }
+                }
+            }
         }
 
-        $content['data'] = $data;
-
-        $html = $this->load->view($this->pathView . 'list', $content, TRUE);
-
-        echo $html;
+        return $data;
     }
 }

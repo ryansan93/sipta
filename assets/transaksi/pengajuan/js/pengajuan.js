@@ -192,6 +192,19 @@ var pengajuan = {
 		}
 	}, // end - setDataMahasiswa
 
+	setJudulPenelitian: function(elm) {
+		var dcontent = $('div#action');
+
+		if ( !empty($(elm).val()) ) {
+			var opt = $(elm).find('option:selected');
+			var jp = $(opt).data('jp');
+
+			$(dcontent).find('input.judul_penelitian').val( jp );
+		} else {
+			$(dcontent).find('input.judul_penelitian').val('');
+		}
+	}, // end - setJudulPenelitian
+
 	changeTabActive: function(elm) {
         var vhref = $(elm).data('href');
         var edit = $(elm).data('edit');
@@ -236,8 +249,6 @@ var pengajuan = {
 
 	getLists: function() {
 		var dcontent = $('div#riwayat');
-
-		console.log('coba');
 
 		var err = 0;
 		$.map( $(dcontent).find('[data-required=1]'), function(ipt) {
@@ -344,12 +355,14 @@ var pengajuan = {
 					});
 
 					var data = {
+						'kode_pengajuan': $(dcontent).find('.kode_pengajuan').val(),
 						'jenis_pengajuan': $(dcontent).find('.jenis_pengajuan').val(),
 						'prodi_kode': $(dcontent).find('.prodi').val(),
 						'nim': $(dcontent).find('.nim').val(),
 						'no_telp': $(dcontent).find('.no_telp').val(),
 						'jenis_pelaksanaan_kode': $(dcontent).find('.jenis_pelaksanaan').val(),
 						'judul_penelitian': $(dcontent).find('.judul_penelitian').val(),
+						'tahun_akademik': $(dcontent).find('.tahun_akademik').val(),
 						'list_penguji': list_penguji,
 						'jadwal': dateSQL( $(dcontent).find('#Jadwal').data('DateTimePicker').date() ),
 						'jam_pelaksanaan': dateTimeSQL( $(dcontent).find('#JamPelaksanaan').data('DateTimePicker').date() ),
@@ -450,7 +463,7 @@ var pengajuan = {
 
 					var data = {
 						'jenis_pengajuan': $(dcontent).find('.jenis_pengajuan').val(),
-						'tgl_pengajuan': dateSQL($(dcontent).find('#TglPengajuan').data('DateTimePicker').date()),
+						// 'tgl_pengajuan': dateSQL($(dcontent).find('#TglPengajuan').data('DateTimePicker').date()),
 						'prodi_kode': $(dcontent).find('.prodi').val(),
 						'nim': $(dcontent).find('.nim').val(),
 						'no_telp': $(dcontent).find('.no_telp').val(),
@@ -536,20 +549,23 @@ var pengajuan = {
 		var dcontent = $('div#action');
 		var err = 0;
 
-		$.map( $(dcontent).find('[data-required=1]'), function(ipt) {
-			if ( empty($(ipt).val()) ) {
-				$(ipt).parent().addClass('has-error');
-				err++;
-			} else {
-				$(ipt).parent().removeClass('has-error');
-			}
-		});
+		var jenis = $(elm).data('jenis');
+
+		if ( jenis == 'approve' ) {
+			$.map( $(dcontent).find('[data-required=1]'), function(ipt) {
+				if ( empty($(ipt).val()) ) {
+					$(ipt).parent().addClass('has-error');
+					err++;
+				} else {
+					$(ipt).parent().removeClass('has-error');
+				}
+			});
+		}
 
 		if ( err > 0 ) {
 			bootbox.alert('Harap lengkapi data terlebih dahulu.');
 		} else {
 			var kode = $(elm).data('kode');
-			var jenis = $(elm).data('jenis');
 			var jam_selesai = dateTimeSQL($(dcontent).find('#JamSelesai').data('DateTimePicker').date());
 			var ruang_kelas = $(dcontent).find('select.ruang_kelas').val();
 			var akun_zoom = $(dcontent).find('.akun_zoom').val();

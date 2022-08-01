@@ -1,4 +1,4 @@
-<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+<!-- <div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
 	<div class="col-xs-12 no-padding">
 		<label class="control-label">Tanggal Pengajuan</label>
 	</div>
@@ -10,7 +10,7 @@
 	        </span>
 	    </div>
 	</div>
-</div>
+</div> -->
 
 <div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
 	<div class="col-xs-12 no-padding">

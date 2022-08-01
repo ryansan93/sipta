@@ -2,7 +2,7 @@
 	<div class="col-lg-12 detailed">
 		<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
 			<div class="col-xs-12 no-padding">
-				<label class="control-label">Tgl Awal</label>
+				<label class="control-label">Tgl Pengajuan Awal</label>
 			</div>
 			<div class="col-xs-12 no-padding">
 				<div class="input-group date datetimepicker" name="startDate" id="StartDate">
@@ -16,7 +16,7 @@
 
 		<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
 			<div class="col-xs-12 no-padding">
-				<label class="control-label">Tgl Akhir</label>
+				<label class="control-label">Tgl Pengajuan Akhir</label>
 			</div>
 			<div class="col-xs-12 no-padding">
 				<div class="input-group date datetimepicker" name="endDate" id="EndDate">
@@ -29,34 +29,47 @@
 		</div>
 
 		<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+			<div class="col-xs-12 no-padding">
+				<label class="control-label">Dosen Pembimbing</label>
+			</div>
+			<div class="col-xs-12 no-padding">
+				<select class="dosen" name="dosen[]" multiple="multiple" width="100%" data-required="1">
+					<option value="all" > All </option>
+					<?php foreach ($dosen as $key => $v_dosen): ?>
+						<option value="<?php echo $v_dosen['nip']; ?>" > <?php echo strtoupper($v_dosen['nama']); ?> </option>
+					<?php endforeach ?>
+				</select>
+			</div>
+		</div>
+
+		<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
 			<button type="button" class="col-xs-12 btn btn-primary pull-right tampilkan_riwayat" onclick="pengajuan.getLists(this)"><i class="fa fa-search"></i> Tampilkan</button>
 		</div>
 
-		<div class="col-xs-12 no-padding"><hr style="margin-top: 10px; margin-bottom: 10px;"></div>
+		<div class="col-xs-12 no-padding"><hr></div>
+			<div class="col-xs-12 no-padding">
+				<div class="panel-heading no-padding">
+					<ul class="nav nav-tabs nav-justified">
+						<li class="nav-item">
+							<a class="nav-link active" data-toggle="tab" href="#by_tanggal" data-tab="by_tanggal">BY TANGGAL</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" data-toggle="tab" href="#by_dosen" data-tab="by_dosen">BY DOSEN</a>
+						</li>
+					</ul>
+				</div>
+				<div class="panel-body no-padding">
+					<div class="tab-content">
+						<div id="by_tanggal" class="tab-pane fade show active" role="tabpanel" style="padding-top: 10px;">
+							<?php echo $report_by_tanggal; ?>
+						</div>
 
-		<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
-			<span>* Klik pada baris untuk melihat detail</span>
-			<small>
-				<table class="table table-bordered tbl_riwayat">
-					<thead>
-						<tr>
-							<th class="col-xs-1"></th>
-							<th class="col-xs-1">Kode Pengajuan</th>
-							<th class="col-xs-1">Tanggal</th>
-							<th class="col-xs-2">Jenis Pengajuan</th>
-							<th class="col-xs-2">Mahasiswa</th>
-							<th class="col-xs-1">Tgl Ujian</th>
-							<th class="col-xs-1">Jam</th>
-							<th class="col-xs-2">Status</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td colspan="8">Data tidak ditemukan.</td>
-						</tr>
-					</tbody>
-				</table>
-			</small>
+						<div id="by_dosen" class="tab-pane fade" role="tabpanel" style="padding-top: 10px;">
+							<?php echo $report_by_dosen; ?>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
