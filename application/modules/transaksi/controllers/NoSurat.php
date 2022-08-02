@@ -898,6 +898,8 @@ class NoSurat extends Public_Controller {
             );
         }
 
+        cetak_r( $_path, 1 );
+
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
         header("Cache-Control: no-cache, must-revalidate");
