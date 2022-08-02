@@ -890,18 +890,16 @@ class NoSurat extends Public_Controller {
             $_path = $_params['path'];
             $_pengajuan_kode = $_params['pengajuan_kode'];
 
-            // $m_ns = new \Model\Storage\NoSurat_model();
-            // $d_ns = $m_ns->where('pengajuan_kode', $_pengajuan_kode)->update(
-            //     array(
-            //         'g_status' => getStatus('approve')
-            //     )
-            // );
+            $m_ns = new \Model\Storage\NoSurat_model();
+            $d_ns = $m_ns->where('pengajuan_kode', $_pengajuan_kode)->update(
+                array(
+                    'g_status' => getStatus('approve')
+                )
+            );
         }
 
         $path = $_SERVER['DOCUMENT_ROOT']."/sipta/uploads/dokumen_undangan/"; // change the path to fit your     websites document structure
         $fullPath = $path.basename($_path);
-
-        // cetak_r( $fullPath, 1 );
 
         if (is_readable ($fullPath)) {
             $fsize = filesize($fullPath);
