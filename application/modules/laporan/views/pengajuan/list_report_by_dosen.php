@@ -5,7 +5,7 @@
 		</tr>
 		<?php foreach ($value['detail'] as $k_det => $v_det): ?>
 			<tr>
-				<td><?php echo tglIndonesia($v_det['tgl_pengajuan'], '-', ' '); ?></td>
+				<!-- <td><?php echo tglIndonesia($v_det['tgl_pengajuan'], '-', ' '); ?></td> -->
 				<td><?php echo $v_det['jenis_pengajuan']; ?></td>
 				<td><?php echo tglIndonesia($v_det['tgl_seminar'], '-', ' '); ?></td>
 				<td><?php echo $v_det['nama'].'<br>'.$v_det['nim']; ?></td>
@@ -26,6 +26,6 @@
 	<?php endforeach ?>
 <?php else: ?>
 	<tr>
-		<td colspan="11">Data tidak ditemukan.</td>
+		<td colspan="9">Data tidak ditemukan.</td>
 	</tr>
 <?php endif ?>

@@ -345,13 +345,15 @@ class Pengajuan extends Public_Controller {
             }
 
             foreach ($params['list_penguji'] as $k_lp => $v_lp) {
-                $m_pd = new \Model\Storage\PengajuanDosen_model();
-                $m_pd->pengajuan_kode = $kode;
-                $m_pd->jenis_dosen = isset($v_lp['jenis_penguji']) ? $v_lp['jenis_penguji'] : 'dalam';
-                $m_pd->nip = isset($v_lp['nip']) ? $v_lp['nip'] : null;
-                $m_pd->nama = $v_lp['penguji'];
-                $m_pd->no_telp = isset($v_lp['no_telp']) ? $v_lp['no_telp'] : null;
-                $m_pd->save();
+                if ( isset($v_lp['penguji']) ) {
+                    $m_pd = new \Model\Storage\PengajuanDosen_model();
+                    $m_pd->pengajuan_kode = $kode;
+                    $m_pd->jenis_dosen = isset($v_lp['jenis_penguji']) ? $v_lp['jenis_penguji'] : 'dalam';
+                    $m_pd->nip = isset($v_lp['nip']) ? $v_lp['nip'] : null;
+                    $m_pd->nama = $v_lp['penguji'];
+                    $m_pd->no_telp = isset($v_lp['no_telp']) ? $v_lp['no_telp'] : null;
+                    $m_pd->save();
+                }
             }
 
             $deskripsi_log = 'di-submit oleh ' . $this->userdata['detail_user']['nama_detuser'];

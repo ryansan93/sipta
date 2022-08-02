@@ -3,7 +3,7 @@
 		<table class="table table-bordered by_dosen" style="margin-bottom: 0px;">
 			<thead>
 				<tr>
-					<th class="col-xs-1">Tgl Pengajuan</th>
+					<!-- <th class="col-xs-1">Tgl Pengajuan</th> -->
 					<th class="col-xs-1">Pengajuan</th>
 					<th class="col-xs-1">Tgl Seminar / Ujian</th>
 					<th class="col-xs-2">Nama<br>Nim</th>
