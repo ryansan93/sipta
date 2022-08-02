@@ -890,32 +890,39 @@ class NoSurat extends Public_Controller {
             $_path = $_params['path'];
             $_pengajuan_kode = $_params['pengajuan_kode'];
 
-            $m_ns = new \Model\Storage\NoSurat_model();
-            $d_ns = $m_ns->where('pengajuan_kode', $_pengajuan_kode)->update(
-                array(
-                    'g_status' => getStatus('approve')
-                )
-            );
+            // $m_ns = new \Model\Storage\NoSurat_model();
+            // $d_ns = $m_ns->where('pengajuan_kode', $_pengajuan_kode)->update(
+            //     array(
+            //         'g_status' => getStatus('approve')
+            //     )
+            // );
         }
 
-        cetak_r( $_path, 1 );
+        $path = $_SERVER['DOCUMENT_ROOT']."/sipta/uploads/dokumen_undangan/"; // change the path to fit your     websites document structure
+        $fullPath = $path.basename($_path);
 
-        header('Content-Description: File Transfer');
-        header('Content-Type: application/octet-stream');
-        header("Cache-Control: no-cache, must-revalidate");
-        header("Expires: 0");
-        header('Content-Disposition: attachment; filename="'.basename($_path).'"');
-        header('Content-Length: ' . filesize($_path));
-        header('Pragma: public');
+        // cetak_r( $fullPath, 1 );
 
-        //Clear system output buffer
-        flush();
-
-        //Read the size of the file
-        readfile($_path);
-
-        //Terminate from the script
-        die();
+        if (is_readable ($fullPath)) {
+            $fsize = filesize($fullPath);
+            $path_parts = pathinfo($fullPath);
+            $ext = strtolower($path_parts["extension"]);
+            switch ($ext) {
+                case "pdf":
+                header("Content-type: application/pdf"); // add here more headers for diff.     extensions
+                header("Content-Disposition: attachment; filename=\"".$path_parts["basename"]."\"");     // use 'attachment' to force a download
+                break;
+                default;
+                header("Content-type: application/octet-stream");
+                header("Content-Disposition: filename=\"".$path_parts["basename"]."\"");
+            }
+            header("Content-length: $fsize");
+            header("Cache-control: private"); //use this to open files directly
+            readfile($fullPath);
+            exit;
+        } else {
+            die("Invalid request");
+        }
     }
 
     public function notifikasi($g_status)
