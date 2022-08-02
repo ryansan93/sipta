@@ -212,8 +212,8 @@ class Pengajuan extends Public_Controller {
     {
         $data = null;
         foreach ($_data as $key => $value) {
-            $data[ $value['tgl_pengajuan'] ]['tanggal'] = $value['tgl_pengajuan'];
-            $data[ $value['tgl_pengajuan'] ]['detail'][ $value['kode'] ] = $value;
+            $data[ $value['tgl_seminar'] ]['tanggal'] = $value['tgl_seminar'];
+            $data[ $value['tgl_seminar'] ]['detail'][ $value['kode'] ] = $value;
         }
 
         return $data;
