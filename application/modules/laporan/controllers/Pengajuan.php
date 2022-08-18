@@ -266,9 +266,26 @@ class Pengajuan extends Public_Controller {
                 $data[ $value['prodi_kode'] ]['nama'] = $value['prodi'];
                 if ( !isset($data[ $value['prodi_kode'] ]['detail'][ $value['jenis_pengajuan_kode'] ]) ) {
                     $data[ $value['prodi_kode'] ]['detail'][ $value['jenis_pengajuan_kode'] ]['nama'] = $value['jenis_pengajuan'];
-                    $data[ $value['prodi_kode'] ]['detail'][ $value['jenis_pengajuan_kode'] ]['jumlah'] = 1;
+                    $data[ $value['prodi_kode'] ]['detail'][ $value['jenis_pengajuan_kode'] ]['jumlah'] = 1;                    
                 } else {
                     $data[ $value['prodi_kode'] ]['detail'][ $value['jenis_pengajuan_kode'] ]['jumlah'] += 1;
+                }
+
+                if ( !isset($data[ $value['prodi_kode'] ]['pengajuan_masuk']) ) {
+                    $data[ $value['prodi_kode'] ]['pengajuan_masuk'] = 1;
+                } else {
+                    $data[ $value['prodi_kode'] ]['pengajuan_masuk'] += 1;
+                }
+
+                $m_blangko = new \Model\Storage\Blangko_model();
+                $d_blangko = $m_blangko->where('pengajuan_kode', $key)->first();
+
+                if ( $d_blangko ) {
+                    if ( !isset($data[ $value['prodi_kode'] ]['pengajuan_selesai']) ) {
+                        $data[ $value['prodi_kode'] ]['pengajuan_selesai'] = 1;
+                    } else {
+                        $data[ $value['prodi_kode'] ]['pengajuan_selesai'] += 1;
+                    }
                 }
             }
         }
