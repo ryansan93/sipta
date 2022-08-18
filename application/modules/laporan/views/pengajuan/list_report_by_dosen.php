@@ -10,9 +10,22 @@
 				<td><?php echo tglIndonesia($v_det['tgl_seminar'], '-', ' '); ?></td>
 				<td><?php echo $v_det['nama'].'<br>'.$v_det['nim']; ?></td>
 				<td><?php echo $v_det['prodi']; ?></td>
-				<td><?php echo $v_det['dosbing1'].'<br>'.$v_det['dosbing2']; ?></td>
-				<td><?php echo $v_det['jenis_pelaksanaan']; ?></td>
-				<td><?php echo $v_det['ruang_kelas']; ?></td>
+				<td><?php echo $v_det['dosbing1'].'<br><br>'.$v_det['dosbing2']; ?></td>
+				<td>
+					<?php
+						if ( isset($v_det['penguji']) && !empty($v_det['penguji']) ) {
+							$jml = count($v_det['penguji']);
+							$idx = 0;
+							foreach ($v_det['penguji'] as $k_pgj => $v_pgj) {
+								echo $v_pgj['nama'];
+								if ( $idx < $jml ) {
+									echo '<br><br>';
+								}
+							}
+						}
+					?>
+				</td>
+				<td><?php echo $v_det['jenis_pelaksanaan'].'<br>'.$v_det['ruang_kelas']; ?></td>
 				<td><?php echo $v_det['akun_zoom']; ?></td>
 				<td>
 					<?php if ( !empty($v_det['no_surat']) ): ?>

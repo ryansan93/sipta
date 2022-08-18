@@ -38,7 +38,7 @@
 	<div class="col-xs-12 no-padding">
 		<label class="control-label">No. HP</label>
 	</div>
-	<div class="col-xs-12 no-padding">
+	<div class="col-xs-12 no-padding" style="padding-left: 15px;">
 		<span><?php echo strtoupper($data['no_telp']); ?></span>
 	</div>
 </div>
@@ -87,7 +87,7 @@
 				<label class="control-label">No. HP</label>
 			</div>
 			<div class="col-xs-12 no-padding" style="padding-left: 15px;">
-				<?php echo $v_pd['no_telp'] ?>
+				<?php echo empty($v_pd['no_telp']) ? '-' : $v_pd['no_telp']; ?>
 			</div>
 		</div>
 		<div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
@@ -135,13 +135,8 @@
 			<div class="col-xs-12 no-padding">
 				<label class="control-label">Jam Selesai</label>
 			</div>
-			<div class="col-xs-12 no-padding">
-				<div class="input-group date datetimepicker" name="jamSelesai" id="JamSelesai">
-			        <input type="text" class="form-control text-center" placeholder="Jam" data-required="1" />
-			        <span class="input-group-addon">
-			            <span class="glyphicon glyphicon-calendar"></span>
-			        </span>
-			    </div>
+			<div class="col-xs-12 no-padding" style="padding-left: 15px;">
+				<span><?php echo strtoupper(substr($data['jam_selesai'], 0, 5)); ?></span>
 			</div>
 		</div>
 		<div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
@@ -159,7 +154,7 @@
 					<label class="control-label">Ruangan / Kelas</label>
 				</div>
 				<div class="col-xs-12 no-padding">
-					<select class="form-control ruang_kelas" data-required="<?php echo $data_required_ruang_kelas; ?>">
+					<select class="form-control ruang_kelas" data-required="<?php echo $data_required_ruang_kelas; ?>" onchange="pengajuan.cekRuangan(this)" data-kode="<?php echo $data['kode']; ?>">
 						<option value="">-- Pilih Kelas --</option>
 						<?php if ( !empty($ruang_kelas) ): ?>
 							<?php foreach ($ruang_kelas as $k_rk => $v_rk): ?>
@@ -217,8 +212,8 @@
 			<label class="control-label">Jam Selesai</label>
 		</div>
 		<div class="col-xs-12 no-padding" style="padding-left: 15px;">
-		<span><?php echo strtoupper(substr($data['jam_selesai'], 0, 5)); ?></span>
-	</div>
+			<span><?php echo strtoupper(substr($data['jam_selesai'], 0, 5)); ?></span>
+		</div>
 	</div>
 	<div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
 	<?php 

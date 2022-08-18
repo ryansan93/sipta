@@ -1,5 +1,5 @@
 <div class="modal-header header" style="padding-left: 8px; padding-right: 8px;">
-	<span class="modal-title">Add Prodi</span>
+	<span class="modal-title">Add Jenis Pelaksanaan</span>
 	<button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <div class="modal-body body">

@@ -1,0 +1,11 @@
+tr.data:hover td {
+	background-color: #ededed;
+}
+
+tr[data-status='submit'] td {
+	background-color: #9698ff;
+}
+
+tr[data-status='reject'] td {
+	background-color: #ff5757;
+}

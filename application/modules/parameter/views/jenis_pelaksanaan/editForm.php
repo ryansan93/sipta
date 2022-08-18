@@ -1,5 +1,5 @@
 <div class="modal-header header" style="padding-left: 8px; padding-right: 8px;">
-	<span class="modal-title">Edit Prodi</span>
+	<span class="modal-title">Edit Jenis Pelaksanaan</span>
 	<button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <div class="modal-body body">
@@ -26,7 +26,7 @@
 					<tr>
 						<td class="col-sm-2">				
 							<label class="control-label">Ruang / Kelas</label>
-						</td>
+						</td>p
 						<td class="col-sm-10">
 							<input type="checkbox" class="ruang_kelas cursor-p" <?php echo ($data['ruang_kelas'] == 1) ? 'checked' : ''; ?>>
 						</td>

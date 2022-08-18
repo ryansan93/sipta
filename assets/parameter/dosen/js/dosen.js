@@ -58,7 +58,8 @@ var dosen = {
 			bootbox.alert('Harap lengkapi data terlebih dahulu.');
 		} else {
 			var nip = $(div).find('.nip').val().toUpperCase();
-			var nama = $(div).find('.nama').val().toUpperCase();
+			var nidn = $(div).find('.nidn').val().toUpperCase();
+			var nama = $(div).find('.nama').val();
 			var no_telp = $(div).find('.no_telp').val().toUpperCase();
 			var email = $(div).find('.email').val();
 
@@ -66,6 +67,7 @@ var dosen = {
 				if ( result ) {
 					var data = {
 						'nip': nip,
+						'nidn': nidn,
 						'nama': nama,
 						'no_telp': no_telp,
 						'email': email
@@ -112,7 +114,8 @@ var dosen = {
 			bootbox.alert('Harap lengkapi data terlebih dahulu.');
 		} else {
 			var nip = $(div).find('.nip').val().toUpperCase();
-			var nama = $(div).find('.nama').val().toUpperCase();
+			var nidn = $(div).find('.nidn').val().toUpperCase();
+			var nama = $(div).find('.nama').val();
 			var no_telp = $(div).find('.no_telp').val().toUpperCase();
 			var email = $(div).find('.email').val();
 
@@ -120,6 +123,7 @@ var dosen = {
 				if ( result ) {
 					var data = {
 						'nip': nip,
+						'nidn': nidn,
 						'nama': nama,
 						'no_telp': no_telp,
 						'email': email

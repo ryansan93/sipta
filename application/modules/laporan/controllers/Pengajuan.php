@@ -146,18 +146,30 @@ class Pengajuan extends Public_Controller {
                 foreach ($d_pengajuan as $key => $value) {
                     if ( !empty($value['kode_pengajuan']) ) {
                         $m_pd = new \Model\Storage\PengajuanDosen_model();
-                        $_d_pd = $m_pd->where('pengajuan_kode', $value['kode_pengajuan'])->whereIn('nip', $nip_dosen)->get();
-                        if ( $_d_pd->count() > 0 ) {
+                        $_d_pd_dosbing = $m_pd->where('pengajuan_kode', $value['kode_pengajuan'])->whereIn('nip', $nip_dosen)->get();
+                        $_d_pd_penguji = $m_pd->where('pengajuan_kode', $value['kode'])->whereIn('nip', $nip_dosen)->get();
+                        if ( $_d_pd_dosbing->count() > 0 || $_d_pd_penguji->count() > 0 ) {
                             $data[ $value['kode'] ] = $value;
 
-                            $d_pd = $m_pd->where('pengajuan_kode', $value['kode_pengajuan'])->get()->toArray();
+                            $d_pd_dosbing = $m_pd->where('pengajuan_kode', $value['kode_pengajuan'])->orderBy('nama', 'asc')->get();
 
-                            $no = 1;
-                            foreach ($d_pd as $k_pd => $v_pd) {
-                                $data[ $value['kode'] ]['dosbing'.$no] = $v_pd['nama'];
-                                $data[ $value['kode'] ]['nip_dosbing'.$no] = $v_pd['nip'];
+                            if ( $d_pd_dosbing->count() > 0 ) {
+                                $d_pd_dosbing = $d_pd_dosbing->toArray();
 
-                                $no++;
+                                $no = 1;
+                                foreach ($d_pd_dosbing as $k_pd_dosbing => $v_pd_dosbing) {
+                                    $data[ $value['kode'] ]['dosbing'.$no] = $v_pd_dosbing['nama'];
+                                    $data[ $value['kode'] ]['nip_dosbing'.$no] = $v_pd_dosbing['nip'];
+
+                                    $no++;
+                                }
+                            }
+
+                            $d_pd_penguji = $m_pd->where('pengajuan_kode', $value['kode'])->orderBy('nama', 'asc')->get();
+                            if ( $d_pd_penguji->count() > 0 ) {
+                                $d_pd_penguji = $d_pd_penguji->toArray();
+
+                                $data[ $value['kode'] ]['penguji'] = $d_pd_penguji;
                             }
                         }
                     } else {
@@ -216,6 +228,10 @@ class Pengajuan extends Public_Controller {
             $data[ $value['tgl_seminar'] ]['detail'][ $value['kode'] ] = $value;
         }
 
+        if ( !empty($data) ) {
+            ksort($data);
+        }
+
         return $data;
     }
 
@@ -223,12 +239,16 @@ class Pengajuan extends Public_Controller {
     {
         $data = null;
         foreach ($_data as $key => $value) {
+            $key_detail = str_replace('-', '', $value['tgl_seminar']).' | '.$value['nama'].' | '.$value['kode'];
+
             foreach ($value as $k_val => $v_val) {
                 if ( stristr($k_val, 'nip_dosbing') !== false ) {
                     if ( in_array($v_val, $nip_dosen) !== false ) {
                         $data[ $v_val ]['nip'] = $v_val;
                         $data[ $v_val ]['nama'] = $value[ substr($k_val, 4, strlen($k_val)) ];
-                        $data[ $v_val ]['detail'][ $value['kode'] ] = $value;
+                        $data[ $v_val ]['detail'][ $key_detail ] = $value;
+
+                        ksort($data[ $v_val ]['detail']);
                     }
                 }
             }

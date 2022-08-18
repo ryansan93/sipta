@@ -18,7 +18,8 @@
 			<table class="table table-bordered table-hover tbl_dosen" id="dataTable" width="100%" cellspacing="0">
 				<thead>
 					<tr>
-						<th class="col-sm-2 text-center">NIP</th>
+						<th class="col-sm-1 text-center">NIP</th>
+						<th class="col-sm-1 text-center">NIDN</th>
 						<th class="col-sm-3 text-center">Nama</th>
 						<th class="col-sm-2 text-center">No. Telp</th>
 						<th class="col-sm-3 text-center">E-mail</th>
@@ -30,6 +31,7 @@
 						<?php foreach ($data as $k_data => $v_data): ?>
 							<tr>
 								<td class="nip"><?php echo $v_data['nip']; ?></td>
+								<td><?php echo $v_data['nidn']; ?></td>
 								<td><?php echo $v_data['nama']; ?></td>
 								<td><?php echo !empty($v_data['no_telp']) ? $v_data['no_telp'] : '-'; ?></td>
 								<td><?php echo !empty($v_data['email']) ? $v_data['email'] : '-'; ?></td>

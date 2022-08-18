@@ -1,5 +1,5 @@
 <div class="modal-header header" style="padding-left: 8px; padding-right: 8px;">
-	<span class="modal-title">Add Dosen</span>
+	<span class="modal-title">Edit Dosen</span>
 	<button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <div class="modal-body body">
@@ -13,6 +13,14 @@
 						</td>
 						<td class="col-sm-10">
 							<input type="text" class="col-sm-2 form-control nip uppercase" placeholder="NIP" maxlength="20" data-required="1" value="<?php echo $data['nip']; ?>" readonly>
+						</td>
+					</tr>
+					<tr>
+						<td class="col-sm-2">				
+							<label class="control-label">NIDN</label>
+						</td>
+						<td class="col-sm-10">
+							<input type="text" class="col-sm-2 form-control nidn uppercase" placeholder="NIDN" maxlength="50" data-required="1" value="<?php echo $data['nidn']; ?>">
 						</td>
 					</tr>
 					<tr>

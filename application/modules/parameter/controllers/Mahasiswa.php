@@ -99,7 +99,7 @@ class Mahasiswa extends Public_Controller {
 
                 // INSERT TO TABLE ms_user
                 $m_usr->id_user = $id_user;
-                $m_usr->username_user = $params['nama'];
+                $m_usr->username_user = $id_user;
                 $m_usr->status_user = 1;
                 $m_usr->pass_user = $hash_password;
                 $m_usr->save();

@@ -17,6 +17,14 @@
 					</tr>
 					<tr>
 						<td class="col-sm-2">				
+							<label class="control-label">NIDN</label>
+						</td>
+						<td class="col-sm-10">
+							<input type="text" class="col-sm-2 form-control nidn uppercase" placeholder="NIDN" maxlength="50" data-required="1">
+						</td>
+					</tr>
+					<tr>
+						<td class="col-sm-2">				
 							<label class="control-label">Nama</label>
 						</td>
 						<td class="col-sm-10">

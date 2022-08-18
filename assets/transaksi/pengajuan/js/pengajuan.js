@@ -143,14 +143,44 @@ var pengajuan = {
 	            success : function(html){
 	                hideLoading();
 	                $(dcontent).html(html);
-
-	                pengajuan.setting_up();
 	            },
 	        });
 		} else {
 			$(dcontent).html('');
 		}
 	}, // end - kelengkapanPengajuan
+
+	formDataPengajuan: function(elm) {
+		var dcontent = $('div#action');
+
+		var jenis_pengajuan_kode = $(dcontent).find('select.jenis_pengajuan').val();
+		var pengajuan_kode = $(dcontent).find('select.kode_pengajuan').val();
+
+		if ( !empty(pengajuan_kode) ) {
+			var params = {
+				'jenis_pengajuan_kode': jenis_pengajuan_kode,
+				'pengajuan_kode': pengajuan_kode
+			};
+
+			$.ajax({
+	            url : 'transaksi/Pengajuan/formDataPengajuan',
+	            data : {
+	                'params' : params
+	            },
+	            type : 'GET',
+	            dataType : 'HTML',
+	            beforeSend : function(){ showLoading(); },
+	            success : function(html){
+	                hideLoading();
+	                $(dcontent).find('.formData').html(html);
+
+	                pengajuan.setting_up();
+	            },
+	        });
+		} else {
+			$(dcontent).find('.formData').html('');
+		}
+	}, // end - formDataPengajuan
 
 	mahasiswa: function(elm) {
 		var dcontent = $(elm).closest('div#action');
@@ -365,7 +395,10 @@ var pengajuan = {
 						'tahun_akademik': $(dcontent).find('.tahun_akademik').val(),
 						'list_penguji': list_penguji,
 						'jadwal': dateSQL( $(dcontent).find('#Jadwal').data('DateTimePicker').date() ),
-						'jam_pelaksanaan': dateTimeSQL( $(dcontent).find('#JamPelaksanaan').data('DateTimePicker').date() ),
+						// 'jam_pelaksanaan': dateTimeSQL( $(dcontent).find('#JamPelaksanaan').data('DateTimePicker').date() ),
+						'jam_seminar_ujian': $(dcontent).find('.jam_seminar_ujian').val(),
+						'jam_pelaksanaan': $(dcontent).find('.jam_seminar_ujian option:selected').data('awal'),
+						'jam_selesai': $(dcontent).find('.jam_seminar_ujian option:selected').data('akhir'),
 						'list_kelengkapan_pengajuan': list_kelengkapan_pengajuan
 					};
 
@@ -433,14 +466,14 @@ var pengajuan = {
 					var formData = new FormData();
 
 					var list_penguji = $.map( $(dcontent).find('div.pembimbing'), function(div) {
-						var penguji = $(div).find('select.pembimbing option:selected').attr('data-nama');
-						var nip = $(div).find('select.pembimbing').val();
-						var no_tlp = $(div).find('input.no_telp_pembimbing').val();
+						var penguji = $(div).find('.nama').text();
+						var nip = $(div).find('.nama').data('nip');
+						var no_tlp = $(div).find('.no_telp').text();
 
 						var _data = {
 							'nip': nip,
-							'penguji': penguji,
-							'no_tlp': no_tlp
+							'penguji': penguji.trim(),
+							'no_tlp': no_tlp.trim()
 						};
 
 						return _data;
@@ -462,17 +495,19 @@ var pengajuan = {
 					});
 
 					var data = {
+						'kode_pengajuan': $(dcontent).find('.kode_pengajuan').val(),
 						'jenis_pengajuan': $(dcontent).find('.jenis_pengajuan').val(),
-						// 'tgl_pengajuan': dateSQL($(dcontent).find('#TglPengajuan').data('DateTimePicker').date()),
-						'prodi_kode': $(dcontent).find('.prodi').val(),
-						'nim': $(dcontent).find('.nim').val(),
-						'no_telp': $(dcontent).find('.no_telp').val(),
+						'prodi_kode': $(dcontent).find('.prodi').attr('data-val'),
+						'nim': $(dcontent).find('.nim').attr('data-val'),
+						'no_telp': $(dcontent).find('.no_telp').attr('data-val'),
 						'jenis_pelaksanaan_kode': $(dcontent).find('.jenis_pelaksanaan').val(),
-						'judul_penelitian': $(dcontent).find('.judul_penelitian').val(),
-						'tahun_akademik': $(dcontent).find('.tahun_akademik').val(),
+						'judul_penelitian': $(dcontent).find('.judul_penelitian').attr('data-val'),
+						'tahun_akademik': $(dcontent).find('.tahun_akademik').attr('data-val'),
 						'list_penguji': list_penguji,
 						'jadwal': dateSQL( $(dcontent).find('#Jadwal').data('DateTimePicker').date() ),
-						'jam_pelaksanaan': dateTimeSQL( $(dcontent).find('#JamPelaksanaan').data('DateTimePicker').date() ),
+						'jam_seminar_ujian': $(dcontent).find('.jam_seminar_ujian').val(),
+						'jam_pelaksanaan': $(dcontent).find('.jam_seminar_ujian option:selected').data('awal'),
+						'jam_selesai': $(dcontent).find('.jam_seminar_ujian option:selected').data('akhir'),
 						'list_kelengkapan_pengajuan': list_kelengkapan_pengajuan
 					};
 
@@ -566,7 +601,7 @@ var pengajuan = {
 			bootbox.alert('Harap lengkapi data terlebih dahulu.');
 		} else {
 			var kode = $(elm).data('kode');
-			var jam_selesai = dateTimeSQL($(dcontent).find('#JamSelesai').data('DateTimePicker').date());
+			// var jam_selesai = dateTimeSQL($(dcontent).find('#JamSelesai').data('DateTimePicker').date());
 			var ruang_kelas = $(dcontent).find('select.ruang_kelas').val();
 			var akun_zoom = $(dcontent).find('.akun_zoom').val();
 			var id_meeting = $(dcontent).find('.id_meeting').val();
@@ -577,7 +612,7 @@ var pengajuan = {
 					var params = {
 						'kode': kode,
 						'jenis': jenis,
-						'jam_selesai': jam_selesai,
+						// 'jam_selesai': jam_selesai,
 						'ruang_kelas': ruang_kelas,
 						'akun_zoom': akun_zoom,
 						'id_meeting': id_meeting,
@@ -613,7 +648,39 @@ var pengajuan = {
 				}
 			});
 		}
-	} // end - approve_reject
+	}, // end - approve_reject
+
+	cekRuangan: function(elm) {
+		var val = $(elm).val();
+		var kode = $(elm).attr('data-kode');
+
+		if ( !empty(val) ) {
+			var params = {
+				'kode': kode,
+				'ruang_kelas': val
+			};
+
+			$.ajax({
+	            url : 'transaksi/Pengajuan/cekRuangan',
+	            type : 'POST',
+	            dataType : 'JSON',
+	            data: {
+	            	'params': params
+	            },
+	            beforeSend : function(){ showLoading(); },
+	            success : function(data){
+	                hideLoading();
+	                if ( data.status == 1 ) {
+	                	bootbox.alert(data.message);
+
+	                	$('select.ruang_kelas').val('');
+	                } else if ( data.status == 2 ) {
+	                	bootbox.alert(data.message);
+	                }
+	            },
+	        });
+		}
+	}, // end - cekRuangan
 };
 
 pengajuan.start_up();

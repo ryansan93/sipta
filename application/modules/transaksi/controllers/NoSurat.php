@@ -316,7 +316,7 @@ class NoSurat extends Public_Controller {
         $no_dosen = 1;
         foreach ($data['pengajuan_dosen'] as $key => $value) {
             $html .= '<tr>
-                    <td colspan="3"><span style="padding-left: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$no_dosen.'. '.ucwords(strtolower($value['nama'])).'</span></td>
+                    <td colspan="3"><span style="padding-left: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$no_dosen.'. '.$value['nama'].'</span></td>
                 </tr>';
 
             $no_dosen++;
@@ -622,7 +622,6 @@ class NoSurat extends Public_Controller {
 
         $pdf->Image('assets/images/templateSurat/Footer.png', 13, 275, 0, 20, 'PNG', 'http://www.tcpdf.org', '', true, 150, '', false, false, 0, false, false, false);
 
-        ob_end_clean();
         $filename = 'Und. Sempro an. '.$data['mahasiswa']['nama'];
         $path = ubahNama('Und_Sempro_an_'.$data['mahasiswa']['nama'].'.pdf');
 
@@ -635,6 +634,7 @@ class NoSurat extends Public_Controller {
         );
 
         $pdf->Output('uploads\\dokumen_undangan\\'.$path, 'F');
+        if (ob_get_contents()) ob_end_clean();
     }
 
     public function export_pdf_kompre($data)
@@ -866,7 +866,6 @@ class NoSurat extends Public_Controller {
 
         $pdf->Image('assets/images/templateSurat/Footer.png', 13, 275, 0, 20, 'PNG', 'http://www.tcpdf.org', '', true, 150, '', false, false, 0, false, false, false);
 
-        ob_end_clean();
         $filename = 'Undangan Kompre an. '.$data['mahasiswa']['nama'];
         $path = ubahNama('Undangan_Kompre_an_'.$data['mahasiswa']['nama'].'.pdf');
 
@@ -879,6 +878,7 @@ class NoSurat extends Public_Controller {
         );
 
         $pdf->Output('uploads\\dokumen_undangan\\'.$path, 'F');
+        if (ob_get_contents()) ob_end_clean();
     }
 
     public function download_file($params)
