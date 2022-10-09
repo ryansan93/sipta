@@ -67,7 +67,8 @@ class KartuSeminar extends Public_Controller {
 
         $tanggal = date('Y-m-d');
         $jam = substr($now['waktu'], 11, 5);
-        // $jam = '10:15';
+        $tanggal = '2022-11-30';
+        $jam = '11:00';
 
         $m_pengajuan = new \Model\Storage\Pengajuan_model();
         $d_pengajuan = $m_pengajuan->where('jenis_pengajuan_kode', $jenis_pengajuan_kode)->where('jadwal', '>=', $tanggal)->where('g_status', getStatus('approve'))->with(['mahasiswa', 'ruang_kelas', 'jenis_pelaksanaan'])->get();

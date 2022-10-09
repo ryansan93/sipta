@@ -7,6 +7,11 @@ class KartuSeminar_model extends Conf{
 	protected $primaryKey = 'kode';
 	protected $kodeTable = 'KSM';
 
+	public function mahasiswa()
+	{
+		return $this->hasOne('\Model\Storage\Mahasiswa_model', 'nim', 'nim')->with(['prodi']);
+	}
+
 	public function pengajuan()
 	{
 		return $this->hasOne('\Model\Storage\Pengajuan_model', 'kode', 'pengajuan_kode')->with(['mahasiswa', 'ruang_kelas', 'jenis_pelaksanaan']);

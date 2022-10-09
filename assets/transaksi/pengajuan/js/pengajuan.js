@@ -132,19 +132,21 @@ var pengajuan = {
 		var val = $(elm).val();
 
 		if ( !empty(val) ) {
-			$.ajax({
-	            url : 'transaksi/Pengajuan/kelengkapanPengajuan',
-	            data : {
-	                'jenis_pengajuan_kode' : val
-	            },
-	            type : 'GET',
-	            dataType : 'HTML',
-	            beforeSend : function(){ showLoading(); },
-	            success : function(html){
-	                hideLoading();
-	                $(dcontent).html(html);
-	            },
-	        });
+			pengajuan.formDataPengajuan( $(elm) );
+
+			// $.ajax({
+	  //           url : 'transaksi/Pengajuan/kelengkapanPengajuan',
+	  //           data : {
+	  //               'jenis_pengajuan_kode' : val
+	  //           },
+	  //           type : 'GET',
+	  //           dataType : 'HTML',
+	  //           beforeSend : function(){ showLoading(); },
+	  //           success : function(html){
+	  //               hideLoading();
+	  //               $(dcontent).html(html);
+	  //           },
+	  //       });
 		} else {
 			$(dcontent).html('');
 		}
@@ -153,33 +155,57 @@ var pengajuan = {
 	formDataPengajuan: function(elm) {
 		var dcontent = $('div#action');
 
+		// var jenis_pengajuan_kode = $(dcontent).find('select.jenis_pengajuan').val();
+		// var pengajuan_kode = $(dcontent).find('select.kode_pengajuan').val();
+
+		// if ( !empty(pengajuan_kode) ) {
+		// 	var params = {
+		// 		'jenis_pengajuan_kode': jenis_pengajuan_kode,
+		// 		'pengajuan_kode': pengajuan_kode
+		// 	};
+
+		// 	console.log( params );
+
+		// 	$.ajax({
+	 //            url : 'transaksi/Pengajuan/formDataPengajuan',
+	 //            data : {
+	 //                'params' : params
+	 //            },
+	 //            type : 'GET',
+	 //            dataType : 'HTML',
+	 //            beforeSend : function(){ showLoading(); },
+	 //            success : function(html){
+	 //                hideLoading();
+	 //                $(dcontent).find('.formData').html(html);
+
+	 //                pengajuan.setting_up();
+	 //            },
+	 //        });
+		// } else {
+		// 	$(dcontent).find('.formData').html('');
+		// }
+
 		var jenis_pengajuan_kode = $(dcontent).find('select.jenis_pengajuan').val();
-		var pengajuan_kode = $(dcontent).find('select.kode_pengajuan').val();
 
-		if ( !empty(pengajuan_kode) ) {
-			var params = {
-				'jenis_pengajuan_kode': jenis_pengajuan_kode,
-				'pengajuan_kode': pengajuan_kode
-			};
+		var params = {
+			'jenis_pengajuan_kode': jenis_pengajuan_kode
+		};
 
-			$.ajax({
-	            url : 'transaksi/Pengajuan/formDataPengajuan',
-	            data : {
-	                'params' : params
-	            },
-	            type : 'GET',
-	            dataType : 'HTML',
-	            beforeSend : function(){ showLoading(); },
-	            success : function(html){
-	                hideLoading();
-	                $(dcontent).find('.formData').html(html);
+		$.ajax({
+            url : 'transaksi/Pengajuan/formDataPengajuan',
+            data : {
+                'params' : params
+            },
+            type : 'GET',
+            dataType : 'HTML',
+            beforeSend : function(){ showLoading(); },
+            success : function(html){
+                hideLoading();
+                $(dcontent).find('.formPengajuan').html(html);
 
-	                pengajuan.setting_up();
-	            },
-	        });
-		} else {
-			$(dcontent).find('.formData').html('');
-		}
+                pengajuan.setting_up();
+            },
+        });
 	}, // end - formDataPengajuan
 
 	mahasiswa: function(elm) {
@@ -501,8 +527,8 @@ var pengajuan = {
 						'nim': $(dcontent).find('.nim').attr('data-val'),
 						'no_telp': $(dcontent).find('.no_telp').attr('data-val'),
 						'jenis_pelaksanaan_kode': $(dcontent).find('.jenis_pelaksanaan').val(),
-						'judul_penelitian': $(dcontent).find('.judul_penelitian').attr('data-val'),
-						'tahun_akademik': $(dcontent).find('.tahun_akademik').attr('data-val'),
+						'judul_penelitian': $(dcontent).find('.judul_penelitian').val(),
+						'tahun_akademik': $(dcontent).find('.tahun_akademik').val(),
 						'list_penguji': list_penguji,
 						'jadwal': dateSQL( $(dcontent).find('#Jadwal').data('DateTimePicker').date() ),
 						'jam_seminar_ujian': $(dcontent).find('.jam_seminar_ujian').val(),
@@ -616,7 +642,9 @@ var pengajuan = {
 						'ruang_kelas': ruang_kelas,
 						'akun_zoom': akun_zoom,
 						'id_meeting': id_meeting,
-						'password_meeting': password_meeting
+						'password_meeting': password_meeting,
+						'tipe_ruangan': $(dcontent).find('[name=optradio]:checked').val(),
+						'alamat': $(dcontent).find('.alamat').val(),
 					};
 
 					$.ajax({

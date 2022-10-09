@@ -3,7 +3,7 @@
 		<label class="control-label">Prodi</label>
 	</div>
 	<div class="col-xs-12 no-padding prodi" style="padding-left: 15px;">
-		<span>-</span>
+		<span><?php echo strtoupper($data_semhas['prodi']['nama']); ?></span>
 	</div>
 </div>
 <!-- <div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div> -->
@@ -12,7 +12,7 @@
 		<label class="control-label">Mahasiswa</label>
 	</div>
 	<div class="col-xs-12 no-padding mahasiswa" style="padding-left: 15px;">
-		<span>-</span>
+		<span><?php echo strtoupper($data_semhas['mahasiswa']['nama']); ?></span>
 	</div>
 </div>
 <!-- <div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div> -->
@@ -21,7 +21,7 @@
 		<label class="control-label">NIM</label>
 	</div>
 	<div class="col-xs-12 no-padding nim" style="padding-left: 15px;">
-		<span>-</span>
+		<span><?php echo strtoupper($data_semhas['nim']); ?></span>
 	</div>
 </div>
 <!-- <div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div> -->
@@ -30,7 +30,7 @@
 		<label class="control-label">No. HP</label>
 	</div>
 	<div class="col-xs-12 no-padding no_telp" style="padding-left: 15px;">
-		<span>-</span>
+		<span><?php echo strtoupper($data_semhas['mahasiswa']['no_telp']); ?></span>
 	</div>
 </div>
 
@@ -55,9 +55,12 @@
 	<div class="col-xs-12 no-padding">
 		<label class="control-label">Judul Penelitian</label>
 	</div>
-	<div class="col-xs-12 no-padding judul_penelitian" style="padding-left: 15px;">
-		<span>-</span>
+	<div class="col-xs-12 no-padding">
+		<input type="text" class="form-control judul_penelitian" data-required="1" placeholder="Judul Penelitian" value="<?php echo $data_semhas['judul_penelitian']; ?>">
 	</div>
+	<!-- <div class="col-xs-12 no-padding judul_penelitian" style="padding-left: 15px;">
+		<span>-</span>
+	</div> -->
 </div>
 <!-- <div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div> -->
 <div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
@@ -65,7 +68,7 @@
 		<label class="control-label tahun_akademik">Tahun Akademik</label>
 	</div>
 	<div class="col-xs-12 no-padding" style="padding-left: 15px;">
-		<span>-</span>
+		<span><?php echo strtoupper($data_semhas['tahun_akademik']); ?></span>
 	</div>
 </div>
 

@@ -84,7 +84,6 @@ class KartuSeminar extends Public_Controller {
 
                 $data[ $key ] = array(
                     'kode' => $v_ks['pengajuan']['kode'],
-                    'mahasiswa' => $v_ks['pengajuan']['mahasiswa']['nama'],
                     'judul_penelitian' => $v_ks['pengajuan']['judul_penelitian'],
                     'jenis_pelaksanaan' => $v_ks['pengajuan']['jenis_pelaksanaan']['nama'],
                     'tanggal' => $v_ks['pengajuan']['jadwal'],

@@ -157,6 +157,32 @@
 					</select>
 				</div>
 			</div>
+			<div class="col-xs-12 no-padding">
+				<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+					<div class="col-xs-12 no-padding">
+						<label class="control-label">Tipe Ruangan / Kelas</label>
+					</div>
+			        <div class="col-lg-12">
+			            <div class="radio" style="margin-top: 0px;">
+							<label><input type="radio" name="optradio" value="1" checked>On Site</label>
+						</div>
+						<div class="radio" style="margin-bottom: 0px;">
+							<label><input type="radio" name="optradio" value="0">Out Site</label>
+						</div>
+			        </div>
+				</div>
+			</div>
+			<div class="col-xs-12 no-padding">
+				<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+					<div class="col-xs-12 no-padding">
+						<label class="control-label">Alamat</label>
+					</div>
+			        <div class="col-lg-12 no-padding">
+			            <textarea class="form-control alamat" placeholder="Alamat"></textarea>
+			        </div>
+				</div>
+				<div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
+			</div>
 			<div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
 		</div>
 
@@ -222,6 +248,32 @@
 			</div>
 			<div class="col-xs-12 no-padding" style="padding-left: 15px;">
 				<span><?php echo strtoupper($data['ruang_kelas']['nama']); ?></span>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 no-padding tipe_ruangan">
+		<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+			<div class="col-xs-12 no-padding">
+				<label class="control-label">Tipe Ruangan / Kelas</label>
+			</div>
+			<div class="col-xs-12 no-padding" style="padding-left: 15px;">
+				<span>
+					<?php if ( $data['tipe_ruangan'] == 1 ): ?>
+						<?php echo 'On Site'; ?>
+					<?php else: ?>
+						<?php echo 'Out Site'; ?>
+					<?php endif ?>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 no-padding alamat">
+		<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+			<div class="col-xs-12 no-padding">
+				<label class="control-label">Alamat</label>
+			</div>
+			<div class="col-xs-12 no-padding" style="padding-left: 15px;">
+				<span><?php echo strtoupper($data['alamat']); ?></span>
 			</div>
 		</div>
 		<div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>

@@ -4,7 +4,8 @@
 			<label class="control-label">Judul Penelitian</label>
 		</div>
 		<div class="col-xs-12 no-padding">
-			<select class="form-control kode_pengajuan" data-required="1" onchange="pengajuan.formDataPengajuan(this)">
+			<input type="text" class="form-control judul_penelitian" data-required="1" placeholder="Judul Penelitian">
+			<!-- <select class="form-control kode_pengajuan" data-required="1" onchange="pengajuan.formDataPengajuan(this)">
 				<option value="">-- Pilih Judul Penlitian --</option>
 				<?php if ( isset($data_rancangan_proposal) && !empty($data_rancangan_proposal) ): ?>
 					<?php foreach ($data_rancangan_proposal as $k_rp => $v_rp): ?>
@@ -16,7 +17,7 @@
 						<option value="<?php echo $v_sempro['kode_pengajuan']; ?>" data-jp="<?php echo $v_sempro['judul_penelitian']; ?>"><?php echo strtoupper($v_sempro['jenis_pengajuan'].' | '.$v_sempro['judul_penelitian']); ?></option>
 					<?php endforeach ?>
 				<?php endif ?>
-			</select>
+			</select> -->
 		</div>
 	</div>
 

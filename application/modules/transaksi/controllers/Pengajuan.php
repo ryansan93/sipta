@@ -192,17 +192,17 @@ class Pengajuan extends Public_Controller {
         $data = null;
         if ( $d_jenis_pengajuan ) {
             $m_pengajuan = new \Model\Storage\Pengajuan_model();
-            $d_pengajuan = $m_pengajuan->where('nim', $this->userid)->where('g_status', getStatus('approve'))->where('jenis_pengajuan_kode', $d_jenis_pengajuan->kode)->with(['jenis_pengajuan'])->get();
+            $d_pengajuan = $m_pengajuan->where('nim', $this->userid)->where('g_status', getStatus('approve'))->where('jenis_pengajuan_kode', $d_jenis_pengajuan->kode)->with(['mahasiswa', 'prodi', 'jenis_pengajuan'])->orderBy('kode', 'desc')->first();
 
             if ( $d_pengajuan->count() > 0 ) {
-                $d_pengajuan = $d_pengajuan->toArray();
-                foreach ($d_pengajuan as $key => $value) {
-                    $data[ $value['kode'] ] = array(
-                        'kode_pengajuan' => $value['kode'],
-                        'jenis_pengajuan' => $value['jenis_pengajuan']['nama'],
-                        'judul_penelitian' => $value['judul_penelitian']
-                    );
-                }
+                $data = $d_pengajuan->toArray();
+                // foreach ($d_pengajuan as $key => $value) {
+                //     $data[ $value['kode'] ] = array(
+                //         'kode_pengajuan' => $value['kode'],
+                //         'jenis_pengajuan' => $value['jenis_pengajuan']['nama'],
+                //         'judul_penelitian' => $value['judul_penelitian']
+                //     );
+                // }
             }
         }
 
@@ -218,6 +218,7 @@ class Pengajuan extends Public_Controller {
 
         if ( $d_jp->form_pengajuan == 'kompre' ) {
             $content['data_semhas'] = $this->getDataSemhas();
+            $content['dosen'] = $this->getDosen();
             $html = $this->load->view($this->pathView . 'formKompre', $content, TRUE);
         } else {
             if ( stristr($d_jp->nama, 'seminar proposal') !== false ) {
@@ -262,8 +263,10 @@ class Pengajuan extends Public_Controller {
     {
         $params = $this->input->get('params');
 
+        $data = null;
+
         $jenis_pengajuan_kode = $params['jenis_pengajuan_kode'];
-        $pengajuan_kode = $params['pengajuan_kode'];
+        // $pengajuan_kode = $params['pengajuan_kode'];
 
         $m_jp = new \Model\Storage\JenisPengajuan_model();
         $d_jp = $m_jp->where('kode', $jenis_pengajuan_kode)->first();
@@ -289,39 +292,65 @@ class Pengajuan extends Public_Controller {
         $content['jam_seminar_ujian'] = $data_jsu;
 
         if ( $d_jp->form_pengajuan == 'kompre' ) {
+            $content['dosen'] = $this->getDosen();
             $content['data_semhas'] = $this->getDataSemhas();
             $html = $this->load->view($this->pathView . 'formDataKompre', $content, TRUE);
         } else {
             if ( stristr($d_jp->nama, 'seminar proposal') !== false ) {
-                $m_rp = new \Model\Storage\RancanganProposal_model();
-                $d_rp = $m_rp->where('kode', $pengajuan_kode)->with(['mahasiswa', 'prodi', 'rancangan_proposal_dosen'])->first()->toArray();
+                // $m_rp = new \Model\Storage\RancanganProposal_model();
+                // $d_rp = $m_rp->where('kode', $pengajuan_kode)->with(['mahasiswa', 'prodi', 'rancangan_proposal_dosen'])->first()->toArray();
+
+                // $list_pembimbing = null;
+                // foreach ($d_rp['rancangan_proposal_dosen'] as $k_rpd => $v_rpd) {
+                //     if ( $v_rpd['tipe_dosen'] == 'pembimbing' ) {
+                //         $list_pembimbing[] = array(
+                //             'nip' => $v_rpd['nip'],
+                //             'nama' => $v_rpd['nama'],
+                //             'no_telp' => $v_rpd['no_telp']
+                //         );
+                //     }
+                // }
+
+                // $data = array(
+                //     'kode' => $d_rp['kode'],
+                //     'prodi_kode' => $d_rp['prodi_kode'],
+                //     'nim' => $d_rp['nim'],
+                //     'no_telp' => $d_rp['no_telp'],
+                //     'judul_penelitian' => $d_rp['judul_penelitian'],
+                //     'tahun_akademik' => $d_rp['tahun_akademik'],
+                //     'g_status' => $d_rp['g_status'],
+                //     'mahasiswa' => $d_rp['mahasiswa'],
+                //     'prodi' => $d_rp['prodi'],
+                //     'list_pembimbing' => $list_pembimbing
+                // );
+
+                $m_sp = new \Model\Storage\SkPembimbing_model();
+                $d_sp = $m_sp->where('nim', $this->userid)->with(['mahasiswa', 'sk_pembimbing_dosen'])->first();
 
                 $list_pembimbing = null;
-                foreach ($d_rp['rancangan_proposal_dosen'] as $k_rpd => $v_rpd) {
-                    if ( $v_rpd['tipe_dosen'] == 'pembimbing' ) {
+                if ( $d_sp ) {
+                    $d_sp = $d_sp->toArray();
+
+                    foreach ($d_sp['sk_pembimbing_dosen'] as $k_spd => $v_spd) {
                         $list_pembimbing[] = array(
-                            'nip' => $v_rpd['nip'],
-                            'nama' => $v_rpd['nama'],
-                            'no_telp' => $v_rpd['no_telp']
+                            'nip' => $v_spd['dosen']['nip'],
+                            'nama' => $v_spd['dosen']['nama'],
+                            'no_telp' => $v_spd['dosen']['no_telp']
                         );
                     }
-                }
 
-                $data = array(
-                    'kode' => $d_rp['kode'],
-                    'prodi_kode' => $d_rp['prodi_kode'],
-                    'nim' => $d_rp['nim'],
-                    'no_telp' => $d_rp['no_telp'],
-                    'judul_penelitian' => $d_rp['judul_penelitian'],
-                    'tahun_akademik' => $d_rp['tahun_akademik'],
-                    'g_status' => $d_rp['g_status'],
-                    'mahasiswa' => $d_rp['mahasiswa'],
-                    'prodi' => $d_rp['prodi'],
-                    'list_pembimbing' => $list_pembimbing
-                );
+                    $data = array(
+                        'mahasiswa' => $d_sp['mahasiswa'],
+                        'prodi_kode' => $d_sp['mahasiswa']['prodi_kode'],
+                        'nim' => $d_sp['mahasiswa']['nim'],
+                        'no_telp' => $d_sp['mahasiswa']['no_telp'],
+                        'prodi' => $d_sp['mahasiswa']['prodi'],
+                        'list_pembimbing' => $list_pembimbing
+                    );
+                }
             } else {
                 $m_pengajuan = new \Model\Storage\Pengajuan_model();
-                $d_pengajuan = $m_pengajuan->where('kode', $pengajuan_kode)->with(['mahasiswa', 'prodi', 'pengajuan_dosen'])->first()->toArray();
+                $d_pengajuan = $m_pengajuan->where('nim', $this->userid)->with(['mahasiswa', 'prodi', 'pengajuan_dosen'])->orderBy('kode', 'desc')->first()->toArray();
 
                 $list_pembimbing = null;
                 foreach ($d_pengajuan['pengajuan_dosen'] as $k_pd => $v_pd) {
@@ -574,7 +603,9 @@ class Pengajuan extends Public_Controller {
                         'ruang_kelas' => $params['ruang_kelas'],
                         'akun_zoom' => $params['akun_zoom'],
                         'id_meeting' => $params['id_meeting'],
-                        'password_meeting' => $params['password_meeting']
+                        'password_meeting' => $params['password_meeting'],
+                        'tipe_ruangan' => $params['tipe_ruangan'],
+                        'alamat' => $params['alamat']
                     )
                 );
 
