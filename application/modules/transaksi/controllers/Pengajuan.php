@@ -194,7 +194,7 @@ class Pengajuan extends Public_Controller {
             $m_pengajuan = new \Model\Storage\Pengajuan_model();
             $d_pengajuan = $m_pengajuan->where('nim', $this->userid)->where('g_status', getStatus('approve'))->where('jenis_pengajuan_kode', $d_jenis_pengajuan->kode)->with(['mahasiswa', 'prodi', 'jenis_pengajuan'])->orderBy('kode', 'desc')->first();
 
-            if ( $d_pengajuan->count() > 0 ) {
+            if ( $d_pengajuan ) {
                 $data = $d_pengajuan->toArray();
                 // foreach ($d_pengajuan as $key => $value) {
                 //     $data[ $value['kode'] ] = array(
@@ -274,6 +274,7 @@ class Pengajuan extends Public_Controller {
         $m_jsu = new \Model\Storage\JamSeminarUjian_model();
         $d_jsu = $m_jsu->where('jenis_pengajuan_kode', $jenis_pengajuan_kode)->orderBy('awal', 'asc')->get();
 
+
         $data_jsu = null;
         if ( $d_jsu->count() > 0 ) {
             $data_jsu = $d_jsu->toArray();
@@ -290,9 +291,9 @@ class Pengajuan extends Public_Controller {
         $content['jenis_pelaksanaan'] = $this->getJenisPelaksanaan();
         $content['data_kelengkapan'] = $data_kp;
         $content['jam_seminar_ujian'] = $data_jsu;
+        $content['dosen'] = $this->getDosen();
 
         if ( $d_jp->form_pengajuan == 'kompre' ) {
-            $content['dosen'] = $this->getDosen();
             $content['data_semhas'] = $this->getDataSemhas();
             $html = $this->load->view($this->pathView . 'formDataKompre', $content, TRUE);
         } else {
@@ -350,32 +351,37 @@ class Pengajuan extends Public_Controller {
                 }
             } else {
                 $m_pengajuan = new \Model\Storage\Pengajuan_model();
-                $d_pengajuan = $m_pengajuan->where('nim', $this->userid)->with(['mahasiswa', 'prodi', 'pengajuan_dosen'])->orderBy('kode', 'desc')->first()->toArray();
+                $d_pengajuan = $m_pengajuan->where('nim', $this->userid)->with(['mahasiswa', 'prodi', 'pengajuan_dosen'])->orderBy('kode', 'desc')->first();
 
-                $list_pembimbing = null;
-                foreach ($d_pengajuan['pengajuan_dosen'] as $k_pd => $v_pd) {
-                    $list_pembimbing[] = array(
-                        'nip' => $v_pd['nip'],
-                        'nama' => $v_pd['nama'],
-                        'no_telp' => $v_pd['no_telp']
+                if ( $d_pengajuan ) {
+                    $d_pengajuan = $d_pengajuan->toArray();
+
+                    $list_pembimbing = null;
+                    foreach ($d_pengajuan['pengajuan_dosen'] as $k_pd => $v_pd) {
+                        $list_pembimbing[] = array(
+                            'nip' => $v_pd['nip'],
+                            'nama' => $v_pd['nama'],
+                            'no_telp' => $v_pd['no_telp']
+                        );
+                    }
+
+                    $data = array(
+                        'kode' => $d_pengajuan['kode'],
+                        'prodi_kode' => $d_pengajuan['prodi_kode'],
+                        'nim' => $d_pengajuan['nim'],
+                        'no_telp' => $d_pengajuan['no_telp'],
+                        'judul_penelitian' => $d_pengajuan['judul_penelitian'],
+                        'tahun_akademik' => $d_pengajuan['tahun_akademik'],
+                        'g_status' => $d_pengajuan['g_status'],
+                        'mahasiswa' => $d_pengajuan['mahasiswa'],
+                        'prodi' => $d_pengajuan['prodi'],
+                        'list_pembimbing' => $list_pembimbing
                     );
                 }
-
-                $data = array(
-                    'kode' => $d_pengajuan['kode'],
-                    'prodi_kode' => $d_pengajuan['prodi_kode'],
-                    'nim' => $d_pengajuan['nim'],
-                    'no_telp' => $d_pengajuan['no_telp'],
-                    'judul_penelitian' => $d_pengajuan['judul_penelitian'],
-                    'tahun_akademik' => $d_pengajuan['tahun_akademik'],
-                    'g_status' => $d_pengajuan['g_status'],
-                    'mahasiswa' => $d_pengajuan['mahasiswa'],
-                    'prodi' => $d_pengajuan['prodi'],
-                    'list_pembimbing' => $list_pembimbing
-                );
             }
 
             $content['data'] = $data;
+            $content['jenis_pengajuan'] = $d_jp->nama;
 
             $html = $this->load->view($this->pathView . 'formDataSemhas', $content, TRUE);
         }
@@ -450,7 +456,7 @@ class Pengajuan extends Public_Controller {
     public function viewForm($kode)
     {
         $m_pengajuan = new \Model\Storage\Pengajuan_model();
-        $d_pengajuan = $m_pengajuan->where('kode', $kode)->with(['jenis_pengajuan', 'mahasiswa', 'jenis_pelaksanaan', 'prodi', 'pengajuan_dosen', 'pengajuan_kelengkapan', 'ruang_kelas'])->first()->toArray();
+        $d_pengajuan = $m_pengajuan->where('kode', $kode)->with(['jenis_pengajuan', 'mahasiswa', 'jenis_pelaksanaan', 'prodi', 'pengajuan_dosen_pembimbing', 'pengajuan_dosen_penguji', 'pengajuan_kelengkapan', 'ruang_kelas'])->first()->toArray();
 
         $jenis_pengajuan_form = $d_pengajuan['jenis_pengajuan']['form_pengajuan'];
 
@@ -506,6 +512,17 @@ class Pengajuan extends Public_Controller {
             $m_pengajuan = new \Model\Storage\Pengajuan_model();
             $kode = $m_pengajuan->getNextIdRibuan();
 
+            $m_dp = new \Model\Storage\DurasiPelaksanaan_model();
+            $d_dp = $m_dp->orderBy('id', 'desc')->first();
+
+            $durasi = 0;
+            if ( $d_dp ) {
+                $durasi = $d_dp->durasi;
+            }
+
+            $time = strtotime(substr($params['jam_pelaksanaan'], 11, 5));
+            $jam_selesai = date("H:i", strtotime('+'.$durasi.' minutes', $time));
+
             $m_pengajuan->kode = $kode;
             $m_pengajuan->kode_pengajuan = isset($params['kode_pengajuan']) ? $params['kode_pengajuan'] : null;
             $m_pengajuan->jenis_pengajuan_kode = $params['jenis_pengajuan'];
@@ -517,10 +534,12 @@ class Pengajuan extends Public_Controller {
             $m_pengajuan->judul_penelitian = $params['judul_penelitian'];
             $m_pengajuan->jadwal = $params['jadwal'];
             $m_pengajuan->jam_pelaksanaan = $params['jam_pelaksanaan'];
-            $m_pengajuan->jam_selesai = $params['jam_selesai'];
+            $m_pengajuan->jam_selesai = $jam_selesai;
             $m_pengajuan->g_status = 1;
             $m_pengajuan->batal = 0;
             $m_pengajuan->tahun_akademik = $params['tahun_akademik'];
+            $m_pengajuan->tipe_ruangan = $params['tipe_ruangan'];
+            $m_pengajuan->alamat = $params['alamat'];
             $m_pengajuan->save();
 
             foreach ($params['list_kelengkapan_pengajuan'] as $k_lkp => $v_lkp) {
@@ -539,6 +558,19 @@ class Pengajuan extends Public_Controller {
                 $m_pk->save();
             }
 
+            foreach ($params['list_pembimbing'] as $k_lb => $v_lb) {
+                if ( isset($v_lb['pembimbing']) ) {
+                    $m_pd = new \Model\Storage\PengajuanDosen_model();
+                    $m_pd->pengajuan_kode = $kode;
+                    $m_pd->jenis_dosen = isset($v_lb['jenis_penguji']) ? $v_lb['jenis_penguji'] : 'dalam';
+                    $m_pd->nip = isset($v_lb['nip']) ? $v_lb['nip'] : null;
+                    $m_pd->nama = $v_lb['pembimbing'];
+                    $m_pd->no_telp = isset($v_lb['no_telp']) ? $v_lb['no_telp'] : null;
+                    $m_pd->tipe = 'pembimbing';
+                    $m_pd->save();
+                }
+            }
+
             foreach ($params['list_penguji'] as $k_lp => $v_lp) {
                 if ( isset($v_lp['penguji']) ) {
                     $m_pd = new \Model\Storage\PengajuanDosen_model();
@@ -546,7 +578,7 @@ class Pengajuan extends Public_Controller {
                     $m_pd->jenis_dosen = isset($v_lp['jenis_penguji']) ? $v_lp['jenis_penguji'] : 'dalam';
                     $m_pd->nip = isset($v_lp['nip']) ? $v_lp['nip'] : null;
                     $m_pd->nama = $v_lp['penguji'];
-                    $m_pd->no_telp = isset($v_lp['no_telp']) ? $v_lp['no_telp'] : null;
+                    $m_pd->tipe = 'penguji';
                     $m_pd->save();
                 }
             }
@@ -604,8 +636,8 @@ class Pengajuan extends Public_Controller {
                         'akun_zoom' => $params['akun_zoom'],
                         'id_meeting' => $params['id_meeting'],
                         'password_meeting' => $params['password_meeting'],
-                        'tipe_ruangan' => $params['tipe_ruangan'],
-                        'alamat' => $params['alamat']
+                        // 'tipe_ruangan' => $params['tipe_ruangan'],
+                        // 'alamat' => $params['alamat']
                     )
                 );
 
@@ -723,5 +755,14 @@ class Pengajuan extends Public_Controller {
         }
 
         return $data;
+    }
+
+    public function tes()
+    {
+        $time = strtotime('10:00');
+        $startTime = date("H:i", strtotime('-30 minutes', $time));
+        $endTime = date("H:i", strtotime('+0 minutes', $time));
+
+        cetak_r($startTime.' | '.$endTime);
     }
 }

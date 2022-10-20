@@ -27,9 +27,14 @@ class Pengajuan_model extends Conf{
 		return $this->hasOne('\Model\Storage\Prodi_model', 'kode', 'prodi_kode');
 	}
 
-	public function pengajuan_dosen()
+	public function pengajuan_dosen_pembimbing()
 	{
-		return $this->hasMany('\Model\Storage\PengajuanDosen_model', 'pengajuan_kode', 'kode');
+		return $this->hasMany('\Model\Storage\PengajuanDosen_model', 'pengajuan_kode', 'kode')->where('tipe', 'pembimbing');
+	}
+
+	public function pengajuan_dosen_penguji()
+	{
+		return $this->hasMany('\Model\Storage\PengajuanDosen_model', 'pengajuan_kode', 'kode')->where('tipe', 'penguji');
 	}
 
 	public function pengajuan_kelengkapan()

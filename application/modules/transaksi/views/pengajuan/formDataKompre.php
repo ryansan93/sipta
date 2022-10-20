@@ -132,21 +132,44 @@
 		<label class="control-label">Jam Pelaksanaan</label>
 	</div>
 	<div class="col-xs-12 no-padding">
-		<!-- <div class="input-group date datetimepicker" name="jamPelaksanaan" id="JamPelaksanaan">
-	        <input type="text" class="form-control text-center" placeholder="Jam" data-required="1" />
+		<div class="input-group date datetimepicker" name="jam_pelaksanaan" id="JamPelaksanaan">
+	        <input type="text" class="form-control text-center" placeholder="Jam Pelaksanaan" data-required="1" />
 	        <span class="input-group-addon">
 	            <span class="glyphicon glyphicon-calendar"></span>
 	        </span>
-	    </div> -->
-	    <select class="form-control jam_seminar_ujian" data-required="1">
+	    </div>
+	    <!-- <select class="form-control jam_seminar_ujian" data-required="1">
 			<option value="">-- Pilih Jam --</option>
 			<?php if ( !empty($jam_seminar_ujian) ): ?>
 				<?php foreach ($jam_seminar_ujian as $k_jsu => $v_jsu): ?>
 					<option value="<?php echo $v_jsu['id']; ?>" data-awal="<?php echo substr($v_jsu['awal'], 0, 5); ?>" data-akhir="<?php echo substr($v_jsu['akhir'], 0, 5); ?>"><?php echo substr($v_jsu['awal'], 0, 5); ?></option>
 				<?php endforeach ?>
 			<?php endif ?>
-		</select>
+		</select> -->
 	</div>
+</div>
+
+<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+	<div class="col-xs-12 no-padding">
+		<label class="control-label">Tipe Ruangan / Kelas</label>
+	</div>
+    <div class="col-lg-12">
+        <div class="radio" style="margin-top: 0px;">
+			<label><input type="radio" name="optradio" value="1" checked>On Site</label>
+		</div>
+		<div class="radio" style="margin-bottom: 0px;">
+			<label><input type="radio" name="optradio" value="0">Out Site</label>
+		</div>
+    </div>
+</div>
+
+<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+	<div class="col-xs-12 no-padding">
+		<label class="control-label">Alamat</label>
+	</div>
+    <div class="col-lg-12 no-padding">
+        <textarea class="form-control alamat" placeholder="Alamat"></textarea>
+    </div>
 </div>
 
 <div class="col-xs-12 no-padding list_kelengkapan_pengajuan">

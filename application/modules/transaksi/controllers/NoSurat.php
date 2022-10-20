@@ -163,7 +163,7 @@ class NoSurat extends Public_Controller {
                 Modules::run( 'base/event/save', $m_ns, $deskripsi_log );
 
                 $m_pengajuan = new \Model\Storage\Pengajuan_model();
-                $d_pengajuan = $m_pengajuan->where('kode', $value['kode_pengajuan'])->with(['jenis_pengajuan', 'mahasiswa', 'jenis_pelaksanaan', 'prodi', 'pengajuan_dosen', 'ruang_kelas', 'no_surat'])->first();
+                $d_pengajuan = $m_pengajuan->where('kode', $value['kode_pengajuan'])->with(['jenis_pengajuan', 'mahasiswa', 'jenis_pelaksanaan', 'prodi', 'pengajuan_dosen_pembimbing', 'pengajuan_dosen_penguji', 'ruang_kelas', 'no_surat'])->first();
 
                 if ( $d_pengajuan ) {
                     $d_pengajuan = $d_pengajuan->toArray();
@@ -314,7 +314,7 @@ class NoSurat extends Public_Controller {
                     <td colspan="3" style="width: 630px;">Kepada Yth Bapak/Ibu</td>
                 </tr>';
         $no_dosen = 1;
-        foreach ($data['pengajuan_dosen'] as $key => $value) {
+        foreach ($data['pengajuan_dosen_pembimbing'] as $key => $value) {
             $html .= '<tr>
                     <td colspan="3"><span style="padding-left: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$no_dosen.'. '.$value['nama'].'</span></td>
                 </tr>';

@@ -71,7 +71,7 @@
 </div>
 <div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
 <?php $idx = 1; ?>
-<?php foreach ($data['pengajuan_dosen'] as $k_pd => $v_pd): ?>
+<?php foreach ($data['pengajuan_dosen_pembimbing'] as $k_pd => $v_pd): ?>
 	<div class="col-xs-12 no-padding pembimbing" style="margin-bottom: 5px;">
 		<div class="col-xs-12 no-padding">
 			<div class="col-xs-12 no-padding">
@@ -112,6 +112,38 @@
 		<span><?php echo strtoupper(substr($data['jam_pelaksanaan'], 0, 5)); ?></span>
 	</div>
 </div>
+<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+	<div class="col-xs-12 no-padding">
+		<label class="control-label">Jam Selesai</label>
+	</div>
+	<div class="col-xs-12 no-padding" style="padding-left: 15px;">
+		<span><?php echo strtoupper(substr($data['jam_selesai'], 0, 5)); ?></span>
+	</div>
+</div>
+
+<?php $no = 1; ?>
+<?php foreach ($data['pengajuan_dosen_penguji'] as $k_pd => $v_pd): ?>
+	<div class="col-xs-12 no-padding penguji" style="margin-bottom: 5px;">
+		<div class="col-xs-4 no-padding" style="padding-right: 5px;">
+			<div class="col-xs-12 no-padding">
+				<label class="control-label">Jenis Penguji</label>
+			</div>
+			<div class="col-xs-12 no-padding" style="padding-left: 15px;">
+				<span><?php echo strtoupper('dosen '.$v_pd['jenis_dosen']); ?></span>
+			</div>
+		</div>
+		<div class="col-xs-8 no-padding dosen_penguji" style="padding-left: 5px;">
+			<div class="col-xs-12 no-padding">
+				<label class="control-label">Penguji <?php echo $no; ?></label>
+			</div>
+			<div class="col-xs-12 no-padding" style="padding-left: 15px;">
+				<span><?php echo strtoupper($v_pd['nama']); ?></span>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
+	<?php $no++; ?>
+<?php endforeach ?>
 
 <div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
 <div class="col-xs-12 no-padding list_kelengkapan_pengajuan">
@@ -131,14 +163,6 @@
 
 <?php if ( $data['g_status'] == getStatus('submit') ): ?>
 	<?php if ( $akses['a_approve'] == 1 ): ?>
-		<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
-			<div class="col-xs-12 no-padding">
-				<label class="control-label">Jam Selesai</label>
-			</div>
-			<div class="col-xs-12 no-padding" style="padding-left: 15px;">
-				<span><?php echo strtoupper(substr($data['jam_selesai'], 0, 5)); ?></span>
-			</div>
-		</div>
 		<div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
 		<?php 
 			$data_required_ruang_kelas = 0;
@@ -164,32 +188,6 @@
 					</select>
 				</div>
 			</div>
-		</div>
-		<div class="col-xs-12 no-padding">
-			<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
-				<div class="col-xs-12 no-padding">
-					<label class="control-label">Tipe Ruangan / Kelas</label>
-				</div>
-		        <div class="col-lg-12">
-		            <div class="radio" style="margin-top: 0px;">
-						<label><input type="radio" name="optradio" value="1" checked>On Site</label>
-					</div>
-					<div class="radio" style="margin-bottom: 0px;">
-						<label><input type="radio" name="optradio" value="0">Out Site</label>
-					</div>
-		        </div>
-			</div>
-		</div>
-		<div class="col-xs-12 no-padding">
-			<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
-				<div class="col-xs-12 no-padding">
-					<label class="control-label">Alamat</label>
-				</div>
-		        <div class="col-lg-12 no-padding">
-		            <textarea class="form-control alamat" placeholder="Alamat"></textarea>
-		        </div>
-			</div>
-			<div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
 		</div>
 
 		<?php
@@ -279,7 +277,7 @@
 				<label class="control-label">Alamat</label>
 			</div>
 			<div class="col-xs-12 no-padding" style="padding-left: 15px;">
-				<span><?php echo strtoupper($data['alamat']); ?></span>
+				<span><?php echo !empty($data['alamat']) ? strtoupper($data['alamat']) : '-'; ?></span>
 			</div>
 		</div>
 		<div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>

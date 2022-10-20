@@ -109,13 +109,18 @@ var pengajuan = {
 
 		if ( !empty(jenis_penguji) ) {
 			var div_penguji = $(elm).closest('div.penguji');
+			var required = $(div_penguji).attr('data-required');
 			$.map( $(div_penguji).find('div.dosen_penguji .jenis_dosen'), function(div) {
 				if ( $(div).hasClass(jenis_penguji) ) {
 					$(div).removeClass('hide');
-					$(div).find('input, select').attr('data-required', 1);
+					if ( required == 1 ) {
+						$(div).find('input, select').attr('data-required', 1);
+					}
 				} else {
 					$(div).addClass('hide');
-					$(div).find('input, select').removeAttr('data-required');
+					if ( required == 1 ) {
+						$(div).find('input, select').removeAttr('data-required');
+					}
 				}
 			});
 		} else {
@@ -421,9 +426,7 @@ var pengajuan = {
 						'tahun_akademik': $(dcontent).find('.tahun_akademik').val(),
 						'list_penguji': list_penguji,
 						'jadwal': dateSQL( $(dcontent).find('#Jadwal').data('DateTimePicker').date() ),
-						// 'jam_pelaksanaan': dateTimeSQL( $(dcontent).find('#JamPelaksanaan').data('DateTimePicker').date() ),
-						'jam_seminar_ujian': $(dcontent).find('.jam_seminar_ujian').val(),
-						'jam_pelaksanaan': $(dcontent).find('.jam_seminar_ujian option:selected').data('awal'),
+						'jam_pelaksanaan': dateTimeSQL( $(dcontent).find('#JamPelaksanaan').data('DateTimePicker').date() ),
 						'jam_selesai': $(dcontent).find('.jam_seminar_ujian option:selected').data('akhir'),
 						'list_kelengkapan_pengajuan': list_kelengkapan_pengajuan
 					};
@@ -491,18 +494,43 @@ var pengajuan = {
 				if ( result ) {
 					var formData = new FormData();
 
-					var list_penguji = $.map( $(dcontent).find('div.pembimbing'), function(div) {
-						var penguji = $(div).find('.nama').text();
+					var list_pembimbing = $.map( $(dcontent).find('div.pembimbing'), function(div) {
+						var pembimbing = $(div).find('.nama').text();
 						var nip = $(div).find('.nama').data('nip');
 						var no_tlp = $(div).find('.no_telp').text();
 
 						var _data = {
 							'nip': nip,
-							'penguji': penguji.trim(),
+							'pembimbing': pembimbing.trim(),
 							'no_tlp': no_tlp.trim()
 						};
 
 						return _data;
+					});
+
+					var list_penguji = $.map( $(dcontent).find('.penguji'), function(div) {
+						var div_dosen_penguji = $(div).find('div.dosen_penguji');
+
+						var jenis_penguji = $(div).find('.jenis_penguji').val();
+
+						if ( !empty(jenis_penguji) ) {							
+							var nip = null;
+							var penguji = null;
+							if ( jenis_penguji == 'luar' ) {
+								penguji = $(div_dosen_penguji).find('input').val();
+							} else {
+								penguji = $(div_dosen_penguji).find('select option:selected').attr('data-nama');
+								nip = $(div_dosen_penguji).find('select').val();
+							}
+
+							var _data = {
+								'jenis_penguji': jenis_penguji,
+								'nip': nip,
+								'penguji': penguji
+							};
+
+							return _data;
+						}
 					});
 
 					var list_kelengkapan_pengajuan = $.map( $(dcontent).find('.kelengkapan_pengajuan'), function(div) {
@@ -529,11 +557,13 @@ var pengajuan = {
 						'jenis_pelaksanaan_kode': $(dcontent).find('.jenis_pelaksanaan').val(),
 						'judul_penelitian': $(dcontent).find('.judul_penelitian').val(),
 						'tahun_akademik': $(dcontent).find('.tahun_akademik').val(),
+						'list_pembimbing': list_pembimbing,
 						'list_penguji': list_penguji,
 						'jadwal': dateSQL( $(dcontent).find('#Jadwal').data('DateTimePicker').date() ),
 						'jam_seminar_ujian': $(dcontent).find('.jam_seminar_ujian').val(),
-						'jam_pelaksanaan': $(dcontent).find('.jam_seminar_ujian option:selected').data('awal'),
-						'jam_selesai': $(dcontent).find('.jam_seminar_ujian option:selected').data('akhir'),
+						'jam_pelaksanaan': dateTimeSQL( $(dcontent).find('#JamPelaksanaan').data('DateTimePicker').date() ),
+						'tipe_ruangan': $(dcontent).find('[name=optradio]:checked').val(),
+						'alamat': $(dcontent).find('.alamat').val(),
 						'list_kelengkapan_pengajuan': list_kelengkapan_pengajuan
 					};
 
@@ -643,8 +673,8 @@ var pengajuan = {
 						'akun_zoom': akun_zoom,
 						'id_meeting': id_meeting,
 						'password_meeting': password_meeting,
-						'tipe_ruangan': $(dcontent).find('[name=optradio]:checked').val(),
-						'alamat': $(dcontent).find('.alamat').val(),
+						// 'tipe_ruangan': $(dcontent).find('[name=optradio]:checked').val(),
+						// 'alamat': $(dcontent).find('.alamat').val(),
 					};
 
 					$.ajax({

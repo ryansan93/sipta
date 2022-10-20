@@ -108,7 +108,7 @@
 						<label class="control-label">No. HP</label>
 					</div>
 					<div class="col-xs-12 no-padding no_telp" style="padding-left: 15px;">
-						<?php echo $v_pd['no_telp'] ?>
+						<?php echo !empty($v_pd['no_telp']) ? $v_pd['no_telp'] : '-'; ?>
 					</div>
 				</div>
 			</div>
@@ -134,16 +134,86 @@
 				<label class="control-label">Jam Pelaksanaan</label>
 			</div>
 			<div class="col-xs-12 no-padding">
-			    <select class="form-control jam_seminar_ujian" data-required="1">
+				<div class="input-group date datetimepicker" name="jam_pelaksanaan" id="JamPelaksanaan">
+			        <input type="text" class="form-control text-center" placeholder="Jam Pelaksanaan" data-required="1" />
+			        <span class="input-group-addon">
+			            <span class="glyphicon glyphicon-calendar"></span>
+			        </span>
+			    </div>
+			    <!-- <select class="form-control jam_seminar_ujian" data-required="1">
 					<option value="">-- Pilih Jam --</option>
 					<?php if ( !empty($jam_seminar_ujian) ): ?>
 						<?php foreach ($jam_seminar_ujian as $k_jsu => $v_jsu): ?>
 							<option value="<?php echo $v_jsu['id']; ?>" data-awal="<?php echo substr($v_jsu['awal'], 0, 5); ?>" data-akhir="<?php echo substr($v_jsu['akhir'], 0, 5); ?>"><?php echo substr($v_jsu['awal'], 0, 5); ?></option>
 						<?php endforeach ?>
 					<?php endif ?>
-				</select>
+				</select> -->
 			</div>
 		</div>
+
+		<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+			<div class="col-xs-12 no-padding">
+				<label class="control-label">Tipe Ruangan / Kelas</label>
+			</div>
+	        <div class="col-lg-12">
+	            <div class="radio" style="margin-top: 0px;">
+					<label><input type="radio" name="optradio" value="1" checked>On Site</label>
+				</div>
+				<div class="radio" style="margin-bottom: 0px;">
+					<label><input type="radio" name="optradio" value="0">Out Site</label>
+				</div>
+	        </div>
+		</div>
+
+		<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+			<div class="col-xs-12 no-padding">
+				<label class="control-label">Alamat</label>
+			</div>
+	        <div class="col-lg-12 no-padding">
+	            <textarea class="form-control alamat" placeholder="Alamat"></textarea>
+	        </div>
+		</div>
+
+		<?php for ($i=0; $i < 4; $i++) { ?>
+			<?php 
+				$data_required = 0;
+				// if ( $i == 3 ) {
+				// 	$data_required = 0;
+				// }
+			?>
+			<div class="col-xs-12 no-padding penguji" data-no="<?php echo $i+1; ?>" style="margin-bottom: 5px;" data-required="0">
+				<div class="col-xs-4 no-padding" style="padding-right: 5px;">
+					<div class="col-xs-12 no-padding">
+						<label class="control-label">Jenis Penguji</label>
+					</div>
+					<div class="col-xs-12 no-padding">
+					<select class="form-control jenis_penguji" data-required="<?php echo $data_required; ?>" onclick="pengajuan.pilihJenisPenguji(this)">
+							<option value="">-- Pilih --</option>
+							<option value="luar">DOSEN LUAR</option>
+							<option value="dalam">DOSEN DALAM</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-8 no-padding dosen_penguji" style="padding-left: 5px;">
+					<div class="col-xs-12 no-padding">
+						<label class="control-label">Penguji <?php echo $i+1; ?></label>
+					</div>
+					<div class="col-xs-12 no-padding jenis_dosen dalam">
+						<select class="form-control dosen" data-required="<?php echo $data_required; ?>">
+							<option value="">-- Pilih Dosen --</option>
+							<?php if ( !empty($dosen) ): ?>
+								<?php foreach ($dosen as $k_dosen => $v_dosen): ?>
+									<option value="<?php echo $v_dosen['nip']; ?>" data-nama="<?php echo $v_dosen['nama']; ?>"><?php echo strtoupper($v_dosen['nip'].' | '.$v_dosen['nama']); ?></option>
+								<?php endforeach ?>
+							<?php endif ?>
+						</select>
+					</div>
+					<div class="col-xs-12 no-padding jenis_dosen luar hide">
+						<input type="text" class="form-control uppercase dosen" placeholder="Nama Penguji">
+					</div>
+				</div>
+			</div>
+		<?php } ?>
 
 		<div class="col-xs-12 no-padding list_kelengkapan_pengajuan">
 			<?php if ( !empty($data_kelengkapan) ): ?>
@@ -176,14 +246,22 @@
 	<?php else: ?>
 		<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
 			<div class="col-xs-12 no-padding">
-				<label class="control-label">Pembimbing anda belum di terbitkan.</label>
+				<label class="control-label">SK Pembimbing anda belum di terbitkan.</label>
 			</div>
 		</div>
 	<?php endif ?>
 <?php else: ?>
-	<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
-		<div class="col-xs-12 no-padding">
-			<label class="control-label">SK Pembimbing anda belum di terbitkan.</label>
+	<?php if ( stristr($jenis_pengajuan, 'seminar hasil') !== false ): ?>
+		<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+			<div class="col-xs-12 no-padding">
+				<label class="control-label">Anda belum mengajukan seminar proposal.</label>
+			</div>
 		</div>
-	</div>
+	<?php else: ?>
+		<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+			<div class="col-xs-12 no-padding">
+				<label class="control-label">SK Pembimbing anda belum di terbitkan.</label>
+			</div>
+		</div>
+	<?php endif ?>
 <?php endif ?>
