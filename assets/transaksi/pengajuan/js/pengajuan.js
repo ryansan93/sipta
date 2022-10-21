@@ -418,16 +418,17 @@ var pengajuan = {
 					var data = {
 						'kode_pengajuan': $(dcontent).find('.kode_pengajuan').val(),
 						'jenis_pengajuan': $(dcontent).find('.jenis_pengajuan').val(),
-						'prodi_kode': $(dcontent).find('.prodi').val(),
-						'nim': $(dcontent).find('.nim').val(),
-						'no_telp': $(dcontent).find('.no_telp').val(),
+						'prodi_kode': $(dcontent).find('.prodi').attr('data-val'),
+						'nim': $(dcontent).find('.nim').attr('data-val'),
+						'no_telp': $(dcontent).find('.no_telp').attr('data-val'),
 						'jenis_pelaksanaan_kode': $(dcontent).find('.jenis_pelaksanaan').val(),
 						'judul_penelitian': $(dcontent).find('.judul_penelitian').val(),
-						'tahun_akademik': $(dcontent).find('.tahun_akademik').val(),
+						'tahun_akademik': $(dcontent).find('.tahun_akademik').attr('data-val'),
 						'list_penguji': list_penguji,
 						'jadwal': dateSQL( $(dcontent).find('#Jadwal').data('DateTimePicker').date() ),
 						'jam_pelaksanaan': dateTimeSQL( $(dcontent).find('#JamPelaksanaan').data('DateTimePicker').date() ),
-						'jam_selesai': $(dcontent).find('.jam_seminar_ujian option:selected').data('akhir'),
+						'tipe_ruangan': $(dcontent).find('[name=optradio]:checked').val(),
+						'alamat': $(dcontent).find('.alamat').val(),
 						'list_kelengkapan_pengajuan': list_kelengkapan_pengajuan
 					};
 

@@ -351,13 +351,13 @@ class Pengajuan extends Public_Controller {
                 }
             } else {
                 $m_pengajuan = new \Model\Storage\Pengajuan_model();
-                $d_pengajuan = $m_pengajuan->where('nim', $this->userid)->with(['mahasiswa', 'prodi', 'pengajuan_dosen'])->orderBy('kode', 'desc')->first();
+                $d_pengajuan = $m_pengajuan->where('nim', $this->userid)->with(['mahasiswa', 'prodi', 'pengajuan_dosen_pembimbing'])->orderBy('kode', 'desc')->first();
 
                 if ( $d_pengajuan ) {
                     $d_pengajuan = $d_pengajuan->toArray();
 
                     $list_pembimbing = null;
-                    foreach ($d_pengajuan['pengajuan_dosen'] as $k_pd => $v_pd) {
+                    foreach ($d_pengajuan['pengajuan_dosen_pembimbing'] as $k_pd => $v_pd) {
                         $list_pembimbing[] = array(
                             'nip' => $v_pd['nip'],
                             'nama' => $v_pd['nama'],
@@ -558,28 +558,32 @@ class Pengajuan extends Public_Controller {
                 $m_pk->save();
             }
 
-            foreach ($params['list_pembimbing'] as $k_lb => $v_lb) {
-                if ( isset($v_lb['pembimbing']) ) {
-                    $m_pd = new \Model\Storage\PengajuanDosen_model();
-                    $m_pd->pengajuan_kode = $kode;
-                    $m_pd->jenis_dosen = isset($v_lb['jenis_penguji']) ? $v_lb['jenis_penguji'] : 'dalam';
-                    $m_pd->nip = isset($v_lb['nip']) ? $v_lb['nip'] : null;
-                    $m_pd->nama = $v_lb['pembimbing'];
-                    $m_pd->no_telp = isset($v_lb['no_telp']) ? $v_lb['no_telp'] : null;
-                    $m_pd->tipe = 'pembimbing';
-                    $m_pd->save();
+            if ( isset($params['list_pembimbing']) && !empty($params['list_pembimbing']) ) {
+                foreach ($params['list_pembimbing'] as $k_lb => $v_lb) {
+                    if ( isset($v_lb['pembimbing']) ) {
+                        $m_pd = new \Model\Storage\PengajuanDosen_model();
+                        $m_pd->pengajuan_kode = $kode;
+                        $m_pd->jenis_dosen = isset($v_lb['jenis_penguji']) ? $v_lb['jenis_penguji'] : 'dalam';
+                        $m_pd->nip = isset($v_lb['nip']) ? $v_lb['nip'] : null;
+                        $m_pd->nama = $v_lb['pembimbing'];
+                        $m_pd->no_telp = isset($v_lb['no_telp']) ? $v_lb['no_telp'] : null;
+                        $m_pd->tipe = 'pembimbing';
+                        $m_pd->save();
+                    }
                 }
             }
 
-            foreach ($params['list_penguji'] as $k_lp => $v_lp) {
-                if ( isset($v_lp['penguji']) ) {
-                    $m_pd = new \Model\Storage\PengajuanDosen_model();
-                    $m_pd->pengajuan_kode = $kode;
-                    $m_pd->jenis_dosen = isset($v_lp['jenis_penguji']) ? $v_lp['jenis_penguji'] : 'dalam';
-                    $m_pd->nip = isset($v_lp['nip']) ? $v_lp['nip'] : null;
-                    $m_pd->nama = $v_lp['penguji'];
-                    $m_pd->tipe = 'penguji';
-                    $m_pd->save();
+            if ( isset($params['list_penguji']) && !empty($params['list_penguji']) ) {
+                foreach ($params['list_penguji'] as $k_lp => $v_lp) {
+                    if ( isset($v_lp['penguji']) ) {
+                        $m_pd = new \Model\Storage\PengajuanDosen_model();
+                        $m_pd->pengajuan_kode = $kode;
+                        $m_pd->jenis_dosen = isset($v_lp['jenis_penguji']) ? $v_lp['jenis_penguji'] : 'dalam';
+                        $m_pd->nip = isset($v_lp['nip']) ? $v_lp['nip'] : null;
+                        $m_pd->nama = $v_lp['penguji'];
+                        $m_pd->tipe = 'penguji';
+                        $m_pd->save();
+                    }
                 }
             }
 

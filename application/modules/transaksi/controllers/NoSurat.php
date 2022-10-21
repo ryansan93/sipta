@@ -207,7 +207,7 @@ class NoSurat extends Public_Controller {
         display_json( $this->result );
     }
 
-    public function export_pdf_non_kompre($data)
+    public function export_pdf_non_kompre($data = null)
     {
         $style = array(
           'vpadding'      =>'auto',
@@ -230,51 +230,12 @@ class NoSurat extends Public_Controller {
 
         // set margins
         // $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-        $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-        $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+        // $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+        // $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
         $pdf -> AddPage();
 
-        // $width_page = 144;
-        $pdf->Image('assets/images/templateSurat/logo-header.png', 5, 5, 0, 30, 'PNG', 'http://www.tcpdf.org', '', true, 150, '', false, false, 0, false, false, false);
-
-        $pdf->SetFont('times', '', 10);
-        $html = '<table style="border-spacing:0; border-collapse: collapse;">
-            <tbody>
-                <tr>
-                    <td style="width: 50px;">
-                    </td>
-                    <td style="width: 700px; vertical-align: top;">
-                        <table style="border-spacing:0; border-collapse: collapse; color: #245fac;">
-                            <tr>
-                                <td style="width: 700px; text-align: center; font-size: 14pt;"><b>KEMENTRIAN PERTANIAN</b></td>
-                            </tr>
-                            <tr>
-                                <td style="width: 700px; text-align: center; font-size: 11pt;">BADAN PENYULUHAN DAN PENGEMBANGAN SUMBER DAYA MANUSIA PERTANIAN</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 700px; text-align: center; font-size: 13pt;"><b>POLITEKNIK PEMBANGUNAN PERTANIAN (POLBANGTAN) MALANG</b></td>
-                            </tr>
-                            <tr>
-                                <td style="width: 700px; text-align: center; font-size: 7.5pt;">Jl. Dr. Cipto 144 A Bedali, Lawang - Malang 65200 Kotak Pos 144 Telp.0341- 427771, 427772, 427379, Fax. 427774</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 700px; text-align: center; font-size: 7.5pt;">website : www.polbangtanmalang.ac.id e-mail : official@polbangtanmalang.ac.id</td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </tbody>
-        </table>';
-        $pdf -> writeHTMLCell(0,0,0,5,$html,0,0,false,true,'L',true);
-
-        $style = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(36, 95, 172));
-        $pdf->Line(0, 0, 0, 0, $style);
-
-        $html = '<hr style="height: 1px; background-color: #245fac; color: #245fac; border-color: #245fac;">';
-        $pdf -> writeHTMLCell(0,0,13,37,$html,0,0,false,true,'L',true);
-        $html = '<hr style="height: 1.5px; background-color: #245fac; color: #245fac; border-color: #245fac;">';
-        $pdf -> writeHTMLCell(0,0,13,38,$html,0,0,false,true,'L',true);
+        $pdf->Image('assets/images/templateSurat/template_surat.png', 0, 0, 210, 297, 'PNG', '', '', false, 150, '', false, false, 0);
 
         $pdf->SetFont('times', '', 12);
         $html = '<table>
@@ -304,22 +265,41 @@ class NoSurat extends Public_Controller {
                 </tr>
             </tbody>
         </table>';
-        $pdf -> writeHTMLCell(0,0,15,40,$html,0,0,false,true,'L',true);
+        $pdf -> writeHTMLCell(0,0,15,45,$html,0,0,false,true,'L',true);
 
-        $pdf->Image('assets/images/templateSurat/TTD.png', 105, 185, 0, 38, 'PNG', 'http://www.tcpdf.org', '', true, 150, '', false, false, 0, false, false, false);
+        $height_ttd = 189.5;
+
+        if ( !empty($data['pengajuan_dosen_pembimbing']) ) {
+            $height_ttd += count($data['pengajuan_dosen_pembimbing']) * 5;
+        }
+
+        if ( !empty($data['pengajuan_dosen_penguji']) ) {
+            $height_ttd += count($data['pengajuan_dosen_penguji']) * 5;
+        }
+
+        $pdf->Image('assets/images/templateSurat/TTD.png', 105, $height_ttd, 0, 38, 'PNG', 'http://www.tcpdf.org', '', true, 150, '', false, false, 0, false, false, false);
 
         $html = '<table>
             <tbody>
                 <tr>
                     <td colspan="3" style="width: 630px;">Kepada Yth Bapak/Ibu</td>
                 </tr>';
-        $no_dosen = 1;
+        $no_dosen = 0;
         foreach ($data['pengajuan_dosen_pembimbing'] as $key => $value) {
+            $no_dosen++;
             $html .= '<tr>
                     <td colspan="3"><span style="padding-left: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$no_dosen.'. '.$value['nama'].'</span></td>
                 </tr>';
 
-            $no_dosen++;
+        }
+        if ( !empty($data['pengajuan_dosen_penguji']) ) {
+            foreach ($data['pengajuan_dosen_penguji'] as $key => $value) {
+                $no_dosen++;
+                $html .= '<tr>
+                        <td colspan="3"><span style="padding-left: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$no_dosen.'. '.$value['nama'].'</span></td>
+                    </tr>';
+
+            }
         }
         $html .= '<tr>
                     <td colspan="3">di - </td>
@@ -405,6 +385,8 @@ class NoSurat extends Public_Controller {
                         <br>
                         <br>
                         <br>
+                        <br>
+                        <br>
                     </td>
                 </tr>
                 <tr>
@@ -427,56 +409,11 @@ class NoSurat extends Public_Controller {
         </table>';
         $pdf -> writeHTMLCell(0,0,15,70,$html,0,0,false,true,'L',true);
 
-        $style = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(36, 95, 172));
-        $pdf->Line(0, 0, 0, 0, $style);
-
-        $html = '<hr style="height: 1px; background-color: #245fac; color: #245fac; border-color: #245fac;">';
-        $pdf -> writeHTMLCell(0,0,13,270,$html,0,0,false,true,'L',true);
-
-        $pdf->Image('assets/images/templateSurat/Footer.png', 13, 275, 0, 20, 'PNG', 'http://www.tcpdf.org', '', true, 150, '', false, false, 0, false, false, false);
-
         $pdf -> AddPage();
 
         // $width_page = 144;
-        $pdf->Image('assets/images/templateSurat/logo-header.png', 5, 5, 0, 30, 'PNG', 'http://www.tcpdf.org', '', true, 150, '', false, false, 0, false, false, false);
+        $pdf->Image('assets/images/templateSurat/template_surat.png', 0, 0, 210, 297, 'PNG', '', '', false, 150, '', false, false, 0);
 
-        $pdf->SetFont('times', '', 10);
-        $html = '<table style="border-spacing:0; border-collapse: collapse;">
-            <tbody>
-                <tr>
-                    <td style="width: 50px;">
-                    </td>
-                    <td style="width: 700px; vertical-align: top;">
-                        <table style="border-spacing:0; border-collapse: collapse; color: #245fac;">
-                            <tr>
-                                <td style="width: 700px; text-align: center; font-size: 14pt;"><b>KEMENTRIAN PERTANIAN</b></td>
-                            </tr>
-                            <tr>
-                                <td style="width: 700px; text-align: center; font-size: 11pt;">BADAN PENYULUHAN DAN PENGEMBANGAN SUMBER DAYA MANUSIA PERTANIAN</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 700px; text-align: center; font-size: 13pt;"><b>POLITEKNIK PEMBANGUNAN PERTANIAN (POLBANGTAN) MALANG</b></td>
-                            </tr>
-                            <tr>
-                                <td style="width: 700px; text-align: center; font-size: 7.5pt;">Jl. Dr. Cipto 144 A Bedali, Lawang - Malang 65200 Kotak Pos 144 Telp.0341- 427771, 427772, 427379, Fax. 427774</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 700px; text-align: center; font-size: 7.5pt;">website : www.polbangtanmalang.ac.id e-mail : official@polbangtanmalang.ac.id</td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </tbody>
-        </table>';
-        $pdf -> writeHTMLCell(0,0,0,5,$html,0,0,false,true,'L',true);
-
-        $style = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(36, 95, 172));
-        $pdf->Line(0, 0, 0, 0, $style);
-
-        $html = '<hr style="height: 1px; background-color: #245fac; color: #245fac; border-color: #245fac;">';
-        $pdf -> writeHTMLCell(0,0,13,37,$html,0,0,false,true,'L',true);
-        $html = '<hr style="height: 1.5px; background-color: #245fac; color: #245fac; border-color: #245fac;">';
-        $pdf -> writeHTMLCell(0,0,13,38,$html,0,0,false,true,'L',true);
 
         $pdf->SetFont('times', '', 12);
         $html = '<table>
@@ -506,9 +443,10 @@ class NoSurat extends Public_Controller {
                 </tr>
             </tbody>
         </table>';
-        $pdf -> writeHTMLCell(0,0,15,40,$html,0,0,false,true,'L',true);
+        $pdf -> writeHTMLCell(0,0,15,45,$html,0,0,false,true,'L',true);
 
-        $pdf->Image('assets/images/templateSurat/TTD.png', 105, 180, 0, 38, 'PNG', 'http://www.tcpdf.org', '', true, 150, '', false, false, 0, false, false, false);
+        $pdf->Image('assets/images/templateSurat/TTD.png', 105, 194, 0, 38, 'PNG', 'http://www.tcpdf.org', '', true, 150, '', false, false, 0, false, false, false);
+
         $html = '<table>
             <tbody>
                 <tr>
@@ -601,6 +539,8 @@ class NoSurat extends Public_Controller {
                         <br>
                         <br>
                         <br>
+                        <br>
+                        <br>
                     </td>
                 </tr>
                 <tr>
@@ -614,16 +554,13 @@ class NoSurat extends Public_Controller {
         </table>';
         $pdf -> writeHTMLCell(0,0,15,70,$html,0,0,false,true,'L',true);
 
-        $style = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(36, 95, 172));
-        $pdf->Line(0, 0, 0, 0, $style);
+        $nama_undangan = 'Und. Sempro an. ';
+        if ( stristr($data['jenis_pengajuan']['nama'], 'SEMINAR HASIL') !== FALSE ) {
+            $nama_undangan = 'Und. Semhas an. ';
+        }
 
-        $html = '<hr style="height: 1px; background-color: #245fac; color: #245fac; border-color: #245fac;">';
-        $pdf -> writeHTMLCell(0,0,13,270,$html,0,0,false,true,'L',true);
-
-        $pdf->Image('assets/images/templateSurat/Footer.png', 13, 275, 0, 20, 'PNG', 'http://www.tcpdf.org', '', true, 150, '', false, false, 0, false, false, false);
-
-        $filename = 'Und. Sempro an. '.$data['mahasiswa']['nama'];
-        $path = ubahNama('Und_Sempro_an_'.$data['mahasiswa']['nama'].'.pdf');
+        $filename = $nama_undangan.$data['mahasiswa']['nama'];
+        $path = ubahNama($filename.'.pdf');
 
         $m_ns = new \Model\Storage\NoSurat_model();
         $d_ns = $m_ns->where('pengajuan_kode', $data['kode'])->update(
@@ -660,51 +597,13 @@ class NoSurat extends Public_Controller {
 
         // set margins
         // $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-        $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-        $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+        // $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+        // $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
         $pdf -> AddPage();
 
         // $width_page = 144;
-        $pdf->Image('assets/images/templateSurat/logo-header.png', 5, 5, 0, 30, 'PNG', 'http://www.tcpdf.org', '', true, 150, '', false, false, 0, false, false, false);
-
-        $pdf->SetFont('times', '', 10);
-        $html = '<table style="border-spacing:0; border-collapse: collapse;">
-            <tbody>
-                <tr>
-                    <td style="width: 50px;">
-                    </td>
-                    <td style="width: 700px; vertical-align: top;">
-                        <table style="border-spacing:0; border-collapse: collapse; color: #245fac;">
-                            <tr>
-                                <td style="width: 700px; text-align: center; font-size: 14pt;"><b>KEMENTRIAN PERTANIAN</b></td>
-                            </tr>
-                            <tr>
-                                <td style="width: 700px; text-align: center; font-size: 11pt;">BADAN PENYULUHAN DAN PENGEMBANGAN SUMBER DAYA MANUSIA PERTANIAN</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 700px; text-align: center; font-size: 13pt;"><b>POLITEKNIK PEMBANGUNAN PERTANIAN (POLBANGTAN) MALANG</b></td>
-                            </tr>
-                            <tr>
-                                <td style="width: 700px; text-align: center; font-size: 7.5pt;">Jl. Dr. Cipto 144 A Bedali, Lawang - Malang 65200 Kotak Pos 144 Telp.0341- 427771, 427772, 427379, Fax. 427774</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 700px; text-align: center; font-size: 7.5pt;">website : www.polbangtanmalang.ac.id e-mail : official@polbangtanmalang.ac.id</td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </tbody>
-        </table>';
-        $pdf -> writeHTMLCell(0,0,0,5,$html,0,0,false,true,'L',true);
-
-        $style = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(36, 95, 172));
-        $pdf->Line(0, 0, 0, 0, $style);
-
-        $html = '<hr style="height: 1px; background-color: #245fac; color: #245fac; border-color: #245fac;">';
-        $pdf -> writeHTMLCell(0,0,13,37,$html,0,0,false,true,'L',true);
-        $html = '<hr style="height: 1.5px; background-color: #245fac; color: #245fac; border-color: #245fac;">';
-        $pdf -> writeHTMLCell(0,0,13,38,$html,0,0,false,true,'L',true);
+        $pdf->Image('assets/images/templateSurat/template_surat.png', 0, 0, 210, 297, 'PNG', '', '', false, 150, '', false, false, 0);
 
         $pdf->SetFont('times', '', 12);
         $html = '<table>
@@ -734,9 +633,15 @@ class NoSurat extends Public_Controller {
                 </tr>
             </tbody>
         </table>';
-        $pdf -> writeHTMLCell(0,0,15,40,$html,0,0,false,true,'L',true);
+        $pdf -> writeHTMLCell(0,0,15,45,$html,0,0,false,true,'L',true);
 
-        $pdf->Image('assets/images/templateSurat/TTD.png', 105, 195, 0, 38, 'PNG', 'http://www.tcpdf.org', '', true, 150, '', false, false, 0, false, false, false);
+        $height_ttd = 189;
+
+        if ( !empty($data['pengajuan_dosen_penguji']) ) {
+            $height_ttd += count($data['pengajuan_dosen_penguji']) * 5;
+        }
+
+        $pdf->Image('assets/images/templateSurat/TTD.png', 105, $height_ttd, 0, 38, 'PNG', 'http://www.tcpdf.org', '', true, 150, '', false, false, 0, false, false, false);
 
         $html = '<table>
             <tbody>
@@ -744,7 +649,7 @@ class NoSurat extends Public_Controller {
                     <td colspan="3" style="width: 630px;">Kepada Yth Bapak/Ibu</td>
                 </tr>';
         $no_dosen = 1;
-        foreach ($data['pengajuan_dosen'] as $key => $value) {
+        foreach ($data['pengajuan_dosen_penguji'] as $key => $value) {
             $html .= '<tr>
                     <td colspan="3"><span style="padding-left: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$no_dosen.'. '.$value['nama'].'</span></td>
                 </tr>';
@@ -835,6 +740,8 @@ class NoSurat extends Public_Controller {
                         <br>
                         <br>
                         <br>
+                        <br>
+                        <br>
                     </td>
                 </tr>
                 <tr>
@@ -857,14 +764,6 @@ class NoSurat extends Public_Controller {
             </tbody>
         </table>';
         $pdf -> writeHTMLCell(0,0,15,70,$html,0,0,false,true,'L',true);
-
-        $style = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(36, 95, 172));
-        $pdf->Line(0, 0, 0, 0, $style);
-
-        $html = '<hr style="height: 1px; background-color: #245fac; color: #245fac; border-color: #245fac;">';
-        $pdf -> writeHTMLCell(0,0,13,270,$html,0,0,false,true,'L',true);
-
-        $pdf->Image('assets/images/templateSurat/Footer.png', 13, 275, 0, 20, 'PNG', 'http://www.tcpdf.org', '', true, 150, '', false, false, 0, false, false, false);
 
         $filename = 'Undangan Kompre an. '.$data['mahasiswa']['nama'];
         $path = ubahNama('Undangan_Kompre_an_'.$data['mahasiswa']['nama'].'.pdf');
@@ -960,5 +859,15 @@ class NoSurat extends Public_Controller {
         }
 
         return $data;
+    }
+
+    public function tes()
+    {
+        $kode_pengajuan = 'PGJ22100004';
+
+        $m_pengajuan = new \Model\Storage\Pengajuan_model();
+        $d_pengajuan = $m_pengajuan->where('kode', $kode_pengajuan)->with(['jenis_pengajuan', 'mahasiswa', 'jenis_pelaksanaan', 'prodi', 'pengajuan_dosen_pembimbing', 'pengajuan_dosen_penguji', 'ruang_kelas', 'no_surat'])->first()->toArray();
+
+        $this->export_pdf_kompre( $d_pengajuan );
     }
 }

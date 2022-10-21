@@ -62,7 +62,7 @@
 </div>
 <div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
 <?php $no = 1; ?>
-<?php foreach ($data['pengajuan_dosen'] as $k_pd => $v_pd): ?>
+<?php foreach ($data['pengajuan_dosen_penguji'] as $k_pd => $v_pd): ?>
 	<div class="col-xs-12 no-padding penguji" style="margin-bottom: 5px;">
 		<div class="col-xs-4 no-padding" style="padding-right: 5px;">
 			<div class="col-xs-12 no-padding">
