@@ -263,9 +263,9 @@
 			<div class="col-xs-12 no-padding" style="padding-left: 15px;">
 				<span>
 					<?php if ( $data['tipe_ruangan'] == 1 ): ?>
-						<?php echo 'On Site'; ?>
+						<?php echo 'In Campus'; ?>
 					<?php else: ?>
-						<?php echo 'Out Site'; ?>
+						<?php echo 'Out Campus'; ?>
 					<?php endif ?>
 				</span>
 			</div>

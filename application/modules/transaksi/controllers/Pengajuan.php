@@ -266,14 +266,15 @@ class Pengajuan extends Public_Controller {
         $data = null;
 
         $jenis_pengajuan_kode = $params['jenis_pengajuan_kode'];
-        // $pengajuan_kode = $params['pengajuan_kode'];
 
         $m_jp = new \Model\Storage\JenisPengajuan_model();
         $d_jp = $m_jp->where('kode', $jenis_pengajuan_kode)->first();
 
+        $d_jp_sempro = $m_jp->where('nama', 'like', '%seminar proposal%')->first();
+        $d_jp_kompre = $m_jp->where('nama', 'like', '%UJIAN KOMPREHENSIF%')->first();
+
         $m_jsu = new \Model\Storage\JamSeminarUjian_model();
         $d_jsu = $m_jsu->where('jenis_pengajuan_kode', $jenis_pengajuan_kode)->orderBy('awal', 'asc')->get();
-
 
         $data_jsu = null;
         if ( $d_jsu->count() > 0 ) {
@@ -294,37 +295,24 @@ class Pengajuan extends Public_Controller {
         $content['dosen'] = $this->getDosen();
 
         if ( $d_jp->form_pengajuan == 'kompre' ) {
+            $m_pengajuan = new \Model\Storage\Pengajuan_model();
+            $d_pengajuan_sempro = $m_pengajuan->where('nim', $this->userid)->where('jenis_pengajuan_kode', $d_jp_kompre->kode)->orderBy('kode', 'desc')->first();
+
+            $pelaksanaan_ta = false;
+            if ( $d_pengajuan_sempro ) {
+                $m_blangko = new \Model\Storage\Blangko_model();
+                $d_blangko = $m_blangko->where('pengajuan_kode', $d_pengajuan_sempro->kode)->first();
+
+                if ( $d_blangko ) {
+                    $pelaksanaan_ta = true;
+                }
+            }
+
+            $content['pelaksanaan_ta'] = $pelaksanaan_ta;
             $content['data_semhas'] = $this->getDataSemhas();
             $html = $this->load->view($this->pathView . 'formDataKompre', $content, TRUE);
         } else {
             if ( stristr($d_jp->nama, 'seminar proposal') !== false ) {
-                // $m_rp = new \Model\Storage\RancanganProposal_model();
-                // $d_rp = $m_rp->where('kode', $pengajuan_kode)->with(['mahasiswa', 'prodi', 'rancangan_proposal_dosen'])->first()->toArray();
-
-                // $list_pembimbing = null;
-                // foreach ($d_rp['rancangan_proposal_dosen'] as $k_rpd => $v_rpd) {
-                //     if ( $v_rpd['tipe_dosen'] == 'pembimbing' ) {
-                //         $list_pembimbing[] = array(
-                //             'nip' => $v_rpd['nip'],
-                //             'nama' => $v_rpd['nama'],
-                //             'no_telp' => $v_rpd['no_telp']
-                //         );
-                //     }
-                // }
-
-                // $data = array(
-                //     'kode' => $d_rp['kode'],
-                //     'prodi_kode' => $d_rp['prodi_kode'],
-                //     'nim' => $d_rp['nim'],
-                //     'no_telp' => $d_rp['no_telp'],
-                //     'judul_penelitian' => $d_rp['judul_penelitian'],
-                //     'tahun_akademik' => $d_rp['tahun_akademik'],
-                //     'g_status' => $d_rp['g_status'],
-                //     'mahasiswa' => $d_rp['mahasiswa'],
-                //     'prodi' => $d_rp['prodi'],
-                //     'list_pembimbing' => $list_pembimbing
-                // );
-
                 $m_sp = new \Model\Storage\SkPembimbing_model();
                 $d_sp = $m_sp->where('nim', $this->userid)->with(['mahasiswa', 'sk_pembimbing_dosen'])->first();
 
@@ -378,6 +366,21 @@ class Pengajuan extends Public_Controller {
                         'list_pembimbing' => $list_pembimbing
                     );
                 }
+
+                $d_pengajuan_sempro = $m_pengajuan->where('nim', $this->userid)->where('jenis_pengajuan_kode', $d_jp_sempro->kode)->orderBy('kode', 'desc')->first();
+
+                $pelaksanaan_ta = false;
+                if ( $d_pengajuan_sempro ) {
+                    $m_blangko = new \Model\Storage\Blangko_model();
+                    $d_blangko = $m_blangko->where('pengajuan_kode', $d_pengajuan_sempro->kode)->first();
+
+                    if ( $d_blangko ) {
+                        $pelaksanaan_ta = true;
+                    }
+                }
+
+                $content['pelaksanaan_ta'] = $pelaksanaan_ta;
+                $content['jml_sempro'] = $this->cekPengajuanSemhas();
             }
 
             $content['data'] = $data;
