@@ -270,11 +270,11 @@ class NoSurat extends Public_Controller {
         $height_ttd = 189.5;
 
         if ( !empty($data['pengajuan_dosen_pembimbing']) ) {
-            $height_ttd += count($data['pengajuan_dosen_pembimbing']) * 2.5;
+            $height_ttd += count($data['pengajuan_dosen_pembimbing']) * 3;
         }
 
         if ( !empty($data['pengajuan_dosen_penguji']) ) {
-            $height_ttd += count($data['pengajuan_dosen_penguji']) * 2.5;
+            $height_ttd += count($data['pengajuan_dosen_penguji']) * 3;
         }
 
         $pdf->Image('assets/images/templateSurat/TTD.png', 105, $height_ttd, 0, 38, 'PNG', 'http://www.tcpdf.org', '', true, 150, '', false, false, 0, false, false, false);
@@ -315,7 +315,7 @@ class NoSurat extends Public_Controller {
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3" style="text-align: justify;">Berdasarkan Kalender Akademik (Tentatif) Politeknik Pembangunan Pertanian Malang Tahun Akademik '.$data['tahun_akademik'].', akan dilaksanakan Seminar Hasil Tugas Akhir (TA). Selanjutnya untuk kelancaran kegiatan tersebut maka kami mohon kehadiran Bapak/Ibu.</td>
+                    <td colspan="3" style="text-align: justify;">Berdasarkan Kalender Akademik (Tentatif) Politeknik Pembangunan Pertanian Malang Tahun Akademik '.$data['tahun_akademik'].', akan dilaksanakan '.ucwords(strtolower($data['jenis_pengajuan']['nama'])).' Tugas Akhir (TA). Selanjutnya untuk kelancaran kegiatan tersebut maka kami mohon kehadiran Bapak/Ibu.</td>
                 </tr>
                 <tr><td colspan="3">Adapun Mahasiswa dan waktu pelaksanaan kegiatan tersebut :</td></tr>
                 <tr>
@@ -469,7 +469,7 @@ class NoSurat extends Public_Controller {
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="3" style="text-align: justify;">Berdasarkan Kalender Akademik (Tentatif) Politeknik Pembangunan Pertanian Malang Tahun Akademik '.$data['tahun_akademik'].', akan dilaksanakan Seminar Hasil Tugas Akhir (TA). Selanjutnya untuk kelancaran kegiatan tersebut maka kami mohon kehadiran saudara.</td>
+                    <td colspan="3" style="text-align: justify;">Berdasarkan Kalender Akademik (Tentatif) Politeknik Pembangunan Pertanian Malang Tahun Akademik '.$data['tahun_akademik'].', akan dilaksanakan '.ucwords(strtolower($data['jenis_pengajuan']['nama'])).' Tugas Akhir (TA). Selanjutnya untuk kelancaran kegiatan tersebut maka kami mohon kehadiran saudara.</td>
                 </tr>
                 <tr><td colspan="3">Adapun Mahasiswa dan waktu pelaksanaan kegiatan tersebut :</td></tr>
                 <tr>
