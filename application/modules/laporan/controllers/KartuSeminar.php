@@ -73,7 +73,7 @@ class KartuSeminar extends Public_Controller {
         $now = $m_conf->getDate();
 
         $m_ks = new \Model\Storage\KartuSeminar_model();
-        $d_ks = $m_ks->where('nim', $mahasiswa)->with(['pengajuan'])->get();
+        $d_ks = $m_ks->where('nim', $mahasiswa)->with(['mahasiswa', 'pengajuan'])->get();
 
         $data = null;
         if ( $d_ks->count() > 0 ) {
@@ -92,7 +92,8 @@ class KartuSeminar extends Public_Controller {
                     'ruang_kelas' => $v_ks['pengajuan']['ruang_kelas']['nama'],
                     'akun_zoom' => $v_ks['pengajuan']['akun_zoom'],
                     'id_meeting' => $v_ks['pengajuan']['id_meeting'],
-                    'password_meeting' => $v_ks['pengajuan']['password_meeting']
+                    'password_meeting' => $v_ks['pengajuan']['password_meeting'],
+                    'mahasiswa' => $v_ks['mahasiswa']['nama']
                 );
             }
 
