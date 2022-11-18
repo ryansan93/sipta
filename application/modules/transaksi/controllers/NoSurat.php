@@ -343,12 +343,27 @@ class NoSurat extends Public_Controller {
                     <td style="width: 10px;">:</td>
                     <td style="width: 500px;">'.substr($data['jam_pelaksanaan'], 0, 5).'</td>
                 </tr>';
-        if ( $data['jenis_pelaksanaan']['ruang_kelas'] == 1 ) {
+
+        $tipe_ruangan = null;
+        if ( $data['tipe_ruangan'] == 1 ) {
+            $tipe_ruangan = ' (In Campus)';
+        } else {
+            $tipe_ruangan = ' (Out Campus)';
+        }
+
+        if ( !empty($data['ruang_kelas']) ) {
             $ruang_kelas = !empty($data['ruang_kelas']['nama']) ? $data['ruang_kelas']['nama'] : '-';
             $html .= '<tr>
                     <td style="width: 200px;">Tempat / Ruang</td>
                     <td style="width: 10px;">:</td>
-                    <td style="width: 500px;">'.$ruang_kelas.'</td>
+                    <td style="width: 500px;">'.$ruang_kelas.$tipe_ruangan.'</td>
+                </tr>';
+        } else {
+            $alamat = !empty($data['alamat']) ? $data['alamat'] : '-';
+            $html .= '<tr>
+                    <td style="width: 200px;">Tempat / Ruang</td>
+                    <td style="width: 10px;">:</td>
+                    <td style="width: 500px;">'.$alamat.$tipe_ruangan.'</td>
                 </tr>';
         }
         if ( $data['jenis_pelaksanaan']['zoom'] == 1 ) {
@@ -497,12 +512,26 @@ class NoSurat extends Public_Controller {
                     <td style="width: 10px;">:</td>
                     <td style="width: 500px;">'.substr($data['jam_pelaksanaan'], 0, 5).'</td>
                 </tr>';
-        if ( $data['jenis_pelaksanaan']['ruang_kelas'] == 1 ) {
+        $tipe_ruangan = null;
+        if ( $data['tipe_ruangan'] == 1 ) {
+            $tipe_ruangan = ' (In Campus)';
+        } else {
+            $tipe_ruangan = ' (Out Campus)';
+        }
+
+        if ( !empty($data['ruang_kelas']) ) {
             $ruang_kelas = !empty($data['ruang_kelas']['nama']) ? $data['ruang_kelas']['nama'] : '-';
             $html .= '<tr>
                     <td style="width: 200px;">Tempat / Ruang</td>
                     <td style="width: 10px;">:</td>
-                    <td style="width: 500px;">'.$ruang_kelas.'</td>
+                    <td style="width: 500px;">'.$ruang_kelas.$tipe_ruangan.'</td>
+                </tr>';
+        } else {
+            $alamat = !empty($data['alamat']) ? $data['alamat'] : '-';
+            $html .= '<tr>
+                    <td style="width: 200px;">Tempat / Ruang</td>
+                    <td style="width: 10px;">:</td>
+                    <td style="width: 500px;">'.$alamat.$tipe_ruangan.'</td>
                 </tr>';
         }
         if ( $data['jenis_pelaksanaan']['zoom'] == 1 ) {
@@ -698,12 +727,34 @@ class NoSurat extends Public_Controller {
                     <td style="width: 10px;">:</td>
                     <td style="width: 500px;">'.substr($data['jam_pelaksanaan'], 0, 5).'</td>
                 </tr>';
-        if ( $data['jenis_pelaksanaan']['ruang_kelas'] == 1 ) {
+        // if ( $data['jenis_pelaksanaan']['ruang_kelas'] == 1 ) {
+        //     $ruang_kelas = !empty($data['ruang_kelas']['nama']) ? $data['ruang_kelas']['nama'] : '-';
+        //     $html .= '<tr>
+        //             <td style="width: 200px;">Tempat / Ruang</td>
+        //             <td style="width: 10px;">:</td>
+        //             <td style="width: 500px;">'.$ruang_kelas.'</td>
+        //         </tr>';
+        // }
+        $tipe_ruangan = null;
+        if ( $data['tipe_ruangan'] == 1 ) {
+            $tipe_ruangan = ' (In Campus)';
+        } else {
+            $tipe_ruangan = ' (Out Campus)';
+        }
+
+        if ( !empty($data['ruang_kelas']) ) {
             $ruang_kelas = !empty($data['ruang_kelas']['nama']) ? $data['ruang_kelas']['nama'] : '-';
             $html .= '<tr>
                     <td style="width: 200px;">Tempat / Ruang</td>
                     <td style="width: 10px;">:</td>
-                    <td style="width: 500px;">'.$ruang_kelas.'</td>
+                    <td style="width: 500px;">'.$ruang_kelas.$tipe_ruangan.'</td>
+                </tr>';
+        } else {
+            $alamat = !empty($data['alamat']) ? $data['alamat'] : '-';
+            $html .= '<tr>
+                    <td style="width: 200px;">Tempat / Ruang</td>
+                    <td style="width: 10px;">:</td>
+                    <td style="width: 500px;">'.$alamat.$tipe_ruangan.'</td>
                 </tr>';
         }
         if ( $data['jenis_pelaksanaan']['zoom'] == 1 ) {

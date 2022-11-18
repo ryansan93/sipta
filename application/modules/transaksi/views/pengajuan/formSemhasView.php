@@ -167,7 +167,7 @@
 		<?php 
 			$data_required_ruang_kelas = 0;
 			$hide_ruang_kelas = 'hide';
-			if ( $data['jenis_pelaksanaan']['ruang_kelas'] == 1 ) {
+			if ( $data['jenis_pelaksanaan']['ruang_kelas'] == 1 && $data['tipe_ruangan'] == 1 ) {
 				$hide_ruang_kelas = '';
 				$data_required_ruang_kelas = 0;
 			}
@@ -188,6 +188,33 @@
 					</select>
 				</div>
 			</div>
+		</div>
+		<div class="col-xs-12 no-padding tipe_ruangan">
+			<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+				<div class="col-xs-12 no-padding">
+					<label class="control-label">Tipe Ruangan / Kelas</label>
+				</div>
+				<div class="col-xs-12 no-padding" style="padding-left: 15px;">
+					<span>
+						<?php if ( $data['tipe_ruangan'] == 1 ): ?>
+							<?php echo 'In Campus'; ?>
+						<?php else: ?>
+							<?php echo 'Out Campus'; ?>
+						<?php endif ?>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 no-padding alamat">
+			<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
+				<div class="col-xs-12 no-padding">
+					<label class="control-label">Alamat</label>
+				</div>
+				<div class="col-xs-12 no-padding" style="padding-left: 15px;">
+					<span><?php echo !empty($data['alamat']) ? strtoupper($data['alamat']) : '-'; ?></span>
+				</div>
+			</div>
+			<div class="col-xs-9 no-padding"><hr style="margin-top: 5px; margin-bottom: 5px;"></div>
 		</div>
 
 		<?php
