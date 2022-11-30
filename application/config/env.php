@@ -9,19 +9,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // Site Details
 $config['connection'] = array(
 	'default' => array(
-		'driver'    => 'sqlsrv',
+		'driver'    => 'mysql',
 
 		// NOTE : LIVE DATABASE
-		'host'      => '103.137.111.6',
-		'database'  => 'sipta',
-		'username'  => 'sa',
-		'password'  => 'Mgb654321',
+		// 'host'      => '103.137.111.6',
+		// 'database'  => 'sipta',
+		// 'username'  => 'sa',
+		// 'password'  => 'Mgb654321',
 
 		// NOTE : LOCAL DATABASE
-		// 'host'      => 'localhost',
-		// 'database'  => 'sipta',
-		// 'username'  => '',
-		// 'password'  => '',
+		'host'      => 'localhost',
+		'database'  => 'sipta',
+		'username'  => 'root',
+		'password'  => '',
 
 		// NOTE : TEST DATABASE
 		// 'host'      => '192.168.100.116',
@@ -30,7 +30,7 @@ $config['connection'] = array(
 		// 'password'  => 'musnimda',
 
 		'charset'   => 'utf8',
-		'collation' => 'utf8_unicode_ci',
+		'collation' => 'utf8_general_ci',
 		'prefix'    => '',
 	),
 );
