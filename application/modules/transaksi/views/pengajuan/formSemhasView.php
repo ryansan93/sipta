@@ -342,7 +342,7 @@
 				<label class="control-label">Password Meeting</label>
 			</div>
 			<div class="col-xs-12 no-padding" style="padding-left: 15px;">
-				<span><?php echo strtoupper($data['password_meeting']); ?></span>
+				<span><?php echo $data['password_meeting']; ?></span>
 			</div>
 		</div>
 	</div>
