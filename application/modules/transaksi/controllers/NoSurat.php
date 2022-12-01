@@ -270,11 +270,11 @@ class NoSurat extends Public_Controller {
         $height_ttd = 189.5;
 
         if ( !empty($data['pengajuan_dosen_pembimbing']) ) {
-            $height_ttd += count($data['pengajuan_dosen_pembimbing']) * 3;
+            $height_ttd += count($data['pengajuan_dosen_pembimbing']) * 5;
         }
 
         if ( !empty($data['pengajuan_dosen_penguji']) ) {
-            $height_ttd += count($data['pengajuan_dosen_penguji']) * 3;
+            $height_ttd += count($data['pengajuan_dosen_penguji']) * 5;
         }
 
         $pdf->Image('assets/images/templateSurat/TTD.png', 105, $height_ttd, 0, 38, 'PNG', 'http://www.tcpdf.org', '', true, 150, '', false, false, 0, false, false, false);
