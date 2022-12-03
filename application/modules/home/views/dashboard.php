@@ -32,7 +32,99 @@
 	</div>
 	<div class="col-xs-12">
 		<div class="col-xs-12">
-			<p>Tata cara pelaksanaan Seminar Proposal / Hasil Tugas Akhir (TA)</p>
+			<p>Silahkan pelajari dan download petunjuk pengajuan Seminar / Ujian Tugas Akhir beserta Juknis Tugas Akhir sesuai masing-masing Program Studi dibawah ini.</p>
+
+			<table class="table" style="width: 100%; b">
+				<tbody>
+					<tr>
+						<td class="text-center" style="border-top: none; width: 20%; padding-left: 0px;">
+							<div class="col-xs-12" style="border: 1px solid #dedede; border-radius: 5px;">
+								<div class="col-xs-12 no-padding" style="height: 60px; padding-top: 10px;">
+									Petunjuk<br>Pengajuan<br>Seminar / Ujian TA
+								</div>
+								<div class="col-xs-12 no-padding"><br></div>
+								<div class="col-xs-12 no-padding" style="padding-bottom: 10px;">
+									<button class="col-xs-12 btn btn-default" disabled>Download <i class="fa fa-download"></i></button>
+								</div>
+							</div>
+						</td>
+						<td class="text-center" style="border-top: none; width: 20%;">
+							<div class="col-xs-12" style="border: 1px solid #dedede; border-radius: 5px;">
+								<div class="col-xs-12 no-padding" style="height: 60px; padding-top: 10px;">
+									Blanko<br>Seminar / Ujian<br>TA
+								</div>
+								<div class="col-xs-12 no-padding"><br></div>
+								<div class="col-xs-12 no-padding" style="padding-bottom: 10px;">
+									<button class="col-xs-12 btn btn-default" onclick="window.open('https://drive.google.com/drive/folders/1Xr1Z3UmgqVnjLqMj7E5iTiE4egOuLv_u?usp=share_link', 'blank');">Download <i class="fa fa-download"></i></button>
+								</div>
+							</div>
+						</td>
+						<td class="text-center" style="border-top: none; width: 20%;">
+							<div class="col-xs-12" style="border: 1px solid #dedede; border-radius: 5px;">
+								<div class="col-xs-12 no-padding" style="height: 60px; padding-top: 10px;">
+									Juknis TA<br>Penyuluhan<br>(PPB dan PPKH)
+								</div>
+								<div class="col-xs-12 no-padding"><br></div>
+								<div class="col-xs-12 no-padding" style="padding-bottom: 10px;">
+									<button class="col-xs-12 btn btn-default" onclick="window.open('assets/document/DRAFT JUKNIS TA ANTAR PRODI PENYULUHAN-FINISH.pdf', 'blank');">Download <i class="fa fa-download"></i></button>
+								</div>
+							</div>
+						</td>
+						<td class="text-center" style="border-top: none; width: 20%;">
+							<div class="col-xs-12" style="border: 1px solid #dedede; border-radius: 5px;">
+								<div class="col-xs-12 no-padding" style="height: 60px; padding-top: 10px;">
+									Juknis TA<br>Prodi Agrinak
+								</div>
+								<div class="col-xs-12 no-padding"><br></div>
+								<div class="col-xs-12 no-padding" style="padding-bottom: 10px;">
+									<button class="col-xs-12 btn btn-default" onclick="window.open('assets/document/Juknis-TA-AGRINAK 2022-2023 (1).pdf', 'blank');">Download <i class="fa fa-download"></i></button>
+								</div>
+							</div>
+						</td>
+						<td class="text-center" style="border-top: none; width: 20%; padding-right: 0px;">
+							<div class="col-xs-12" style="border: 1px solid #dedede; border-radius: 5px;">
+								<div class="col-xs-12 no-padding" style="height: 60px; padding-top: 10px;">
+									Juknis TA<br>Program RPL
+								</div>
+								<div class="col-xs-12 no-padding"><br></div>
+								<div class="col-xs-12 no-padding" style="padding-bottom: 10px;">
+									<button class="col-xs-12 btn btn-default" onclick="window.open('assets/document/JUKNIS TA RPL_2022 FIX_220918.pdf', 'blank');">Download <i class="fa fa-download"></i></button>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<!-- <div style="width: 100%; display: table;">
+				<div style="width: 25%; padding: 5px; display:table-row;">
+					<div class="col-xs-12 no-padding" style="border: 1px solid #dedede;">
+						<div class="col-xs-12 no-padding text-center">Petunjuk Pengajuan Seminar / Ujian TA</div>
+					</div>
+				</div>
+				<div style="width: 25%; padding: 5px; display:table-row;">
+					<div class="col-xs-12 no-padding" style="border: 1px solid #dedede;">
+						<div class="col-xs-12 no-padding text-center">Blanko Seminar / Ujian TA</div>
+					</div>
+				</div>
+				<div style="width: 25%; padding: 5px; display:table-row;">
+					<div class="col-xs-12 no-padding" style="border: 1px solid #dedede;">
+						<div class="col-xs-12 no-padding text-center">Juknis TA Penyuluhan (PPB dan PPKH)</div>
+					</div>
+				</div>
+				<div style="width: 25%; padding: 5px; display:table-row;">
+					<div class="col-xs-12 no-padding" style="border: 1px solid #dedede;">
+						<div class="col-xs-12 no-padding text-center">Juknis TA Prodi Agrinak</div>
+					</div>
+				</div>
+				<div style="width: 25%; padding: 5px; display:table-row;">
+					<div class="col-xs-12 no-padding" style="border: 1px solid #dedede;">
+						<div class="col-xs-12 no-padding text-center">Juknis TA Program RPL</div>
+					</div>
+				</div>
+			</div> -->
+
+			<!-- <p>Tata cara pelaksanaan Seminar Proposal / Hasil Tugas Akhir (TA)</p>
 			<p>Bagi Mahasiswa yang akan melakukan Seminar Proposal / Hasil Tugas Akhir (TA) harap memperhatikan tata cara berikut ini :</p>
 			<ol style="padding-left: 15px;">
 				<li style="padding-left: 15px; padding-bottom: 5px;">Mahasiswa diperkenankan mendaftar Seminar Proposal / Hasil Tugas Akhir (TA) dengan persyaratan yang sudah di tentukan berdasarkan persetujuan Pembimbing 1 dan 2.</li>
@@ -43,7 +135,7 @@
 				<li style="padding-left: 15px; padding-bottom: 5px;">Silahkan download <b>Surat Undangan</b> Seminar Proposal / Hasil Tugas Akhir (TA) yang tersedia pada pengajuan yang terlah di buat sebelumnya.</li>
 				<li style="padding-left: 15px; padding-bottom: 5px;"><b>Blanko Seminar</b> Seminar Proposal / Hasil Tugas Akhir (TA) dapat di download pada link <a href="http://bit.ly/3s7LdEO" target="_blank">http://bit.ly/3s7LdEO</a>.</li>
 				<li style="padding-left: 15px; padding-bottom: 5px;">Form penilaian Seminar Proposal / Hasil Tugas Akhir (TA) oleh mahasiswa untuk prodi PPB dan PPKH dapat di download pada link <a href="http://bit.ly/3s7LdEO" target="_blank">http://bit.ly/3s7LdEO</a><b>Untuk prodi Agrinak pada form berikut (diisi oleh Bpk Ibu Dosen, mahasiswa dapat membantu menyiapkan sebelum seminar).</li>
-			</ol>
+			</ol> -->
 		</b>
 	</div>
 </div>
