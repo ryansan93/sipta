@@ -19,7 +19,7 @@ $config['connection'] = array(
 
 		// NOTE : LOCAL DATABASE
 		'host'      => 'localhost',
-		'database'  => 'sipta',
+		'database'  => 'sipta_live',
 		'username'  => 'root',
 		'password'  => '',
 

@@ -7,7 +7,9 @@
 		</div>
 	</div>
 	<div class="col-xs-12">
-		<hr style="margin-top: 10px; margin-bottom: 10px;">
+		<div class="col-xs-12">
+			<hr style="margin-top: 10px; margin-bottom: 10px;">
+		</div>
 	</div>
 	<div class="col-xs-12">
 		<?php if ( !empty($list_notif) ): ?>
@@ -44,7 +46,7 @@
 								</div>
 								<div class="col-xs-12 no-padding"><br></div>
 								<div class="col-xs-12 no-padding" style="padding-bottom: 10px;">
-									<button class="col-xs-12 btn btn-default" disabled>Download <i class="fa fa-download"></i></button>
+									<button class="col-xs-12 btn btn-default" onclick="window.open('https://drive.google.com/drive/folders/1SBC0FYoKKwnkNwnduW-OxmG_b1UxR29V?usp=sharing', 'blank')">Download <i class="fa fa-download"></i></button>
 								</div>
 							</div>
 						</td>
@@ -60,6 +62,28 @@
 							</div>
 						</td>
 						<td class="text-center" style="border-top: none; width: 20%;">
+							<div class="col-xs-12" style="border: 1px solid #dedede; border-radius: 5px;">
+								<div class="col-xs-12 no-padding" style="height: 60px; padding-top: 10px;">
+									Juknis Tugas Akhir
+								</div>
+								<div class="col-xs-12 no-padding"><br></div>
+								<div class="col-xs-12 no-padding" style="padding-bottom: 10px;">
+									<button class="col-xs-12 btn btn-default" onclick="window.open('https://drive.google.com/drive/folders/1lbNWSvomzR4VOYSa0SgRLEwiJ7HaBbkf?usp=sharing', 'blank');">Download <i class="fa fa-download"></i></button>
+								</div>
+							</div>
+						</td>
+						<td class="text-center" style="border-top: none; width: 20%; padding-right: 0px;">
+							<div class="col-xs-12" style="border: 1px solid #dedede; border-radius: 5px;">
+								<div class="col-xs-12 no-padding" style="height: 60px; padding-top: 10px;">
+									SK Dosen Pembimbing TA
+								</div>
+								<div class="col-xs-12 no-padding"><br></div>
+								<div class="col-xs-12 no-padding" style="padding-bottom: 10px;">
+									<button class="col-xs-12 btn btn-default" onclick="window.open('https://drive.google.com/drive/folders/1QQFMiocrD9evvcACai_e7n41fWBpNIJY?usp=sharing', 'blank');">Download <i class="fa fa-download"></i></button>
+								</div>
+							</div>
+						</td>
+						<!-- <td class="text-center" style="border-top: none; width: 20%;">
 							<div class="col-xs-12" style="border: 1px solid #dedede; border-radius: 5px;">
 								<div class="col-xs-12 no-padding" style="height: 60px; padding-top: 10px;">
 									Juknis TA<br>Penyuluhan<br>(PPB dan PPKH)
@@ -91,7 +115,7 @@
 									<button class="col-xs-12 btn btn-default" onclick="window.open('assets/document/JUKNIS TA RPL_2022 FIX_220918.pdf', 'blank');">Download <i class="fa fa-download"></i></button>
 								</div>
 							</div>
-						</td>
+						</td> -->
 					</tr>
 				</tbody>
 			</table>

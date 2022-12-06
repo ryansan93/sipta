@@ -206,4 +206,54 @@ class Mahasiswa extends Public_Controller {
 
         display_json( $this->result );
     }
+
+    public function insert_user_mahasiswa()
+    {
+        $m_mahasiswa = new \Model\Storage\Mahasiswa_model();
+        $d_mahasiswa = $m_mahasiswa->get();
+
+        if ( $d_mahasiswa->count() > 0 ) {
+            $d_mahasiswa = $d_mahasiswa->toArray();
+
+            foreach ($d_mahasiswa as $key => $value) {
+                $m_usr = new \Model\Storage\User_model();
+                $now = $m_usr->getDate();
+
+                // ENCRYPT PASSWORD
+                $id_user = $value['nim'];
+
+                $this->load->helper('phppass');
+                $hasher = new PasswordHash(PHPASS_HASH_STRENGTH, PHPASS_HASH_PORTABLE);
+                $password = $id_user;
+                $hash_password = $hasher->HashPassword($password);
+
+                // INSERT TO TABLE ms_user
+                $m_usr->id_user = $id_user;
+                $m_usr->username_user = $id_user;
+                $m_usr->status_user = 1;
+                $m_usr->pass_user = $hash_password;
+                $m_usr->save();
+
+                $m_dusr = new \Model\Storage\DetUser_model();
+
+                // GET ID FOR SAVE TO detail_user
+                $id_detuser = $m_dusr->getNextId();
+
+                // INSERT TO TABLE detail_user
+                $m_dusr->id_detuser = $id_detuser;
+                $m_dusr->id_user = $id_user;
+                $m_dusr->aktif_detuser = $now['tanggal'];
+                $m_dusr->jk_detuser = '-';
+                $m_dusr->email_detuser = $value['email'];
+                $m_dusr->nama_detuser = $value['nama'];
+                $m_dusr->username_detuser = $value['nama'];
+                $m_dusr->pass_detuser = $hash_password;
+                $m_dusr->telp_detuser = $value['no_telp'];
+                $m_dusr->id_group = 'GRP2207001';
+                $m_dusr->edit_detuser = $now['waktu'];
+                $m_dusr->useredit_detuser = $this->userid;
+                $m_dusr->save();
+            }
+        }
+    }
 }
