@@ -345,7 +345,7 @@ class NoSurat extends Public_Controller {
                 <tr>
                     <td style="width: 200px;">Pukul</td>
                     <td style="width: 10px;">:</td>
-                    <td style="width: 500px;">'.substr($data['jam_pelaksanaan'], 0, 5).'</td>
+                    <td style="width: 500px;">'.substr($data['jam_pelaksanaan'], 0, 5).' - '.substr($data['jam_selesai'], 0, 5).'</td>
                 </tr>';
 
         $tipe_ruangan = null;
@@ -514,7 +514,7 @@ class NoSurat extends Public_Controller {
                 <tr>
                     <td style="width: 200px;">Pukul</td>
                     <td style="width: 10px;">:</td>
-                    <td style="width: 500px;">'.substr($data['jam_pelaksanaan'], 0, 5).'</td>
+                    <td style="width: 500px;">'.substr($data['jam_pelaksanaan'], 0, 5).' - '.substr($data['jam_selesai'], 0, 5).'</td>
                 </tr>';
         $tipe_ruangan = null;
         if ( $data['tipe_ruangan'] == 1 ) {
@@ -733,7 +733,7 @@ class NoSurat extends Public_Controller {
                 <tr>
                     <td style="width: 200px;">Pukul</td>
                     <td style="width: 10px;">:</td>
-                    <td style="width: 500px;">'.substr($data['jam_pelaksanaan'], 0, 5).'</td>
+                    <td style="width: 500px;">'.substr($data['jam_pelaksanaan'], 0, 5).' - '.substr($data['jam_selesai'], 0, 5).'</td>
                 </tr>';
         // if ( $data['jenis_pelaksanaan']['ruang_kelas'] == 1 ) {
         //     $ruang_kelas = !empty($data['ruang_kelas']['nama']) ? $data['ruang_kelas']['nama'] : '-';
