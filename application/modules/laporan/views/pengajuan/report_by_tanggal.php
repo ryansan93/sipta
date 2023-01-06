@@ -10,8 +10,8 @@
 					<th class="col-xs-1">Prodi</th>
 					<th class="col-xs-2">Dosbing 1<br>Dosbing 2</th>
 					<th class="col-xs-1">Pelaksanaan</th>
-					<th class="col-xs-1">ruang</th>
-					<th class="col-xs-1">akun zoom</th>
+					<th class="col-xs-1">Ruang</th>
+					<th class="col-xs-1">Akun Zoom</th>
 					<th class="col-xs-1">No. Surat</th>
 				</tr>
 			</thead>

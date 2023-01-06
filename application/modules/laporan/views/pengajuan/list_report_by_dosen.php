@@ -7,7 +7,7 @@
 			<tr>
 				<!-- <td><?php echo tglIndonesia($v_det['tgl_pengajuan'], '-', ' '); ?></td> -->
 				<td><?php echo $v_det['jenis_pengajuan']; ?></td>
-				<td><?php echo tglIndonesia($v_det['tgl_seminar'], '-', ' '); ?></td>
+				<td><?php echo tglIndonesia($v_det['tgl_seminar'], '-', ' ').' '.substr($v_det['jam_pelaksanaan'], 0, 5); ?></td>
 				<td><?php echo $v_det['nama'].'<br>'.$v_det['nim']; ?></td>
 				<td><?php echo $v_det['prodi']; ?></td>
 				<td><?php echo $v_det['dosbing1'].'<br><br>'.$v_det['dosbing2']; ?></td>
