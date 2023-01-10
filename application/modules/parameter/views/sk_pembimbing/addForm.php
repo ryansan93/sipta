@@ -30,12 +30,14 @@
 						<table class="table table-bordered tbl_pembimbing" style="margin-bottom: 0px;">
 							<thead>
 								<tr>
-									<th class="col-sm-8">Dosen</th>
+									<th class="col-sm-1">No.</th>
+									<th class="col-sm-7">Dosen</th>
 									<th class="col-sm-4">Action</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
+									<td><input type="text" class="form-control no" placeholder="No" data-required="1"></td>
 									<td>
 										<select class="col-sm-12 form-control dosen" data-required="1">
 											<option value="">-- Pilih Dosen --</option>

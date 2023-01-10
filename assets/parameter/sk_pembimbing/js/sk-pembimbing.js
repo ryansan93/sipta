@@ -134,6 +134,7 @@ var skp = {
                 if ( result ) {
                     var list_pembimbing = $.map( $(div).find('table.tbl_pembimbing tbody tr'), function(tr) {
                         var _list_pembimbing = {
+                            'no': $(tr).find('.no').val(),
                             'nip': $(tr).find('.dosen').select2().val()
                         };
 
@@ -212,6 +213,7 @@ var skp = {
                 if ( result ) {
                     var list_pembimbing = $.map( $(div).find('table.tbl_pembimbing tbody tr'), function(tr) {
                         var _list_pembimbing = {
+                            'no': $(tr).find('.no').val(),
                             'nip': $(tr).find('.dosen').select2().val()
                         };
 

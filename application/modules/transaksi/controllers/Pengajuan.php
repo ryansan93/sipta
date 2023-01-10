@@ -324,7 +324,8 @@ class Pengajuan extends Public_Controller {
                         $list_pembimbing[] = array(
                             'nip' => $v_spd['dosen']['nip'],
                             'nama' => $v_spd['dosen']['nama'],
-                            'no_telp' => $v_spd['dosen']['no_telp']
+                            'no_telp' => $v_spd['dosen']['no_telp'],
+                            'no' => $v_spd['no']
                         );
                     }
 
@@ -349,7 +350,8 @@ class Pengajuan extends Public_Controller {
                         $list_pembimbing[] = array(
                             'nip' => $v_pd['nip'],
                             'nama' => $v_pd['nama'],
-                            'no_telp' => $v_pd['no_telp']
+                            'no_telp' => $v_pd['no_telp'],
+                            'no' => $v_pd['no']
                         );
                     }
 
@@ -571,6 +573,7 @@ class Pengajuan extends Public_Controller {
                         $m_pd->nama = $v_lb['pembimbing'];
                         $m_pd->no_telp = isset($v_lb['no_telp']) ? $v_lb['no_telp'] : null;
                         $m_pd->tipe = 'pembimbing';
+                        $m_pd->no = $v_lb['no'];
                         $m_pd->save();
                     }
                 }
@@ -585,6 +588,7 @@ class Pengajuan extends Public_Controller {
                         $m_pd->nip = isset($v_lp['nip']) ? $v_lp['nip'] : null;
                         $m_pd->nama = $v_lp['penguji'];
                         $m_pd->tipe = 'penguji';
+                        $m_pd->no = $v_lp['no'];
                         $m_pd->save();
                     }
                 }

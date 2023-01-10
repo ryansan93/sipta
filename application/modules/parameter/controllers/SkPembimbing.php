@@ -154,6 +154,7 @@ class SkPembimbing extends Public_Controller {
                 $m_skpd->id_header = $id_header;
                 $m_skpd->nip = $v_lp['nip'];
                 $m_skpd->nama = $d_dosen->nama;
+                $m_skpd->no = $v_lp['no'];
                 $m_skpd->save();
             }
 
@@ -220,6 +221,7 @@ class SkPembimbing extends Public_Controller {
                 $m_skpd->id_header = $id_header;
                 $m_skpd->nip = $v_lp['nip'];
                 $m_skpd->nama = $d_dosen->nama;
+                $m_skpd->no = $v_lp['no'];
                 $m_skpd->save();
             }
 

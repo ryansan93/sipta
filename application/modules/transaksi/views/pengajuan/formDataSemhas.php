@@ -112,8 +112,8 @@
 			<?php foreach ($data['list_pembimbing'] as $k_pd => $v_pd): ?>
 				<div class="col-xs-12 no-padding pembimbing" style="margin-bottom: 5px;">
 					<div class="col-xs-12 no-padding">
-						<div class="col-xs-12 no-padding">
-							<label class="control-label">Pembimbing <?php echo $idx; ?></label>
+						<div class="col-xs-12 no-padding no_pembimbing" data-no="<?php echo $v_pd['no']; ?>">
+							<label class="control-label">Pembimbing <?php echo $v_pd['no']; ?></label>
 						</div>
 						<div class="col-xs-12 no-padding nama" data-nip="<?php echo $v_pd['nip']; ?>" style="padding-left: 15px;">
 							<?php echo $v_pd['nama'] ?>
@@ -211,7 +211,7 @@
 						</div>
 					</div>
 					<div class="col-xs-8 no-padding dosen_penguji" style="padding-left: 5px;">
-						<div class="col-xs-12 no-padding">
+						<div class="col-xs-12 no-padding no_penguji" data-no="<?php echo $i+1; ?>">
 							<label class="control-label">Penguji <?php echo $i+1; ?></label>
 						</div>
 						<div class="col-xs-12 no-padding jenis_dosen dalam">

@@ -81,9 +81,9 @@
 					$data_required = 0;
 				}
 			?>
-			<div class="col-xs-12 no-padding penguji" data-no="<?php echo $i+1; ?>" style="margin-bottom: 5px;">
+			<div class="col-xs-12 no-padding penguji" style="margin-bottom: 5px;">
 				<div class="col-xs-4 no-padding" style="padding-right: 5px;">
-					<div class="col-xs-12 no-padding">
+					<div class="col-xs-12 no-padding no_penguji" data-no="<?php echo $i+1; ?>">
 						<label class="control-label">Jenis Penguji</label>
 					</div>
 					<div class="col-xs-12 no-padding">
@@ -95,7 +95,7 @@
 					</div>
 				</div>
 				<div class="col-xs-8 no-padding dosen_penguji" style="padding-left: 5px;">
-					<div class="col-xs-12 no-padding">
+					<div class="col-xs-12 no-padding no_penguji" data-no="<?php echo $i+1; ?>">
 						<label class="control-label">Penguji <?php echo $i+1; ?></label>
 					</div>
 					<div class="col-xs-12 no-padding jenis_dosen dalam">

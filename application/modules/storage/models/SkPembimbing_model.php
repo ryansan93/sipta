@@ -13,6 +13,6 @@ class SkPembimbing_model extends Conf{
 
 	public function sk_pembimbing_dosen()
 	{
-		return $this->hasMany('\Model\Storage\SkPembimbingDosen_model', 'id_header', 'id')->with(['dosen'])->orderBy('nama', 'asc');
+		return $this->hasMany('\Model\Storage\SkPembimbingDosen_model', 'id_header', 'id')->with(['dosen'])->orderBy('no', 'asc');
 	}
 }

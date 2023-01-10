@@ -29,12 +29,12 @@ class Pengajuan_model extends Conf{
 
 	public function pengajuan_dosen_pembimbing()
 	{
-		return $this->hasMany('\Model\Storage\PengajuanDosen_model', 'pengajuan_kode', 'kode')->where('tipe', 'pembimbing');
+		return $this->hasMany('\Model\Storage\PengajuanDosen_model', 'pengajuan_kode', 'kode')->where('tipe', 'pembimbing')->orderBy('no', 'asc');
 	}
 
 	public function pengajuan_dosen_penguji()
 	{
-		return $this->hasMany('\Model\Storage\PengajuanDosen_model', 'pengajuan_kode', 'kode')->where('tipe', 'penguji');
+		return $this->hasMany('\Model\Storage\PengajuanDosen_model', 'pengajuan_kode', 'kode')->where('tipe', 'penguji')->orderBy('no', 'asc');
 	}
 
 	public function pengajuan_kelengkapan()

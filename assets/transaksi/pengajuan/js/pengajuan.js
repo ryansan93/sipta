@@ -394,7 +394,8 @@ var pengajuan = {
 						var _data = {
 							'jenis_penguji': jenis_penguji,
 							'nip': nip,
-							'penguji': penguji
+							'penguji': penguji,
+							'no': $(div).find('.no_penguji').attr('data-no')
 						};
 
 						return _data;
@@ -503,7 +504,8 @@ var pengajuan = {
 						var _data = {
 							'nip': nip,
 							'pembimbing': pembimbing.trim(),
-							'no_tlp': no_tlp.trim()
+							'no_tlp': no_tlp.trim(),
+							'no': $(div).find('.no_pembimbing').attr('data-no')
 						};
 
 						return _data;
@@ -527,7 +529,8 @@ var pengajuan = {
 							var _data = {
 								'jenis_penguji': jenis_penguji,
 								'nip': nip,
-								'penguji': penguji
+								'penguji': penguji,
+								'no': $(div).find('.no_penguji').attr('data-no')
 							};
 
 							return _data;
