@@ -42,22 +42,6 @@ class Home extends Public_Controller
 						}
 					}
 				}
-
-				if ( $akses['a_submit'] == 0 ) {
-					$status = getStatus('approve');
-
-					$data = Modules::run( $v_mdetail['path_detfitur'].'/notifikasi', $status);
-
-					if ( !empty($data) ) {
-						foreach ($data as $key => $value) {
-							if ( $value['jumlah'] > 0 ) {
-								$notif[$key][$v_mdetail['path_detfitur']] = $value;
-								$notif[$key][$v_mdetail['path_detfitur']]['path'] = $v_mdetail['path_detfitur'];
-								$notif[$key][$v_mdetail['path_detfitur']]['nama_fitur'] = $v_mdetail['nama_detfitur'];
-							}
-						}
-					}
-				}
 			}
         }
 
