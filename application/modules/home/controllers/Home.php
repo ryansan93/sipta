@@ -27,17 +27,23 @@ class Home extends Public_Controller
 		foreach ($arr_fitur as $key => $v_fitur) {
 			foreach ($v_fitur['detail'] as $key => $v_mdetail) {
 				$akses = hakAkses('/'.$v_mdetail['path_detfitur']);
+
 				if ( $akses['a_approve'] == 1 ) {
 					$status = getStatus('submit');
 
-					$data = Modules::run( $v_mdetail['path_detfitur'].'/notifikasi', $status);
+					$data = Modules::run( trim($v_mdetail['path_detfitur']).'/notifikasi', $status);
 
 					if ( !empty($data) ) {
+						$idx = 0;
 						foreach ($data as $key => $value) {
 							if ( $value['jumlah'] > 0 ) {
-								$notif[$key][$v_mdetail['path_detfitur']] = $value;
-								$notif[$key][$v_mdetail['path_detfitur']]['path'] = $v_mdetail['path_detfitur'];
-								$notif[$key][$v_mdetail['path_detfitur']]['nama_fitur'] = $v_mdetail['nama_detfitur'];
+								$_key = trim($v_mdetail['path_detfitur']).$idx;
+
+								$notif[$_key][$v_mdetail['path_detfitur']] = $value;
+								$notif[$_key][$v_mdetail['path_detfitur']]['path'] = $v_mdetail['path_detfitur'];
+								$notif[$_key][$v_mdetail['path_detfitur']]['nama_fitur'] = $v_mdetail['nama_detfitur'];
+
+								$idx++;
 							}
 						}
 					}

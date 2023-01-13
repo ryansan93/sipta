@@ -922,11 +922,17 @@ class NoSurat extends Public_Controller {
 
     public function tes()
     {
-        $kode_pengajuan = 'PGJ22100004';
+        cetak_r( $this->userid );
 
-        $m_pengajuan = new \Model\Storage\Pengajuan_model();
-        $d_pengajuan = $m_pengajuan->where('kode', $kode_pengajuan)->with(['jenis_pengajuan', 'mahasiswa', 'jenis_pelaksanaan', 'prodi', 'pengajuan_dosen_pembimbing', 'pengajuan_dosen_penguji', 'ruang_kelas', 'no_surat'])->first()->toArray();
+        $this->load->helper('phppass');
+        $hasher = new PasswordHash(PHPASS_HASH_STRENGTH, PHPASS_HASH_PORTABLE);
+        $password = '040107234';
+        $hash_password = $hasher->HashPassword($password);
 
-        $this->export_pdf_kompre( $d_pengajuan );
+        cetak_r( $hash_password );
+
+        $data = $this->notifikasi(1);
+
+        cetak_r( $data );
     }
 }
