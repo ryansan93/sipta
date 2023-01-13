@@ -43,7 +43,7 @@ class Home extends Public_Controller
 					}
 				}
 
-				if ( $akses['a_submit'] == 1 ) {
+				if ( $akses['a_submit'] == 0 ) {
 					$status = getStatus('approve');
 
 					$data = Modules::run( $v_mdetail['path_detfitur'].'/notifikasi', $status);
