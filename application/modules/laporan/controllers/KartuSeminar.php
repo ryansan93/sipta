@@ -93,7 +93,7 @@ class KartuSeminar extends Public_Controller {
                     'akun_zoom' => $v_ks['pengajuan']['akun_zoom'],
                     'id_meeting' => $v_ks['pengajuan']['id_meeting'],
                     'password_meeting' => $v_ks['pengajuan']['password_meeting'],
-                    'mahasiswa' => $v_ks['mahasiswa']['nama']
+                    'mahasiswa' => $v_ks['pengajuan']['mahasiswa']['nama']
                 );
             }
 
