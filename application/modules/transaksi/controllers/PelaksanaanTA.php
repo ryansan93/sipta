@@ -76,6 +76,8 @@ class PelaksanaanTA extends Public_Controller {
             $_jenis_pengajuan_kode[] = $jenis_pengajuan_kode;
         }
 
+        $d_blangko = null;
+
         $m_blangko = new \Model\Storage\Blangko_model();
         $m_pengajuan = new \Model\Storage\Pengajuan_model();
         if ( $d_mahasiswa ) {
@@ -87,7 +89,7 @@ class PelaksanaanTA extends Public_Controller {
                 $d_blangko = $m_blangko->whereIn('pengajuan_kode', $d_pengajuan)->with(['pengajuan'])->orderBy('tgl_trans', 'desc')->get();
             }
         } else {
-            $d_pengajuan = $m_pengajuan->whereIn('jenis_pengajuan_kode', $_jenis_pengajuan_kode)->orderBy('tgl_pengajuan', 'desc')->get();
+            $d_pengajuan = $m_pengajuan->select('kode')->whereIn('jenis_pengajuan_kode', $_jenis_pengajuan_kode)->orderBy('tgl_pengajuan', 'desc')->get();
 
             if ( $d_pengajuan ) {
                 $d_pengajuan = $d_pengajuan->toArray();
@@ -97,7 +99,7 @@ class PelaksanaanTA extends Public_Controller {
         }
 
         $data = null;
-        if ( $d_blangko->count() > 0 ) {
+        if ( !empty($d_blangko) && $d_blangko->count() > 0 ) {
             $data = $d_blangko->toArray();
         }
 
