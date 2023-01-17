@@ -296,7 +296,7 @@ class Pengajuan extends Public_Controller {
 
         if ( $d_jp->form_pengajuan == 'kompre' ) {
             $m_pengajuan = new \Model\Storage\Pengajuan_model();
-            $d_pengajuan_sempro = $m_pengajuan->where('nim', $this->userid)->where('jenis_pengajuan_kode', $d_jp_kompre->kode)->orderBy('kode', 'desc')->first();
+            $d_pengajuan_sempro = $m_pengajuan->where('nim', $this->userid)->where('jenis_pengajuan_kode', $d_jp_sempro->kode)->orderBy('kode', 'desc')->first();
 
             $pelaksanaan_ta = false;
             if ( $d_pengajuan_sempro ) {

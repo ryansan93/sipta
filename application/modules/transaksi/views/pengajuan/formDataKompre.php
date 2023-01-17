@@ -203,7 +203,7 @@
 			<button type="button" class="btn btn-primary pull-right" onclick="pengajuan.save_kompre()"><i class="fa fa-save"></i> Simpan</button>
 		</div>
 	<?php else: ?>
-		<span>Anda belum upload hasil pelaksanaan <b>Seminar Proposal</b>.</span>
+		<span>Anda belum upload hasil pelaksanaan <b>Seminar Hasil</b>.</span>
 	<?php endif ?>
 <?php else: ?>
 	<div class="col-xs-12 no-padding" style="margin-bottom: 5px;">
